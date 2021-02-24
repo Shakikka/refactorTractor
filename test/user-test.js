@@ -30,7 +30,7 @@ describe('User', function () {
     expect(altUser).to.be.an.instanceof(User);
   });
 
-  it('should have an id', function () { //is this a relevant test
+  it('should have an id', function () {
     expect(user.id).to.equal(1);
   });
 
@@ -56,15 +56,15 @@ describe('User', function () {
 
   it('should have a list of friends', function () {
     expect(user.friends.length).to.equal(3);
-
+    expect(user.friends).to.deep.equal([16, 4, 8]);
   });
-
-
 
   it('should return user first name', function () {
     expect(user.getFirstName()).to.equal("Luisa");
   });
 
+
+  //the below is not refactored
   it('should return list of friend names from user repository', function () {
     const user1 = new User({
       id: 1,
@@ -107,7 +107,6 @@ describe('User', function () {
     const users = [user1, user2, user3, user4];
     const userRepo = new UserRepo(users);
 
-    console.log(user2.getFriendsNames(userRepo));
     expect(user2.getFriendsNames(userRepo)).to.deep.equal(['Alex Roth', 'The Rock', 'Rainbow Dash']);
   });
 });
