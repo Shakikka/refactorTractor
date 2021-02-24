@@ -4,6 +4,7 @@ import './css/style.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
+import {sleepDataAPI, userDataAPI, hydrationDataAPI, activityDataAPI} from './api.js'
 import userData from './data/users';
 import hydrationData from './data/hydration';
 import sleepData from './data/sleep';
@@ -47,6 +48,19 @@ var userMinutesThisWeek = document.getElementById('userMinutesThisWeek');
 var bestUserSteps = document.getElementById('bestUserSteps');
 var streakList = document.getElementById('streakList');
 var streakListMinutes = document.getElementById('streakListMinutes')
+// sleepDataAPI
+// .then(data => console.log('sleep:', data.sleepData))
+// userDataAPI
+// .then(data => console.log('user:', data.userData))
+// activityDataAPI
+// .then(data => console.log('activity:', data.activityData))
+// hydrationDataAPI
+// .then(data => console.log('hydration:', data.hydrationData))
+Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
+.then((values) => {
+  console.log(values)
+})
+
 
 function startApp() {
   let userList = [];
