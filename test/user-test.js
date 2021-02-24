@@ -9,8 +9,8 @@ import {
 } from '../src/data/fakeData';
 
 describe('User', function () {
-  let user;
-  let altUser;
+
+  let user, altUser;
 
   beforeEach(function () {
     user = new User(fakeUserData[0])
@@ -19,72 +19,32 @@ describe('User', function () {
 
 
   it('should be a function', function () {
-    // const user = new User({
-    //   id: 1,
-    //   name: "Alex Roth",
-    //   address: "1234 Turing Street, Denver CO 80301-1697",
-    //   email: "alex.roth1@hotmail.com",
-    //   strideLength: 4.3,
-    //   dailyStepGoal: 10000,
-    //   friends: [2, 3, 4]
-    // });
     expect(User).to.be.a('function');
   });
 
   it('should be an instance of User', function () {
-    // const user = new User({
-    //   id: 1,
-    //   name: "Alex Roth",
-    //   address: "1234 Turing Street, Denver CO 80301-1697",
-    //   email: "alex.roth1@hotmail.com",
-    //   strideLength: 4.3,
-    //   dailyStepGoal: 10000,
-    //   friends: [2, 3, 4]
-    // });
     expect(user).to.be.an.instanceof(User);
   });
 
   it('should take a user data object', function () {
-    // const user = new User({
-    //   id: 1,
-    //   name: "Alex Roth",
-    //   address: "1234 Turing Street, Denver CO 80301-1697",
-    //   email: "alex.roth1@hotmail.com",
-    //   strideLength: 4.3,
-    //   dailyStepGoal: 10000,
-    //   friends: [2, 3, 4]
-    // });
-
     expect(user.id).to.equal(1);
     expect(user.name).to.equal("Luisa Hane");
   });
 
   it('should take a different user data object', function () {
-    // const user2 = new User({
-    //   id: 2,
-    //   name: "Allie McCarthy",
-    //   address: "1235 Turing Street, Denver CO 80301-1697",
-    //   email: "allie.mcc1@hotmail.com",
-    //   strideLength: 3.3,
-    //   dailyStepGoal: 9000,
-    //   friends: [1, 3, 4]
-    // });
-
     expect(altUser.id).to.equal(2);
     expect(altUser.name).to.equal("Jarvis Considine");
   });
 
-  it('should return user first name', function () {
-    // const user2 = new User({
-    //   id: 2,
-    //   name: "Allie McCarthy",
-    //   address: "1235 Turing Street, Denver CO 80301-1697",
-    //   email: "allie.mcc1@hotmail.com",
-    //   strideLength: 3.3,
-    //   dailyStepGoal: 9000,
-    //   friends: [1, 3, 4]
-    // });
 
+
+
+
+
+
+
+
+  it('should return user first name', function () {
     expect(user.getFirstName()).to.equal("Luisa");
   });
 
