@@ -26,21 +26,38 @@ describe('User', function () {
     expect(user).to.be.an.instanceof(User);
   });
 
-  it('should take a user data object', function () {
+  it('should be able to take in different user data', function () {
+    expect(altUser).to.be.an.instanceof(User);
+  });
+
+  it('should have an id', function () { //is this a relevant test
     expect(user.id).to.equal(1);
+  });
+
+  it('should have a name', function () {
     expect(user.name).to.equal("Luisa Hane");
   });
 
-  it('should take a different user data object', function () {
-    expect(altUser.id).to.equal(2);
-    expect(altUser.name).to.equal("Jarvis Considine");
+  it('should have an address', function () {
+    expect(user.address).to.equal("15195 Nakia Tunnel, Erdmanport VA 19901-1697");
   });
 
+  it('should have an email', function () {
+    expect(user.email).to.equal("Diana.Hayes1@hotmail.com");
+  });
 
+  it('should have a strideLength', function () {
+    expect(user.strideLength).to.equal(4.3);
+  });
 
+  it('should have a dailyStepGoal', function () {
+    expect(user.dailyStepGoal).to.equal(10000);
+  });
 
+  it('should have a list of friends', function () {
+    expect(user.friends.length).to.equal(3);
 
-
+  });
 
 
 
