@@ -1,6 +1,12 @@
+import User from '../src/User';
+
 class UserRepo {
   constructor(users) {
-    this.users = users;
+    this.users;
+  }
+
+  createUsers(users) {
+    this.users = users.map(user => new User(user));
   }
 
   getDataFromID(id) {
@@ -72,7 +78,7 @@ class UserRepo {
       }, 0) / sortedObjectKeys[b].length)
     });
   }
-  
+
   combineRankedUserIDsAndAveragedData(dataSet, date, relevantData, listFromMethod) {
     let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod)
     let rankedUsersAndAverages = this.rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod)

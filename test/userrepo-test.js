@@ -13,10 +13,7 @@ describe('User Repo', function () {
   let userOne, userTwo, users, userRepo;
 
   beforeEach(function () {
-    userOne = new User(fakeUserData[0]);
-    userTwo = new User(fakeUserData[1]);
-    users = [userOne, userTwo];
-    userRepo = new UserRepo(users);
+    userRepo = new UserRepo(fakeUserData);
   });
 
 
@@ -24,8 +21,9 @@ describe('User Repo', function () {
     expect(UserRepo).to.be.a('function');
   });
 
-  it('takes an array of users', function() {
-    expect(userRepo.users).to.include(userTwo);
+  it('should create and store users', function() {
+    userRepo.createUsers(fakeUserData);
+    expect(userRepo.users).to.deep.equal([fakeUserData[0], fakeUserData[1], fakeUserData[2]]);
   });
 
   it('should have a parameter to take in user data', function() {
