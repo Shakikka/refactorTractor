@@ -240,5 +240,5 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
-// startApp();
+startApp();
 window.addEventListener('load', loadThisFirst)
