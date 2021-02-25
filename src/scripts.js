@@ -88,22 +88,28 @@ function loadThisFirst() {
 }
 
 function displayUserInfo(userInfo) {
-  let newUserList = makeUsers(userInfo)
-  console.log(newUserList);
-  let userRepo = new UserRepo(newUserList);
+  let userRepo = new UserRepo(userInfo);
+  // userRepo.createUsers(userInfo);
   var userNowId = pickUser();
   let userNow = getUserById(userNowId, userRepo);
   addInfoToSidebar(userNow, userRepo);
 }
 
-function makeUsers(rawData) {
-  let userList = []
-  rawData.forEach(dataItem => {
-    let user = new User(dataItem);
-    userList.push(user);
-  })
-  return userList
+function pickUser() {
+  return Math.floor(Math.random() * 50);
 }
+
+function getUserById(id, listRepo) {
+  return listRepo.findUserData(id);
+};
+// function makeUsers(rawData) {
+//   let userList = []
+//   rawData.forEach(dataItem => {
+//     let user = new User(dataItem);
+//     userList.push(user);
+//   })
+//   return userList
+// }
 
 
 function startApp() {
@@ -126,27 +132,13 @@ function startApp() {
   addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
 }
 
-function makeUsers(array) {
-  userData.forEach(function (dataItem) {
-    let user = new User(dataItem);
-    array.push(user);
-  })
-}
-
-function pickUser() {
-  return Math.floor(Math.random() * 50);
-}
-
-function getUserById(id, listRepo) {
-  return listRepo.getDataFromID(id);
-};
 
 
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
   stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}.`
-  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.calculateAverageStepGoal()}`;
+  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.findAverageStepGoal()}`;
   userAddress.innerText = user.address;
   userEmail.innerText = user.email;
   userStridelength.innerText = `Your stridelength is ${user.strideLength} meters.`;
@@ -240,5 +232,5 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
-startApp();
+// startApp();
 window.addEventListener('load', loadThisFirst)
