@@ -16,17 +16,34 @@ h1 {
   padding-top: 10px;
 }
 
-.main {
-  display: flex;
-  flex-direction: row;
-  height: 1500px;
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 0.5fr 1fr 1fr;
+  grid-template-rows: 5fr 5fr;
+  grid-template-areas:
+  "dash activity hydration"
+  "dash activity sleep"
 }
 
 .user-dash {
-  display: flex;
-  flex-direction: row;
-  width: 25%;
-  height: 100%;
+  grid-area: dash;
+  // display: flex;
+  // flex-direction: row;
+  // width: 25%;
+  // height: 100%;
+}
+
+.main-column-hydration {
+  grid-area: hydration;
+}
+
+.main-column-activity {
+  grid-area: activity;
+}
+
+.main-column-sleep {
+  grid-area: sleep;
 }
 
 .body-sidebar-sidebarContainer {
@@ -36,7 +53,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  overflow: scroll;
 }
 
 .sidebar-header-name {
@@ -79,32 +95,15 @@ h1 {
   text-align: left;
 }
 
-.body-main-infoContainter {
-  width: 100%;
-  border: 1px solid black;
-  margin: 0 0 1em;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-}
+// .body-main-infoContainter {
+//   width: 100%;
+//   border: 1px solid black;
+//   margin: 0 0 1em;
+//   display: flex;
+//   flex-direction: column;
+//   overflow: scroll;
+// }
 
-.main-column-hydration {
-  display: flex;
-  flex-direction: row;
-  height: 25%
-}
-
-.main-column-activity {
-  display: flex;
-  flex-direction: row;
-  height: 50%
-}
-
-.main-column-sleep {
-  display: flex;
-  flex-direction: row;
-  height: 35%
-}
 
 .infoContainer-cardContainer-card-horizontal {
   width: 100%;
@@ -252,12 +251,29 @@ h1 {
 
 
 @media screen and (max-width: 550px) {
-  .main {
+  .container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "user"
+    "activity"
+    "hydration"
+    "sleep"
   }
   .user-dash {
-    width: 100%;
+    grid-area: user;
+    // width: 100%;
+  }
+  .main-column-hydration {
+    grid-area: hydration;
+  }
+
+  .main-column-activity {
+    grid-area: activity;
+  }
+
+  .main-column-sleep {
+    grid-area: sleep;
   }
 }
