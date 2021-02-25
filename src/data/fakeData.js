@@ -1,5 +1,4 @@
-export const fakeUserData = [
-  {
+export const fakeUserData = [{
     "id": 1,
     "name": "Luisa Hane",
     "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
@@ -43,7 +42,7 @@ export const fakeUserData = [
 ]
 
 
-const fakeHydrationData = [{
+const fakeSleepData = [{
     "userID": 1,
     "date": "2019/06/15",
     "hoursSlept": 6.1,
@@ -63,7 +62,7 @@ const fakeHydrationData = [{
   }
 ]
 
-const fakeSleepData = [{
+const fakeHydrationData = [{
     "userID": 1,
     "date": "2019/06/15",
     "numOunces": 37
