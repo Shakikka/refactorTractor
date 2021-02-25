@@ -1,4 +1,6 @@
-import { expect } from 'chai';
+import {
+  expect
+} from 'chai';
 
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
@@ -19,14 +21,11 @@ describe('User Repo', function () {
 
 
   it('should be a function', function() {
-    const userRepo = new UserRepo();
-
     expect(UserRepo).to.be.a('function');
   });
 
-  it('takes an array of user data', function() {
-
-    expect(userRepo.users).to.include(user2);
+  it('takes an array of users', function() {
+    expect(userRepo.users).to.include(userTwo);
   });
 
   it('should have a parameter to take in user data', function() {
@@ -41,8 +40,6 @@ describe('User Repo', function () {
     });
     const users = [user1];
     const userRepo = new UserRepo(users);
-
-    console.log('here: ', userRepo.users[0]);
 
     expect(userRepo.users[0].id).to.equal(1);
   });
