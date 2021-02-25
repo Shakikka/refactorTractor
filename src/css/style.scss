@@ -22,7 +22,7 @@ h1 {
   height: 1500px;
 }
 
-.main-sidebar-body {
+.user-dash {
   display: flex;
   flex-direction: row;
   width: 25%;
@@ -247,4 +247,17 @@ h1 {
   padding: .3em;
   font-weight: bold;
   font-family: sans-serif;
+}
+
+
+
+@media screen and (max-width: 550px) {
+  .main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .user-dash {
+    width: 100%;
+  }
 }
