@@ -26,28 +26,9 @@ describe('User Repo', function () {
     expect(userRepo.users).to.deep.equal([fakeUserData[0], fakeUserData[1], fakeUserData[2]]);
   });
 
-  it('should have a parameter to take in user data', function() {
-    const user1 = new User({
-      id: 1,
-      name: "Alex Roth",
-      address: "1234 Turing Street, Denver CO 80301-1697",
-      email: "alex.roth1@hotmail.com",
-      strideLength: 4.3,
-      dailyStepGoal: 10000,
-      friends: [2, 3, 4]
-    });
-    const users = [user1];
-    const userRepo = new UserRepo(users);
-
-    expect(userRepo.users[0].id).to.equal(1);
-  });
-
-  it('should return user data when given user ID', function() {
-
-
-    userRepo.getDataFromID(1);
-
-    expect(userRepo.getDataFromID(1)).to.eql(user1);
+  it('should find User data based on ID', function() {
+    userRepo.createUsers(fakeUserData);
+    expect(userRepo.findUserData(1)).to.deep.equal(fakeUserData[0]);
   });
 
   it('should return the average of all users step goals', function() {

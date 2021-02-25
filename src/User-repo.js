@@ -9,7 +9,7 @@ class UserRepo {
     this.users = users.map(user => new User(user));
   }
 
-  getDataFromID(id) {
+  findUserData(id) {
     return this.users.find((user) => id === user.id);
   }
 

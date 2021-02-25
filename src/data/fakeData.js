@@ -1,4 +1,5 @@
-export const fakeUserData = [{
+export const fakeUserData = [
+  {
     "id": 1,
     "name": "Luisa Hane",
     "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
