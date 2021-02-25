@@ -17,10 +17,11 @@ class UserRepo {
     return dataSet.filter((userData) => id === userData.userID);
   }
 
-  calculateAverageStepGoal() {
-    var totalStepGoal = this.users.reduce((sumSoFar, data) => {
-      return sumSoFar = sumSoFar + data.dailyStepGoal;
+  findAverageStepGoal() {
+    let totalStepGoal = this.users.reduce((sum, user) => {
+      return sum = sum + user.dailyStepGoal;
     }, 0);
+
     return totalStepGoal / this.users.length;
   }
 
