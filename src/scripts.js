@@ -56,10 +56,51 @@ var streakListMinutes = document.getElementById('streakListMinutes')
 // .then(data => console.log('activity:', data.activityData))
 // hydrationDataAPI
 // .then(data => console.log('hydration:', data.hydrationData))
-Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
-.then((values) => {
-  console.log(values)
-})
+
+function loadThisFirst() {
+  Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
+    .then((values) => {
+    // console.log(values)
+    // console.log('userData:', values[1].userData)
+    // console.log('sleepData:', values[0].sleepData[0])
+    // let userList;
+    // makeUsers(values[1].userData);
+    // let userRepo = new UserRepo(userList);
+    displayUserInfo(values[1].userData)
+    let hydrationRepo = new Hydration(values[3].hydrationData);
+    let sleepRepo = new Sleep(values[0].sleepData);
+    let activityRepo = new Activity(values[2].activityData);
+    // var userNowId = pickUser();
+    // let userNow = getUserById(userNowId, userRepo);
+    let today = makeToday(userRepo, userNowId, hydrationData);
+    let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+    historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+    // addInfoToSidebar(userNow, userRepo);
+    addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+    addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+    let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+    addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
+    addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+  })
+}
+
+function displayUserInfo(userInfo) {
+  let newUserList = makeUsers(userInfo)
+  console.log(newUserList);
+  let userRepo = new UserRepo(newUserList);
+  var userNowId = pickUser();
+  let userNow = getUserById(userNowId, userRepo);
+  addInfoToSidebar(userNow, userRepo);
+}
+
+function makeUsers(rawData) {
+  let userList = []
+  rawData.forEach(dataItem => {
+    let user = new User(dataItem);
+    userList.push(user);
+  })
+  return userList
+}
 
 
 function startApp() {
@@ -82,12 +123,6 @@ function startApp() {
   addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
 }
 
-function makeUsers(array) {
-  userData.forEach(function(dataItem) {
-    let user = new User(dataItem);
-    array.push(user);
-  })
-}
 
 function pickUser() {
   return Math.floor(Math.random() * 50);
@@ -196,4 +231,5 @@ function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
 
-startApp();
+// startApp();
+window.addEventListener('load', loadThisFirst)
