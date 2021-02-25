@@ -37,6 +37,7 @@ describe('Hydration', function () {
   it('should find the water intake for a user on a specified date', function () {
     expect(hydration.calculateDailyOunces(1, "2019/06/15")).to.equal(37);
     expect(hydration.calculateDailyOunces(4, "2019/04/15")).to.equal(36);
+    expect(hydration.calculateDailyOunces(1, "2020/06/15")).to.equal(0);
   });
 
   it('should find water intake by day for first week', function () {
