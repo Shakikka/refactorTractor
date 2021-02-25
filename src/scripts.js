@@ -19,38 +19,39 @@ import {
   fakeUserData
 } from './data/fakeData';
 
-var sidebarName = document.getElementById('sidebarName');
-var stepGoalCard = document.getElementById('stepGoalCard');
-var headerText = document.getElementById('headerText');
-var userAddress = document.getElementById('userAddress');
-var userEmail = document.getElementById('userEmail');
-var userStridelength = document.getElementById('userStridelength');
-var friendList = document.getElementById('friendList');
-var hydrationToday = document.getElementById('hydrationToday');
-var hydrationAverage = document.getElementById('hydrationAverage');
-var hydrationThisWeek = document.getElementById('hydrationThisWeek');
-var hydrationEarlierWeek = document.getElementById('hydrationEarlierWeek');
-var historicalWeek = document.querySelectorAll('.historicalWeek');
-var sleepToday = document.getElementById('sleepToday');
-var sleepQualityToday = document.getElementById('sleepQualityToday');
-var avUserSleepQuality = document.getElementById('avUserSleepQuality');
-var sleepThisWeek = document.getElementById('sleepThisWeek');
-var sleepEarlierWeek = document.getElementById('sleepEarlierWeek');
-var friendChallengeListToday = document.getElementById('friendChallengeListToday');
-var friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
-var bigWinner = document.getElementById('bigWinner');
-var userStepsToday = document.getElementById('userStepsToday');
-var avgStepsToday = document.getElementById('avgStepsToday');
-var userStairsToday = document.getElementById('userStairsToday');
-var avgStairsToday = document.getElementById('avgStairsToday');
-var userMinutesToday = document.getElementById('userMinutesToday');
-var avgMinutesToday = document.getElementById('avgMinutesToday');
-var userStepsThisWeek = document.getElementById('userStepsThisWeek');
-var userStairsThisWeek = document.getElementById('userStairsThisWeek');
-var userMinutesThisWeek = document.getElementById('userMinutesThisWeek');
-var bestUserSteps = document.getElementById('bestUserSteps');
-var streakList = document.getElementById('streakList');
-var streakListMinutes = document.getElementById('streakListMinutes')
+const sidebarName = document.getElementById('sidebarName');
+const stepGoalCard = document.getElementById('stepGoalCard');
+const headerText = document.getElementById('headerText');
+const userAddress = document.getElementById('userAddress');
+const userEmail = document.getElementById('userEmail');
+const userStridelength = document.getElementById('userStridelength');
+const friendList = document.getElementById('friendList');
+const hydrationToday = document.getElementById('hydrationToday');
+const hydrationAverage = document.getElementById('hydrationAverage');
+const hydrationThisWeek = document.getElementById('hydrationThisWeek');
+const hydrationEarlierWeek = document.getElementById('hydrationEarlierWeek');
+const historicalWeek = document.querySelectorAll('.historicalWeek');
+const sleepToday = document.getElementById('sleepToday');
+const sleepQualityToday = document.getElementById('sleepQualityToday');
+const avUserSleepQuality = document.getElementById('avUserSleepQuality');
+const sleepThisWeek = document.getElementById('sleepThisWeek');
+const sleepEarlierWeek = document.getElementById('sleepEarlierWeek');
+const friendChallengeListToday = document.getElementById('friendChallengeListToday');
+const friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
+const bigWinner = document.getElementById('bigWinner');
+const userStepsToday = document.getElementById('userStepsToday');
+const avgStepsToday = document.getElementById('avgStepsToday');
+const userStairsToday = document.getElementById('userStairsToday');
+const avgStairsToday = document.getElementById('avgStairsToday');
+const userMinutesToday = document.getElementById('userMinutesToday');
+const avgMinutesToday = document.getElementById('avgMinutesToday');
+const userStepsThisWeek = document.getElementById('userStepsThisWeek');
+const userStairsThisWeek = document.getElementById('userStairsThisWeek');
+const userMinutesThisWeek = document.getElementById('userMinutesThisWeek');
+const bestUserSteps = document.getElementById('bestUserSteps');
+const streakList = document.getElementById('streakList');
+const streakListMinutes = document.getElementById('streakListMinutes')
+const avStepGoalCard = document.getElementById('avStepGoalCard');
 // sleepDataAPI
 // .then(data => console.log('sleep:', data.sleepData))
 // userDataAPI
@@ -73,7 +74,7 @@ function loadThisFirst() {
     let hydrationRepo = new Hydration(values[3].hydrationData);
     let sleepRepo = new Sleep(values[0].sleepData);
     let activityRepo = new Activity(values[2].activityData);
-    // var userNowId = pickUser();
+    // const userNowId = pickUser();
     // let userNow = getUserById(userNowId, userRepo);
     let today = makeToday(userRepo, userNowId, hydrationData);
     let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
@@ -89,8 +90,7 @@ function loadThisFirst() {
 
 function displayUserInfo(userInfo) {
   let userRepo = new UserRepo(userInfo);
-  // userRepo.createUsers(userInfo);
-  var userNowId = pickUser();
+  let userNowId = pickUser();
   let userNow = getUserById(userNowId, userRepo);
   addInfoToSidebar(userNow, userRepo);
 }
@@ -110,30 +110,6 @@ function getUserById(id, listRepo) {
 //   })
 //   return userList
 // }
-
-
-function startApp() {
-  let userList = [];
-  makeUsers(userList);
-  let userRepo = new UserRepo(userList);
-  let hydrationRepo = new Hydration(hydrationData);
-  let sleepRepo = new Sleep(sleepData);
-  let activityRepo = new Activity(activityData);
-  var userNowId = pickUser();
-  let userNow = getUserById(userNowId, userRepo);
-  let today = makeToday(userRepo, userNowId, hydrationData);
-  let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-  historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-  addInfoToSidebar(userNow, userRepo);
-  addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-  addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-  let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-  addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-  addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
-}
-
-
-
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
@@ -145,6 +121,30 @@ function addInfoToSidebar(user, userStorage) {
   friendList.insertAdjacentHTML('afterBegin', makeFriendHTML(user, userStorage))
 };
 
+
+// function startApp() {
+//   let userList = [];
+//   makeUsers(userList);
+//   let userRepo = new UserRepo(userList);
+//   let hydrationRepo = new Hydration(hydrationData);
+//   let sleepRepo = new Sleep(sleepData);
+//   let activityRepo = new Activity(activityData);
+//   const userNowId = pickUser();
+//   let userNow = getUserById(userNowId, userRepo);
+//   let today = makeToday(userRepo, userNowId, hydrationData);
+//   let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+//   historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+//   addInfoToSidebar(userNow, userRepo);
+//   addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+//   addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+//   let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+//   addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
+//   addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+// }
+
+
+
+
 function makeFriendHTML(user, userStorage) {
   return user.getFriendsNames(userStorage).map(friendName => `<li class='historical-list-listItem'>${friendName}</li>`).join('');
 }
@@ -154,12 +154,12 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) {
 }
 
 function makeToday(userStorage, id, dataSet) {
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+  const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[0].date;
 }
 
 function makeRandomDate(userStorage, id, dataSet) {
-  var sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+  const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date
 
 }
