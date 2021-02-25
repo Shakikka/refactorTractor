@@ -3,6 +3,7 @@ import User from '../src/User';
 class UserRepo {
   constructor(users) {
     this.users;
+    this.createUsers(users);
   }
 
   createUsers(users) {
