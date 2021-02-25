@@ -36,6 +36,13 @@ describe('User Repo', function () {
     expect(userRepo.findAverageStepGoal()).to.equal(6666.666666666667);
   });
 
+
+
+
+//END OF ITERATION 1
+
+
+
   describe('array changes', function() {
     let user1;
     let user2;
