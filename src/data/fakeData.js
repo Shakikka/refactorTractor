@@ -43,7 +43,8 @@ export const fakeUserData = [
 ]
 
 
-const fakeHydrationData = [{
+export const fakeHydrationData = [
+  {
     "userID": 1,
     "date": "2019/06/15",
     "hoursSlept": 6.1,
@@ -63,7 +64,8 @@ const fakeHydrationData = [{
   }
 ]
 
-const fakeSleepData = [{
+export const fakeSleepData = [
+  {
     "userID": 1,
     "date": "2019/06/15",
     "numOunces": 37
@@ -80,7 +82,8 @@ const fakeSleepData = [{
   }
 ]
 
-const fakeActivityData = [{
+export const fakeActivityData = [
+  {
     "userID": 1,
     "date": "2019/06/15",
     "numSteps": 3577,
