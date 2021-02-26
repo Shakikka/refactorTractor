@@ -1,0 +1,36 @@
+.user-dash {
+  background-color: #F6F3FF;
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.sidebar-header-userImage {
+  border-radius: 50%;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+  height: 200px;
+  width: 200px;
+  justify-content: center;
+}
+
+// .sidebar-header-userInfo {
+//   font-family: sans-serif;
+//   font-weight: bold;
+//   font-size: 1.2em;
+//   // margin: .5em .5em .5em .5em;
+//   width: inherit;
+// }
+
+//
+// .sidebar-body-friendContainer {
+//   display: flex;
+//   flex-direction: column;
+// }
+//

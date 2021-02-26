@@ -1,0 +1,35 @@
+.main-column-hydration {
+  background-color: #F6F3FF;
+  grid-column: 3 / 4;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+// .card-history-hydration {
+//   text-align: center;
+//   background-color: #5BC8AC;
+//   font-size: 1em;
+//   // margin: .5em;
+//   font-family: sans-serif;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   width: 50%;
+// }
+
+// .card-today-hydration {
+//   text-align: center;
+//   background-color: #5BC8AC;
+//   height: auto;
+//   font-size: 1.5em;
+//   // margin: .5em;
+//   font-family: sans-serif;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   width: 80%;
+// }
