@@ -21,7 +21,7 @@ import {
 
 const sidebarName = document.getElementById('sidebarName');
 const stepGoalCard = document.getElementById('stepGoalCard');
-const headerText = document.getElementById('headerText');
+const headerText = document.querySelector('.header');
 const userAddress = document.getElementById('userAddress');
 const userEmail = document.getElementById('userEmail');
 const userStridelength = document.getElementById('userStridelength');
