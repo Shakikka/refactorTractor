@@ -113,17 +113,14 @@
 // //   text-align: center;
 // // }
 // //
-// // .sidebar-header-name {
-// //   text-align: center;
-// // }
 //
-// // .sidebar-header-userInfo {
-// //   font-family: sans-serif;
-// //   font-weight: bold;
-// //   font-size: 1.2em;
-// //   // margin: .5em .5em .5em .5em;
-// //   width: inherit;
-// // }
+// .sidebar-header-userInfo {
+//   font-family: sans-serif;
+//   font-weight: bold;
+//   font-size: 1.2em;
+//   // margin: .5em .5em .5em .5em;
+//   width: inherit;
+// }
 //
 //
 // // .sidebar-header-line {
@@ -166,13 +163,13 @@
 //   justify-content: space-between;
 // }
 //
-// .horizontalCard-activity-container {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-around;
-//   width: 100%;
-//   overflow: scroll;
-// }
+.horizontalCard-activity-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  overflow: scroll;
+}
 //
 // .infoContainer-cardContainer-card-vertical {
 //   width: 100%;

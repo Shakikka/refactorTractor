@@ -1,20 +1,24 @@
-//Activity column
-.main-column-activity {
+.activity-column {
   background-color: #F6F3FF;
   grid-column: 2 / 3;
   grid-row: 2 / 4;
-  // display: grid;
-  // grid-template-columns: 1fr;
-  // grid-auto-rows: 1fr 1fr;
-  // grid-template-areas:
-  //   "today"
-  //   "history"
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
 }
-//
+
 // .card-today-activity {
-//   grid-area: today;
-// }
-//
-// .card-history-activity {
-//   grid-area: history;
+//   text-align: center;
+//   background-color: #DFE166;
+//   height: auto;
+//   font-size: 1.5em;
+//   // margin: .3em;
+//   font-family: sans-serif;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   width: 40%;
 // }
