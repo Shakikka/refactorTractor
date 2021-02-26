@@ -52,35 +52,17 @@ const bestUserSteps = document.getElementById('bestUserSteps');
 const streakList = document.getElementById('streakList');
 const streakListMinutes = document.getElementById('streakListMinutes')
 const avStepGoalCard = document.getElementById('avStepGoalCard');
-// sleepDataAPI
-// .then(data => console.log('sleep:', data.sleepData))
-// userDataAPI
-// .then(data => console.log('user:', data.userData))
-// activityDataAPI
-// .then(data => console.log('activity:', data.activityData))
-// hydrationDataAPI
-// .then(data => console.log('hydration:', data.hydrationData))
 
 function loadThisFirst() {
   Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
     .then((values) => {
-    // console.log(values)
-    // console.log('userData:', values[1].userData)
-    // console.log('sleepData:', values[0].sleepData[0])
-    // let userList;
-    // makeUsers(values[1].userData);
-    // let userRepo = new UserRepo(userList);
-    displayUserInfo(values[1].userData)
-    let hydrationRepo = new Hydration(values[3].hydrationData);
+    displayInfo(values[1].userData, values[3].hydrationData)
     let sleepRepo = new Sleep(values[0].sleepData);
     let activityRepo = new Activity(values[2].activityData);
-    // const userNowId = pickUser();
-    // let userNow = getUserById(userNowId, userRepo);
-    let today = makeToday(userRepo, userNowId, hydrationData);
-    let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-    historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-    // addInfoToSidebar(userNow, userRepo);
-    addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+    // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
+    // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+    // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+    // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
     addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
     let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
     addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
@@ -88,11 +70,21 @@ function loadThisFirst() {
   })
 }
 
-function displayUserInfo(userInfo) {
+function displayInfo(userInfo, hydrationInfo) {
   let userRepo = new UserRepo(userInfo);
   let userNowId = pickUser();
   let userNow = getUserById(userNowId, userRepo);
   addInfoToSidebar(userNow, userRepo);
+  displayHydrationInfo(userRepo, userNowId, hydrationInfo)
+}
+
+function displayHydrationInfo(userInfo, id, hydrationInfo) {
+  let hydrationRepo = new Hydration(hydrationInfo);
+  let today = makeToday(userInfo, id, hydrationRepo.hydrationData)
+  hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span
+  class="number">${hydrationRepo.calculateDailyOunces(id, today)}</span></p><p>oz water today.</p>`);
+  hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id,
+    hydrationRepo, userInfo, hydrationRepo.calculateFirstWeekOunces(userInfo, id)))
 }
 
 function pickUser() {
@@ -102,14 +94,7 @@ function pickUser() {
 function getUserById(id, listRepo) {
   return listRepo.findUserData(id);
 };
-// function makeUsers(rawData) {
-//   let userList = []
-//   rawData.forEach(dataItem => {
-//     let user = new User(dataItem);
-//     userList.push(user);
-//   })
-//   return userList
-// }
+
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
@@ -142,9 +127,6 @@ function addInfoToSidebar(user, userStorage) {
 //   addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
 // }
 
-
-
-
 function makeFriendHTML(user, userStorage) {
   return user.getFriendsNames(userStorage).map(friendName => `<li class='historical-list-listItem'>${friendName}</li>`).join('');
 }
@@ -155,6 +137,8 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) {
 
 function makeToday(userStorage, id, dataSet) {
   const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
+  // console.log(id)
+  // console.log('sortedArray:', sortedArray);
   return sortedArray[0].date;
 }
 
@@ -164,12 +148,12 @@ function makeRandomDate(userStorage, id, dataSet) {
 
 }
 
-function addHydrationInfo(id, hydrationInfo, dateString, userStorage, laterDateString) {
-  hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span class="number">${hydrationInfo.calculateDailyOunces(id, dateString)}</span></p><p>oz water today.</p>`);
-  hydrationAverage.insertAdjacentHTML('afterBegin', `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.calculateAverageOunces(id)}</span></p> <p>oz per day.</p>`)
-  hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateFirstWeekOunces(userStorage, id)));
-  hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
-}
+// function addHydrationInfo(id, hydrationInfo, dateString, userStorage, laterDateString) {
+//   hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span class="number">${hydrationInfo.calculateDailyOunces(id, dateString)}</span></p><p>oz water today.</p>`);
+//   hydrationAverage.insertAdjacentHTML('afterBegin', `<p>Your average water intake is</p><p><span class="number">${hydrationInfo.calculateAverageOunces(id)}</span></p> <p>oz per day.</p>`)
+//   hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateFirstWeekOunces(userStorage, id)));
+//   hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
+// }
 
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
   return method.map(drinkData => `<li class="historical-list-listItem">On ${drinkData}oz</li>`).join('');
