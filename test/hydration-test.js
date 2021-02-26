@@ -51,33 +51,16 @@ describe('Hydration', function () {
     expect(hydration.calculateFirstWeekOunces(userRepo, 2)[1]).to.eql('2018/10/23: 34');
   });
 
-  it('should find sleep quality by day for that days week', function () {
-    const user3 = new User({
-      id: 3,
-      name: "The Rock",
-      address: "1236 Awesome Street, Denver CO 80301-1697",
-      email: "therock@hotmail.com",
-      strideLength: 10,
-      dailyStepGoal: 60000,
-      friends: [1, 2, 4]
-    });
+  //below method to be deleted if not used
 
-    const user4 = new User({
-      id: 4,
-      name: "Rainbow Dash",
-      address: "1237 Equestria Street, Denver CO 80301-1697",
-      email: "rainbowD1@hotmail.com",
-      strideLength: 3.8,
-      dailyStepGoal: 7000,
-      friends: [1, 2, 3]
-    });
-    const users = [user3, user4];
-    const userRepo = new UserRepo(users);
-    expect(hydration.calculateRandomWeekOunces('2019/09/18', 4, userRepo)[0]).to.eql('2019/09/18: 40');
-    // expect(hydration.calculateRandomWeekOunces('2018/02/01', 4, userRepo)[6]).to.eql('2019/09/16: 30');
-    //this is failing because it doesn't exist, need a failure case
-  })
-  //day of hydration should not include user 2 or user 1 on August 22
-  //week of hydration should not include user 4 not during the week
+  // it('should find sleep quality by day for that days week', function () {
+  //   const user1 = new User(fakeUserData[0]);
+  //   const user2 = new User(fakeUserData[1]);
+
+  //   const users = [user1, user2];
+  //   const userRepo = new UserRepo(users);
+  //   console.log(hydration.calculateRandomWeekOunces('2016/08/22', 1, userRepo))
+  //   expect(hydration.calculateRandomWeekOunces('2019/09/18', 4, userRepo)[0]).to.eql('2019/09/18: 40');
+  // })
 
 });

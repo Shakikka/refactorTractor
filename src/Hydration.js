@@ -22,9 +22,11 @@ class Hydration {
     return userRepo.getFirstWeek(id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
   }
 
-  calculateRandomWeekOunces(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
-  }
+  //below method to be deleted if not used
+
+  // calculateRandomWeekOunces(date, id, userRepo) {
+  //   return userRepo.getWeekFromDate(date, id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
+  // }
 }
 
 
