@@ -1,13 +1,15 @@
 //Activity column
-// .main-column-activity {
-//   grid-area: activity;
-//   display: grid;
-//   grid-template-columns: 1fr;
-//   grid-auto-rows: 1fr 1fr;
-//   grid-template-areas:
-//     "today"
-//     "history"
-// }
+.main-column-activity {
+  background-color: #F6F3FF;
+  grid-column: 2 / 3;
+  grid-row: 2 / 4;
+  // display: grid;
+  // grid-template-columns: 1fr;
+  // grid-auto-rows: 1fr 1fr;
+  // grid-template-areas:
+  //   "today"
+  //   "history"
+}
 //
 // .card-today-activity {
 //   grid-area: today;

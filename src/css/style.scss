@@ -20,24 +20,35 @@
 
 .container {
   height: 100vh;
+  padding: 20px;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
-  // grid-template-rows: 40px 200px 40px;
-  // grid-template-areas:
-  // "header header header"
-  // "dash activity hydration"
-  // "dash activity sleep"
+  grid-template-rows: .2fr 1fr 1fr;
 }
 
 .header {
-  grid-column-start: 1;
-  grid-column-end: 3;
+  background-color: purple;
+  grid-column: 1 / 4;
 }
 
-// .user-dash {
-//   grid-area: dash;
-// }
+.user-dash {
+  background-color: #F6F3FF;
+  grid-column: 1 / 2;
+  grid-row: 2 / 4;
+}
+
+.main-column-hydration {
+  background-color: #F6F3FF;
+  grid-column: 3 / 4;
+}
+
+.main-column-sleep {
+  background-color: #F6F3FF;
+  grid-column: 3 / 4;
+}
+
+
 
 //Activity column
 // .main-column-activity {
