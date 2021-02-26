@@ -10,21 +10,6 @@
   justify-content: space-around;
 }
 
-//
-// .sidebar-header-userInfo {
-//   font-family: sans-serif;
-//   font-weight: bold;
-//   font-size: 1.2em;
-//   // margin: .5em .5em .5em .5em;
-//   width: inherit;
-// }
-//
-.sidebar-header-line {
-  color: #ffffff;
-  border: 1px solid black;
-  width: 80%;
-}
-//
 .sidebar-header-userImage {
   border-radius: 50%;
   border-color: black;
@@ -32,9 +17,17 @@
   border-width: 1px;
   height: 200px;
   width: 200px;
-  // margin: 4px 2px 2px 2px;
   justify-content: center;
 }
+
+// .sidebar-header-userInfo {
+//   font-family: sans-serif;
+//   font-weight: bold;
+//   font-size: 1.2em;
+//   // margin: .5em .5em .5em .5em;
+//   width: inherit;
+// }
+
 //
 // .sidebar-body-friendContainer {
 //   display: flex;
