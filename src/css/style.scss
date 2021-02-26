@@ -18,7 +18,7 @@
 //   padding-top: 10px;
 // }
 
-.container {
+.main-container {
   height: 100vh;
   padding: 20px;
   display: grid;
@@ -28,8 +28,11 @@
 }
 
 .header {
-  background-color: purple;
+  background-color: #FFF2E3;
   grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -129,17 +132,6 @@
 // //   // margin: 1em 1em 0 1em;
 // //   height: 0;
 // //   width: 80%;
-// // }
-//
-// // .sidebar-header-userImage {
-// //   border-radius: 50%;
-// //   border-color: black;
-// //   border-style: solid;
-// //   border-width: 1px;
-// //   height: 200px;
-// //   width: 200px;
-// //   // margin: 4px 2px 2px 2px;
-// //   justify-content: center;
 // // }
 //
 // // .sidebar-body-friendContainer {
@@ -292,13 +284,13 @@
 //   color: black;
 // }
 //
-// .card-vertical-list {
-//   list-style-type: none;
-//   font-weight: lighter;
-//   font-style: italic;
-//   // padding-left: 0;
-//   font-size: 1em;
-// }
+.card-vertical-list {
+  list-style-type: none;
+  font-weight: lighter;
+  font-style: italic;
+  padding-left: 0;
+  font-size: 1em;
+}
 //
 // .historical-list-listItem {
 //   // padding: .3em;
@@ -308,31 +300,31 @@
 
 
 
-@media screen and (max-width: 550px) {
-  .container {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-areas:
-    "user"
-    "activity"
-    "hydration"
-    "sleep"
-  }
-  .user-dash {
-    grid-area: user;
-  }
-
-  .main-column-hydration {
-    grid-area: hydration;
-  }
-
-  .main-column-activity {
-    grid-area: activity;
-  }
-
-  .main-column-sleep {
-    grid-area: sleep;
-  }
-}
+// @media screen and (max-width: 550px) {
+//   .container {
+//     display: grid;
+//     grid-gap: 10px;
+//     grid-template-columns: 1fr;
+//     grid-template-rows: 1fr 1fr 1fr 1fr;
+//     grid-template-areas:
+//     "user"
+//     "activity"
+//     "hydration"
+//     "sleep"
+//   }
+//   .user-dash {
+//     grid-area: user;
+//   }
+//
+//   .main-column-hydration {
+//     grid-area: hydration;
+//   }
+//
+//   .main-column-activity {
+//     grid-area: activity;
+//   }
+//
+//   .main-column-sleep {
+//     grid-area: sleep;
+//   }
+// }
