@@ -5,7 +5,8 @@ import Hydration from '../src/Hydration';
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 import {
-  fakeHydrationData
+  fakeHydrationData,
+  fakeUserData
 } from '../src/data/fakeData';
 
 describe('Hydration', function () {
@@ -41,29 +42,13 @@ describe('Hydration', function () {
   });
 
   it('should find water intake by day for first week', function () {
-    const user3 = new User({
-      id: 3,
-      name: "The Rock",
-      address: "1236 Awesome Street, Denver CO 80301-1697",
-      email: "therock@hotmail.com",
-      strideLength: 10,
-      dailyStepGoal: 60000,
-      friends: [1, 2, 4]
-    });
+    const user1 = new User(fakeUserData[0]);
+    const user2 = new User(fakeUserData[1]);
 
-    const user4 = new User({
-      id: 4,
-      name: "Rainbow Dash",
-      address: "1237 Equestria Street, Denver CO 80301-1697",
-      email: "rainbowD1@hotmail.com",
-      strideLength: 3.8,
-      dailyStepGoal: 7000,
-      friends: [1, 2, 3]
-    });
-    const users = [user3, user4];
+    const users = [user1, user2];
     const userRepo = new UserRepo(users);
-    expect(hydration.calculateFirstWeekOunces(userRepo, 4)[0]).to.eql('2019/09/20: 40');
-    expect(hydration.calculateFirstWeekOunces(userRepo, 4)[6]).to.eql('2019/04/15: 36');
+    expect(hydration.calculateFirstWeekOunces(userRepo, 1)[0]).to.eql('2019/06/15: 37');
+    expect(hydration.calculateFirstWeekOunces(userRepo, 2)[1]).to.eql('2018/10/23: 34');
   });
 
   it('should find sleep quality by day for that days week', function () {
