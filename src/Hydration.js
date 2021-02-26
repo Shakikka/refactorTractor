@@ -8,16 +8,25 @@ class Hydration {
       return sumSoFar += data.numOunces;
     }, 0) / perDayUserHydration.length;
   }
+
   calculateDailyOunces(id, date) {
     let findOuncesByDate = this.hydrationData.find((data) => id === data.userID && date === data.date);
-    return findOuncesByDate.numOunces;
+    if (findOuncesByDate === undefined) {
+      return 0;
+    } else {
+      return findOuncesByDate.numOunces;
+    }
   }
+
   calculateFirstWeekOunces(userRepo, id) {
     return userRepo.getFirstWeek(id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
   }
-  calculateRandomWeekOunces(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
-  }
+
+  //below method to be deleted if not used
+
+  // calculateRandomWeekOunces(date, id, userRepo) {
+  //   return userRepo.getWeekFromDate(date, id, this.hydrationData).map((data) => `${data.date}: ${data.numOunces}`);
+  // }
 }
 
 

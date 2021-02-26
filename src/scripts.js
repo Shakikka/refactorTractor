@@ -15,7 +15,8 @@ import Hydration from './Hydration';
 import Sleep from './Sleep';
 import UserRepo from './User-repo';
 import {
-  fakeUserData
+  fakeUserData,
+  fakeHydrationData
 } from './data/fakeData';
 
 const sidebarName = document.getElementById('sidebarName');
