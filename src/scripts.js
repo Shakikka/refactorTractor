@@ -66,6 +66,7 @@ const hydrationForm = document.querySelector('#hydrationForm');
 const sleepForm = document.querySelector('#sleepForm');
 const userForms = document.querySelectorAll('.user-form');
 const formInputs = document.querySelectorAll('.form-input');
+const submitFormButton = document.querySelector('#submitForm');
 
 function testPost() {
   fetch("http://localhost:3001/api/v1/activity", {
@@ -263,19 +264,23 @@ function updateFormView(event) {
   switch (event.target.value) {
     case 'activity':
       removeClass(activityForm);
+      removeClass(submitFormButton);
       break;
     case 'hydration':
       removeClass(hydrationForm);
+      removeClass(submitFormButton);
       break;
     case 'sleep':
       removeClass(sleepForm);
+      removeClass(submitFormButton);
       break;
   }
 }
 
-function resetForm(domElements) {
+function resetForm() {
   formInputs.forEach(ele => ele.value = '');
   userForms.forEach(ele => addClass(ele))
+  addClass(submitFormButton)
 }
 
 
@@ -285,3 +290,5 @@ window.addEventListener('load', loadThisFirst)
 enterProgressDropdown.addEventListener('change', function (event) {
   updateFormView(event)
 })
+
+// submitFormButton
