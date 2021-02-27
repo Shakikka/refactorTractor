@@ -35,7 +35,7 @@ const sleepToday = document.getElementById('sleepToday');
 const sleepQualityToday = document.getElementById('sleepQualityToday');
 const avUserSleepQuality = document.getElementById('avUserSleepQuality');
 const sleepThisWeek = document.getElementById('sleepThisWeek');
-const sleepEarlierWeek = document.getElementById('sleepEarlierWeek');
+const allTimeSleep = document.getElementById('allTimeSleep');
 const friendChallengeListToday = document.getElementById('friendChallengeListToday');
 const friendChallengeListHistory = document.getElementById('friendChallengeListHistory');
 const bigWinner = document.getElementById('bigWinner');
@@ -98,7 +98,7 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
 
   sleepToday.insertAdjacentHTML('afterBegin', `<p>You slept:</p><p><span
   class="number">${sleepRepo.calculateDailySleep(id, today)}</span></p><p> hours today.</p>
-  <p>Quality of sleep: ${sleepRepo.calculateDailySleepQuality(id, today)}.</p>`);
+  <p>Quality of sleep: ${sleepRepo.calculateDailySleepQuality(id, today)}</p>`);
 
   let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo);
   console.log(weeksHours);
@@ -114,7 +114,7 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
 
   sleepThisWeek.innerHTML += `QUALITY: PLACHEOLDER`;
 
-  sleepEarlierWeek.innerHTML += `
+  allTimeSleep.innerHTML += `
     <p>All time average hours of sleep: ${sleepRepo.calculateAverageSleep(id)}</p>
     <p>All time average quality of sleep: ${sleepRepo.calculateAverageSleepQuality(id)}</p>
   `;
@@ -186,7 +186,7 @@ function makeRandomDate(userStorage, id, dataSet) {
 // }
 
 function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
-  return method.map(drinkData => `<li class="historical-list-listItem">On ${drinkData}oz</li>`).join('');
+  return method.map(drinkData => `<li class="historical-list-listItem">${drinkData}oz</li>`).join('');
 }
 
 // function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
