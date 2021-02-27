@@ -98,7 +98,7 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo) {
 
 function displayHydrationInfo(userInfo, id, hydrationInfo) {
   let hydrationRepo = new Hydration(hydrationInfo);
-  let today = makeToday(userInfo, id, hydrationRepo.hydrationData);
+  let today = userInfo.getToday(id, hydrationRepo.hydrationData);
   console.log('Result of makeToday function called upon the hydrationData:', today);
 
   hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span
@@ -110,30 +110,29 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 
 function displaySleepInfo(userInfo, id, sleepInfo) {
   let sleepRepo = new Sleep(sleepInfo);
-  let today = makeToday(userInfo, id, sleepRepo.sleepData);
+  let today = userInfo.getToday(id, sleepRepo.sleepData);
   console.log('Result of makeToday function called upon the sleepData:', today);
 
   sleepToday.insertAdjacentHTML('afterBegin', `<p>You slept:</p><p><span
-  class="number">${sleepRepo.calculateDailySleep(id, today)}</span></p><p> hours today.</p>
-  <p>Quality of sleep: ${sleepRepo.calculateDailySleepQuality(id, today)}</p>`);
+  class="number">${sleepRepo.findInfoForDate(id, today, 'hoursSlept')}</span></p><p> hours today.</p>
+  <p>Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}</p>`);
 
   let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo);
   console.log(weeksHours);
 
-  let weeksQuality = sleepRepo.calculateWeekSleepQuality(today, id, userInfo);
+  let weeksQuality = sleepRepo.calculateWeekSleep(today, id, userInfo);
   console.log(weeksQuality);
 
   weeksHours.forEach(element => {
     sleepThisWeek.insertAdjacentHTML('afterBegin', `
-      <li>${element} hours</li>
+      <li>${element}</li>
     `)
   })
 
-  sleepThisWeek.innerHTML += `<li>QUALITY: PLACHEOLDER</li>`;
 
   allTimeSleep.innerHTML += `
-    <p>All time average hours of sleep: ${sleepRepo.calculateAverageSleep(id)}</p>
-    <p>All time average quality of sleep: ${sleepRepo.calculateAverageSleepQuality(id)}</p>
+    <p>All time average hours of sleep: ${sleepRepo.calculateAverage(id, 'hoursSlept').toFixed(2)}</p>
+    <p>All time average quality of sleep: ${sleepRepo.calculateAverage(id, 'sleepQuality').toFixed(2)}</p>
   `;
 }
 
@@ -183,10 +182,8 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) {
 }
 
 function makeToday(userStorage, id, dataSet) {
-  const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  // console.log(id)
-  // console.log('sortedArray:', sortedArray);
-  return sortedArray[0].date;
+ return userStorage.getToday()
+
 }
 
 function makeRandomDate(userStorage, id, dataSet) {
