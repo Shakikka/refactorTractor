@@ -56,8 +56,8 @@ const avStepGoalCard = document.getElementById('avStepGoalCard');
 function loadThisFirst() {
   Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
     .then((values) => {
-    displayInfo(values[1].userData, values[3].hydrationData)
-    let sleepRepo = new Sleep(values[0].sleepData);
+    displayInfo(values[1].userData, values[3].hydrationData, values[0].sleepData)
+    // let sleepRepo = new Sleep(values[0].sleepData);
     let activityRepo = new Activity(values[2].activityData);
     // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
     // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
@@ -76,22 +76,32 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo) {
 
   addInfoToSidebar(randomUser, userRepo);
   displayHydrationInfo(userRepo, randomUser.id, hydrationInfo);
-  // displaySleepInfo(userInfo, userNowId, sleepInfo);
+  displaySleepInfo(userRepo, randomUser.id, sleepInfo);
 }
 
 function displayHydrationInfo(userInfo, id, hydrationInfo) {
   let hydrationRepo = new Hydration(hydrationInfo);
-  let today = makeToday(userInfo, id, hydrationRepo.hydrationData)
+  let today = makeToday(userInfo, id, hydrationRepo.hydrationData);
+  console.log('Result of makeToday function called upon the hydrationData:', today);
+
   hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span
   class="number">${hydrationRepo.calculateDailyOunces(id, today)}</span></p><p>oz water today.</p>`);
+
   hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id,
     hydrationRepo, userInfo, hydrationRepo.calculateFirstWeekOunces(userInfo, id)))
 }
 
-// function displaySleepInfo(userInfo, id, sleepInfo) {
-//   let sleepRepo = new Sleep(sleepInfo);
-//   let today =
-// }
+function displaySleepInfo(userInfo, id, sleepInfo) {
+  let sleepRepo = new Sleep(sleepInfo);
+  let today = makeToday(userInfo, id, sleepRepo.sleepData);
+  console.log('Result of makeToday function called upon the sleepData:', today);
+
+  sleepToday.insertAdjacentHTML('afterBegin', `<p>You slept:</p><p><span
+  class="number">${sleepRepo.calculateDailySleep(id, today)}</span></p><p> hours today.</p>`);
+
+  sleepThisWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id,
+    sleepRepo, userInfo, sleepRepo.calculateFirstWeekOunces(userInfo, id)));
+}
 
 function pickUser(listRepo) {
   let randomUser = Math.floor(Math.random() * 50);
