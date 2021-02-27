@@ -60,6 +60,7 @@ const bestUserSteps = document.getElementById('bestUserSteps');
 const streakList = document.getElementById('streakList');
 const streakListMinutes = document.getElementById('streakListMinutes')
 const avStepGoalCard = document.getElementById('avStepGoalCard');
+const enterProgressDropdown = document.querySelector('#enter-progress-dropdown');
 
 function testPost() {
   fetch("http://localhost:3001/api/v1/activity", {
@@ -243,6 +244,38 @@ function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
 function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
-
 // startApp();
+const addClass = (element, className) => {
+  element.classList.add(className || "hidden");
+};
+
+const removeClass = (element, className) => {
+  element.classList.remove(className || "hidden");
+};
+///////form and post functionality
+function updateFormView(event) {
+  switch (event.target.value) {
+    case '':
+      //clear all form fields
+      break;
+    case 'activity':
+      //do something
+      break;
+    case 'hydration':
+      //do something
+      break;
+    case 'sleep':
+      //do something
+      break;
+  }
+}
+
+
+
+
+///////event listeners
 window.addEventListener('load', loadThisFirst)
+
+enterProgressDropdown.addEventListener('change', function (event) {
+  //call function here and pass in event
+})
