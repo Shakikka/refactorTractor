@@ -5,10 +5,13 @@ import {
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 import {
-  fakeUserData
+  fakeUserData,
+  fakeHydrationData,
+  fakeSleepData,
+  fakeActivityData,
 } from '../src/data/fakeData';
 
-describe('User Repo', function () {
+describe.only('User Repo', function () {
 
   let userOne, userTwo, users, userRepo;
 
@@ -22,20 +25,21 @@ describe('User Repo', function () {
   });
 
   it('should create and store users', function() {
-    userRepo.createUsers(fakeUserData);
     expect(userRepo.users).to.deep.equal([fakeUserData[0], fakeUserData[1], fakeUserData[2]]);
   });
 
   it('should find User data based on ID', function() {
-    userRepo.createUsers(fakeUserData);
     expect(userRepo.findUserData(1)).to.deep.equal(fakeUserData[0]);
   });
 
   it('should find average step goal amongst all users', function() {
-    userRepo.createUsers(fakeUserData);
     expect(userRepo.findAverageStepGoal()).to.equal(6666.666666666667);
   });
 
+  it('should be able to find data by id for any data set', function() {
+  expect(userRepo.getDataFromUserID(2, fakeSleepData)).to.deep.equal([fakeSleepData[1], fakeSleepData[4], fakeSleepData[7]]);
+  expect(userRepo.getDataFromUserID(3, fakeHydrationData)).to.deep.equal([fakeHydrationData[2], fakeHydrationData[6], fakeHydrationData[9]])
+});
 
 
 

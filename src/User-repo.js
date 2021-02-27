@@ -28,13 +28,13 @@ class UserRepo {
 
 
 //END OF ITERATION 1
-
+// START ITERATION 3
 
 
   makeSortedUserArray(id, dataSet) {
     let selectedID = this.getDataFromUserID(id, dataSet)
-    let sortedByDate = selectedID.sort((a, b) => new Date(b.date) - new Date(a.date));
-    return sortedByDate;
+    let sortByDate = selectedID.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return sortByDate;
   }
 
   getToday(id, dataSet) {

@@ -5,7 +5,7 @@ import Sleep from '../src/Sleep';
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 
-describe.only('Sleep', function() {
+describe('Sleep', function() {
   let sleepData;
   let sleep;
   let user1;
@@ -44,7 +44,7 @@ describe.only('Sleep', function() {
     expect(sleep.findInfoForDate(1, '2019/06/15', 'sleepQuality')).to.equal(2.2);
     expect(sleep.findInfoForDate(1, '2019/06/17', 'sleepQuality')).to.equal(2.6);
   });
-
+// BREAK
   it.skip('should find sleep by day for that days week', function() {
 
     expect(sleep.calculateWeekSleep('2019/06/18', 4, userRepo)[0]).to.eql('2019/06/18: 7.9');
