@@ -31,12 +31,12 @@ describe.only('Sleep', function() {
     expect(sleep.sleepData).to.deep.equal(fakeSleepData);
   });
 
-  it.skip('should find the average sleep hours per day for a user', function() {
-    expect(sleep.calculateAverageSleep(3)).to.equal(3);
+  it('should find the average sleep hours per day for a user', function() {
+    expect(sleep.calculateAverage(2, 'hoursSlept').toFixed(2)).to.equal('6.73');
   });
 
-  it.skip('should find the average sleep quality per day for a user', function() {
-    expect(sleep.calculateAverageSleepQuality(3)).to.equal(2);
+  it('should find the average sleep quality per day for a user', function() {
+    expect(sleep.calculateAverage(1, 'sleepQuality').toFixed(2)).to.equal('2.87');
   });
 
   it.skip('should find the sleep hours for a user on a specified date', function() {

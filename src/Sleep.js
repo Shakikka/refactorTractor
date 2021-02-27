@@ -4,18 +4,14 @@ class Sleep {
   constructor(sleepData) {
     this.sleepData = sleepData;
   }
-  calculateAverageSleep(id) {
-    let perDaySleep = this.sleepData.filter((data) => id === data.userID);
-    return perDaySleep.reduce((sumSoFar, data) => {
-      return sumSoFar += data.hoursSlept;
-    }, 0) / perDaySleep.length;
+
+  calculateAverage(id, key) {
+    let dailyValues = this.sleepData.filter((userData) => id === userData.userID);
+    let totalValue = dailyValues.reduce((total, userData) => total += userData[key], 0)
+    let averageValue = totalValue / dailyValues.length
+    return averageValue
   }
-  calculateAverageSleepQuality(id) {
-    let perDaySleepQuality = this.sleepData.filter((data) => id === data.userID);
-    return perDaySleepQuality.reduce((sumSoFar, data) => {
-      return sumSoFar += data.sleepQuality;
-    }, 0) / perDaySleepQuality.length;
-  }
+
   calculateDailySleep(id, date) {
     let findSleepByDate = this.sleepData.find((data) => id === data.userID && date === data.date);
     return findSleepByDate.hoursSlept;
