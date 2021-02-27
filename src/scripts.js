@@ -68,14 +68,13 @@ const userForms = document.querySelectorAll('.user-form');
 const formInputs = document.querySelectorAll('.form-input');
 const submitFormButton = document.querySelector('#submitForm');
 
-
+let activityRepo, randomUser, userRepo, sleepRepo, hydrationRepo; // may not need userRepo globally
 
 function loadThisFirst() {
   Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
     .then((values) => {
-      displayInfo(values[1].userData, values[3].hydrationData, values[0].sleepData)
       // let sleepRepo = new Sleep(values[0].sleepData);
-      let activityRepo = new Activity(values[2].activityData);
+      activityRepo = new Activity(values[2].activityData);
       // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
       // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
       // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
@@ -84,12 +83,13 @@ function loadThisFirst() {
       // let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
       // addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
       // addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+      displayInfo(values[1].userData, values[3].hydrationData, values[0].sleepData)
     })
 }
 
 function displayInfo(userInfo, hydrationInfo, sleepInfo) {
-  let userRepo = new UserRepo(userInfo);
-  let randomUser = pickUser(userRepo);
+  userRepo = new UserRepo(userInfo);
+  randomUser = pickUser(userRepo);
 
   addInfoToSidebar(randomUser, userRepo);
   displayHydrationInfo(userRepo, randomUser.id, hydrationInfo);
@@ -97,7 +97,7 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo) {
 }
 
 function displayHydrationInfo(userInfo, id, hydrationInfo) {
-  let hydrationRepo = new Hydration(hydrationInfo);
+  hydrationRepo = new Hydration(hydrationInfo);
   let today = makeToday(userInfo, id, hydrationRepo.hydrationData);
   console.log('Result of makeToday function called upon the hydrationData:', today);
 
@@ -109,7 +109,7 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 }
 
 function displaySleepInfo(userInfo, id, sleepInfo) {
-  let sleepRepo = new Sleep(sleepInfo);
+  sleepRepo = new Sleep(sleepInfo);
   let today = makeToday(userInfo, id, sleepRepo.sleepData);
   console.log('Result of makeToday function called upon the sleepData:', today);
 
