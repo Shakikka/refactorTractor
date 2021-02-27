@@ -296,21 +296,41 @@ function resetForm() {
 }
 
 function postFormEntry() {
+  // const userID = ;
+  const date = new Date().toISOString().replace(/-/g, "/").split("T")[0];
+
   switch (enterProgressDropdown.value) {
     case 'activity':
-      // postActivityData();
+      // postActivityData(userID, date);
       break;
       // case 'hydration':
-      //   postHydrationData();
+      //   postHydrationData(userID, date);
       //   break;
       // case 'sleep':
-      //   postSleepData();
+      //   postSleepData(userID, date);
       //   break;
   }
   resetForm();
+  enterProgressDropdown.value = '';
 }
 
+function postActivityData(userID, date) {
+  //check if date exist in activity data
+  //if yes - alert saying data exists for this date already
+  //if no - 
+  //1. create object (relevant params) to pass into post request
+  //2. run post request and pass in obect
+  //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
+  //run dom updates based on new dataset (run whole dom update or just category specific?)
+}
 
+function postHydrationData(userID, date) {
+  //
+}
+
+function postSleepData(userID, date) {
+  //
+}
 
 ///////event listeners
 window.addEventListener('load', loadThisFirst)

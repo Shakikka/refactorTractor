@@ -1,15 +1,19 @@
 //GET requests
 export const sleepDataAPI = fetch("http://localhost:3001/api/v1/sleep")
   .then(response => response.json())
+  .catch(err => alert('Sorry, but there was an error. Please try again.'))
 
 export const userDataAPI = fetch("http://localhost:3001/api/v1/users")
   .then(response => response.json())
+  .catch(err => alert('Sorry, but there was an error. Please try again.'))
 
 export const activityDataAPI = fetch("http://localhost:3001/api/v1/activity")
   .then(response => response.json())
+  .catch(err => alert('Sorry, but there was an error. Please try again.'))
 
 export const hydrationDataAPI = fetch("http://localhost:3001/api/v1/hydration")
   .then(response => response.json())
+  .catch(err => alert('Sorry, but there was an error. Please try again.'))
 
 
 //POST requests
@@ -23,7 +27,7 @@ export const sleepDataPost = (dataFormEntry) => {
     })
     .then(response => response.json())
     .then(json => console.log(json))
-    .catch(err => console.log('too much sauce'))
+    .catch(err => console.log('too much sauce')) //err.message
 }
 
 export const hydrationDataPost = (dataFormEntry) => {
@@ -36,7 +40,7 @@ export const hydrationDataPost = (dataFormEntry) => {
     })
     .then(response => response.json())
     .then(json => console.log(json))
-    .catch(err => console.log('too much sauce'))
+    .catch(err => console.log('too much sauce')) //err.message
 }
 
 export const activityDataPost = (dataFormEntry) => {
@@ -49,7 +53,7 @@ export const activityDataPost = (dataFormEntry) => {
     })
     .then(response => response.json())
     .then(json => console.log(json))
-    .catch(err => console.log('too much sauce'))
+    .catch(err => console.log('too much sauce')) //err.message
 }
 
 
