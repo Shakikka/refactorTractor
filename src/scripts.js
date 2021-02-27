@@ -68,24 +68,6 @@ const userForms = document.querySelectorAll('.user-form');
 const formInputs = document.querySelectorAll('.form-input');
 const submitFormButton = document.querySelector('#submitForm');
 
-function testPost() {
-  fetch("http://localhost:3001/api/v1/activity", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        userID: 2,
-        date: "2021/01/01",
-        numSteps: 69,
-        minutesActive: 666,
-        flightsOfStairs: 610
-      })
-    })
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch(err => console.log('too much sauce'))
-}
 
 
 function loadThisFirst() {
@@ -290,5 +272,3 @@ window.addEventListener('load', loadThisFirst)
 enterProgressDropdown.addEventListener('change', function (event) {
   updateFormView(event)
 })
-
-// submitFormButton

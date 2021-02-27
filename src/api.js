@@ -60,10 +60,10 @@ export const activityDataPost = (dataFormEntry) => {
 //       'Content-Type': 'application/json'
 //     },
 //     body: JSON.stringify({
-//       userID: 60,
+//       userID: 33,
 //       date: "2021/01/01",
-//       numSteps: 69,
-//       minutesActive: 666,
+//       numSteps: 68,
+//       minutesActive: 66,
 //       flightsOfStairs: 610
 //     })
 //   })
