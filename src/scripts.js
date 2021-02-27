@@ -73,18 +73,18 @@ const submitFormButton = document.querySelector('#submitForm');
 function loadThisFirst() {
   Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
     .then((values) => {
-    displayInfo(values[1].userData, values[3].hydrationData, values[0].sleepData)
-    // let sleepRepo = new Sleep(values[0].sleepData);
-    let activityRepo = new Activity(values[2].activityData);
-    // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
-    // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-    // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-    // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-    // addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-    // let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-    // addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-    // addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
-  })
+      displayInfo(values[1].userData, values[3].hydrationData, values[0].sleepData)
+      // let sleepRepo = new Sleep(values[0].sleepData);
+      let activityRepo = new Activity(values[2].activityData);
+      // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
+      // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+      // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+      // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+      // addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+      // let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+      // addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
+      // addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+    })
 }
 
 function displayInfo(userInfo, hydrationInfo, sleepInfo) {
@@ -295,6 +295,22 @@ function resetForm() {
   addClass(submitFormButton)
 }
 
+function postFormEntry() {
+  switch (enterProgressDropdown.value) {
+    case 'activity':
+      // postActivityData();
+      break;
+      // case 'hydration':
+      //   postHydrationData();
+      //   break;
+      // case 'sleep':
+      //   postSleepData();
+      //   break;
+  }
+  resetForm();
+}
+
+
 
 ///////event listeners
 window.addEventListener('load', loadThisFirst)
@@ -302,3 +318,5 @@ window.addEventListener('load', loadThisFirst)
 enterProgressDropdown.addEventListener('change', function (event) {
   updateFormView(event)
 })
+
+submitFormButton.addEventListener('click', postFormEntry)
