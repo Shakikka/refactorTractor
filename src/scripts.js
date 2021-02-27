@@ -3,7 +3,15 @@ import './css/base.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import {sleepDataAPI, userDataAPI, hydrationDataAPI, activityDataAPI} from './api.js'
+import {
+  sleepDataAPI,
+  userDataAPI,
+  hydrationDataAPI,
+  activityDataAPI,
+  sleepDataPost,
+  hydrationDataPost,
+  activityDataPost
+} from './api.js'
 // import userData from './data/users';
 import hydrationData from './data/hydration';
 import sleepData from './data/sleep';
@@ -53,21 +61,41 @@ const streakList = document.getElementById('streakList');
 const streakListMinutes = document.getElementById('streakListMinutes')
 const avStepGoalCard = document.getElementById('avStepGoalCard');
 
+function testPost() {
+  fetch("http://localhost:3001/api/v1/activity", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userID: 2,
+        date: "2021/01/01",
+        numSteps: 69,
+        minutesActive: 666,
+        flightsOfStairs: 610
+      })
+    })
+    .then(response => response.json())
+    .then(json => console.log(json))
+    .catch(err => console.log('too much sauce'))
+}
+
+
 function loadThisFirst() {
   Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
     .then((values) => {
-    displayInfo(values[1].userData, values[3].hydrationData)
-    let sleepRepo = new Sleep(values[0].sleepData);
-    let activityRepo = new Activity(values[2].activityData);
-    // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
-    // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-    // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-    // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-    addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-    let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-    addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-    addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
-  })
+      displayInfo(values[1].userData, values[3].hydrationData)
+      let sleepRepo = new Sleep(values[0].sleepData);
+      let activityRepo = new Activity(values[2].activityData);
+      // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
+      // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+      // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+      // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+      addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+      let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+      addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
+      addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+    })
 }
 
 function displayInfo(userInfo, hydrationInfo) {
