@@ -11,24 +11,24 @@
 
   <body>
 
-    <div class="main-container">
+    <main class="main-container">
       <h1 class="header">Activity Tracker</h1>
 
-      <section class="user-dash">
+      <article class="user-dash">
 
-        <div class="user-info">
+        <section class="user-info">
           <h2 id="sidebarName">Name Name</h2>
-          <img src="./images/The Rock.jpg" class="sidebar-header-userImage"></img>
+          <img src="./images/The Rock.jpg"  alt="Dewayne 'The Rock' Johnson's smiling face"class="sidebar-header-userImage"></img>
           <p class="sidebar-header-userInfo" id="userAddress">1000 Mulberry Lane</p>
           <p class="sidebar-header-userInfo" id="userEmail">muffinMan@hotmail.com</p>
           <p class="sidebar-header-userInfo">Friends:</p>
-        </div>
+        </section>
 
         <div class="sidebar-header-line"></div>
 
-        <div class="user-friends">
+        <section class="user-friends">
           <h2 id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
-          <img src="./images/person walking on path.jpg" class="sidebar-header-userImage"></img>
+          <img src="./images/person walking on path.jpg" alt="A person's legs walking down a path" class="sidebar-header-userImage"></img>
           <p>WINNER: <span id="bigWinner">PLACEHOLDER</span></p>
             <ul class="card-vertical-list" id="friendList">
               <!-- friend list goes here -->
@@ -55,20 +55,20 @@
                     </ul>
                   </section>
           </section> -->
-        </div>
+        </section>
 
-      </section>
+      </article>
 
 
 <!-- Start Activity column -->
-      <section class="activity-column">
+      <article class="activity-column">
 
-        <div class="user-activity">
+        <section class="user-activity">
           <h1>Activity</h1>
           <p id="userStridelength">STRIDE-LENGTH: 1000 strides per second</p>
           <p id="stepGoalCard">GOAL: 2,000,000 steps a day</p>
           <p id="avStepGoalCard"><p>
-        </div>
+        </section>
 
         <div class="sidebar-header-line"></div>
 
@@ -184,12 +184,12 @@
 
         </section> -->
 
-    </section>
+    </article>
 
 <!-- End Activity Column -->
 <!-- Start Hydration Column -->
 
-        <section class="main-column-hydration">
+        <article class="main-column-hydration">
 
             <div class="card-today-hydration">
               <p id="hydrationToday"></p>
@@ -220,7 +220,7 @@
             </div>
           <!-- </section> -->
 
-        </section>
+        </article>
 
 <!-- END HYDRATION COLUMN -->
 <!-- Start Sleep column -->
@@ -230,9 +230,11 @@
             <div class="card-today-sleep">
               <p id="sleepToday"></p>
             </div>
+
             <div class="card-today-sleep">
               <p id="sleepQualityToday"></p>
             </div>
+
             <div class="card-today-sleep">
               <p id="avUserSleepQuality"></p>
             </div>
@@ -248,17 +250,15 @@
 
             <div class="card-history-sleep">
               <p class="thisWeek"></p>
-
               <ul class="card-vertical-list" id="sleepThisWeek">
               </ul>
             </div>
 
             <div class="sidebar-header-line"></div>
 
-            <div class="card-vertical-list" id="allTimeSleep">
-            </div>
+            <div class="card-vertical-list" id="allTimeSleep"></div>
+          </section>
 
-    </div>
+    </main>
   </body>
-
 </html>
