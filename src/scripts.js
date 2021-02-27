@@ -145,8 +145,8 @@ function pickUser(listRepo) {
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
-  stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}.`
-  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.findAverageStepGoal()}`;
+  stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal} steps.`
+  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.findAverageStepGoal()} steps.`;
   userAddress.innerText = user.address;
   userEmail.innerText = user.email;
   userStridelength.innerText = `Your stridelength is ${user.strideLength} meters.`;
