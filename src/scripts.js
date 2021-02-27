@@ -63,19 +63,20 @@ function loadThisFirst() {
     // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
     // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
     // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-    addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-    let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-    addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-    addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+    // addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+    // let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+    // addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
+    // addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
   })
 }
 
-function displayInfo(userInfo, hydrationInfo) {
+function displayInfo(userInfo, hydrationInfo, sleepInfo) {
   let userRepo = new UserRepo(userInfo);
-  let userNowId = pickUser();
-  let userNow = getUserById(userNowId, userRepo);
-  addInfoToSidebar(userNow, userRepo);
-  displayHydrationInfo(userRepo, userNowId, hydrationInfo)
+  let randomUser = pickUser(userRepo);
+
+  addInfoToSidebar(randomUser, userRepo);
+  displayHydrationInfo(userRepo, randomUser.id, hydrationInfo);
+  // displaySleepInfo(userInfo, userNowId, sleepInfo);
 }
 
 function displayHydrationInfo(userInfo, id, hydrationInfo) {
@@ -87,13 +88,15 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
     hydrationRepo, userInfo, hydrationRepo.calculateFirstWeekOunces(userInfo, id)))
 }
 
-function pickUser() {
-  return Math.floor(Math.random() * 50);
-}
+// function displaySleepInfo(userInfo, id, sleepInfo) {
+//   let sleepRepo = new Sleep(sleepInfo);
+//   let today =
+// }
 
-function getUserById(id, listRepo) {
-  return listRepo.findUserData(id);
-};
+function pickUser(listRepo) {
+  let randomUser = Math.floor(Math.random() * 50);
+  return listRepo.findUserData(randomUser);
+}
 
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
