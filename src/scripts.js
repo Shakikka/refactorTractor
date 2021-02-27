@@ -64,7 +64,7 @@ const enterProgressDropdown = document.querySelector('#enter-progress-dropdown')
 const activityForm = document.querySelector('#activityForm');
 const hydrationForm = document.querySelector('#hydrationForm');
 const sleepForm = document.querySelector('#sleepForm');
-const userForms = document.querySelector('.user-form');
+const userForms = document.querySelectorAll('.user-form');
 const formInputs = document.querySelectorAll('.form-input');
 
 function testPost() {
