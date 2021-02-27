@@ -12,14 +12,11 @@ class Sleep {
     return averageValue
   }
 
-  calculateDailySleep(id, date) {
-    let findSleepByDate = this.sleepData.find((data) => id === data.userID && date === data.date);
-    return findSleepByDate.hoursSlept;
+  findInfoForDate(id, date, key) {
+    let infoForDate = this.sleepData.find((userData) => id === userData.userID && date === userData.date);
+    return infoForDate[key];
   }
-  calculateDailySleepQuality(id, date) {
-    let findSleepQualityByDate = this.sleepData.find((data) => id === data.userID && date === data.date);
-    return findSleepQualityByDate.sleepQuality;
-  }
+  
   calculateWeekSleep(date, id, userRepo) {
     return userRepo.getWeekFromDate(date, id, this.sleepData).map((data) => `${data.date}: ${data.hoursSlept}`);
   }

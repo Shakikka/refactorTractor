@@ -5,7 +5,7 @@ import './images/The Rock.jpg';
 
 import {sleepDataAPI, userDataAPI, hydrationDataAPI, activityDataAPI} from './api.js'
 // import userData from './data/users';
-import hydrationData from './data/hydration';
+// import hydrationData from './data/hydration';
 import sleepData from './data/sleep';
 import activityData from './data/activity';
 

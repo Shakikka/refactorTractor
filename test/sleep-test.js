@@ -21,10 +21,6 @@ describe.only('Sleep', function() {
     user1 = userRepo.users[0];
     user2 = userRepo.users[1];
     user3 = userRepo.users[2];
-    // console.log('sleepData', sleep.sleepData);
-    // console.log('user1', user1)
-    // console.log('user2', user2)
-    // console.log('user3', user3)
   });
 
   it('should take in a list of data', function() {
@@ -39,14 +35,14 @@ describe.only('Sleep', function() {
     expect(sleep.calculateAverage(1, 'sleepQuality').toFixed(2)).to.equal('2.87');
   });
 
-  it.skip('should find the sleep hours for a user on a specified date', function() {
-    expect(sleep.calculateDailySleep(2, "2017/06/15")).to.equal(7);
-    expect(sleep.calculateDailySleep(4, "2019/06/21")).to.equal(6.1);
+  it('should find the sleep hours for a user on a specified date', function() {
+    expect(sleep.findInfoForDate(3, "2019/06/16", 'hoursSlept')).to.equal(10.7);
+    expect(sleep.findInfoForDate(2, "2019/06/17", 'hoursSlept')).to.equal(5.7);
   });
 
-  it.skip('should find the sleep quality for a user on a specified date', function() {
-    expect(sleep.calculateDailySleepQuality(2, "2017/06/15")).to.equal(4.7);
-    expect(sleep.calculateDailySleepQuality(4, "2019/06/21")).to.equal(3.5);
+  it('should find the sleep quality for a user on a specified date', function() {
+    expect(sleep.findInfoForDate(1, '2019/06/15', 'sleepQuality')).to.equal(2.2);
+    expect(sleep.findInfoForDate(1, '2019/06/17', 'sleepQuality')).to.equal(2.6);
   });
 
   it.skip('should find sleep by day for that days week', function() {
