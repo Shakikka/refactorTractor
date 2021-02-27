@@ -24,6 +24,30 @@
           <p class="sidebar-header-userInfo">Friends:</p>
         </section>
 
+        <div>
+          <label for="activity-type">Enter your progress for today:</label>
+          <select name="activity-type" id="enter-progress-dropdown">
+            <option value="" selected></option>
+            <option value="activity">Activity</option>
+            <option value="hydration">Hydration</option>
+            <option value="sleep">Sleep</option>
+          </select>
+          <form id="activityForm" class="user-form hidden">
+            <input class="form-input" type="number" placeholder="number of steps">
+            <input class="form-input" type="number" placeholder="minutes active">
+            <input class="form-input" type="number" placeholder="flights of stairs">
+          </form>
+          <form id="hydrationForm" class="user-form hidden">
+            <input class="form-input" type="number" placeholder="fluid ounces drank">
+          </form>
+          <form id="sleepForm" class="user-form hidden">
+            <input class="form-input" type="number" placeholder="hours slept">
+            <input class="form-input" type="number" placeholder="sleep quality">
+          </form>
+          <button id="submitForm" class="hidden">Submit</button>
+
+        </div>
+
         <div class="sidebar-header-line"></div>
 
         <section tabindex="0" class="user-friends">

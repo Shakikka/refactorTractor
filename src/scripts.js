@@ -3,7 +3,15 @@ import './css/base.scss';
 import './images/person walking on path.jpg';
 import './images/The Rock.jpg';
 
-import {sleepDataAPI, userDataAPI, hydrationDataAPI, activityDataAPI} from './api.js'
+import {
+  sleepDataAPI,
+  userDataAPI,
+  hydrationDataAPI,
+  activityDataAPI,
+  sleepDataPost,
+  hydrationDataPost,
+  activityDataPost
+} from './api.js'
 // import userData from './data/users';
 // import hydrationData from './data/hydration';
 import sleepData from './data/sleep';
@@ -52,6 +60,15 @@ const bestUserSteps = document.getElementById('bestUserSteps');
 const streakList = document.getElementById('streakList');
 const streakListMinutes = document.getElementById('streakListMinutes')
 const avStepGoalCard = document.getElementById('avStepGoalCard');
+const enterProgressDropdown = document.querySelector('#enter-progress-dropdown');
+const activityForm = document.querySelector('#activityForm');
+const hydrationForm = document.querySelector('#hydrationForm');
+const sleepForm = document.querySelector('#sleepForm');
+const userForms = document.querySelectorAll('.user-form');
+const formInputs = document.querySelectorAll('.form-input');
+const submitFormButton = document.querySelector('#submitForm');
+
+
 
 function loadThisFirst() {
   Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
@@ -245,6 +262,43 @@ function makeFriendChallengeHTML(id, activityInfo, userStorage, method) {
 function makeStepStreakHTML(id, activityInfo, userStorage, method) {
   return method.map(streakData => `<li class="historical-list-listItem">${streakData}!</li>`).join('');
 }
-
 // startApp();
+const addClass = (element, className) => {
+  element.classList.add(className || "hidden");
+};
+
+const removeClass = (element, className) => {
+  element.classList.remove(className || "hidden");
+};
+///////form and post functionality
+function updateFormView(event) {
+  resetForm()
+  switch (event.target.value) {
+    case 'activity':
+      removeClass(activityForm);
+      removeClass(submitFormButton);
+      break;
+    case 'hydration':
+      removeClass(hydrationForm);
+      removeClass(submitFormButton);
+      break;
+    case 'sleep':
+      removeClass(sleepForm);
+      removeClass(submitFormButton);
+      break;
+  }
+}
+
+function resetForm() {
+  formInputs.forEach(ele => ele.value = '');
+  userForms.forEach(ele => addClass(ele))
+  addClass(submitFormButton)
+}
+
+
+///////event listeners
 window.addEventListener('load', loadThisFirst)
+
+enterProgressDropdown.addEventListener('change', function (event) {
+  updateFormView(event)
+})
