@@ -97,10 +97,27 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
   console.log('Result of makeToday function called upon the sleepData:', today);
 
   sleepToday.insertAdjacentHTML('afterBegin', `<p>You slept:</p><p><span
-  class="number">${sleepRepo.calculateDailySleep(id, today)}</span></p><p> hours today.</p>`);
+  class="number">${sleepRepo.calculateDailySleep(id, today)}</span></p><p> hours today.</p>
+  <p>Quality of sleep: ${sleepRepo.calculateDailySleepQuality(id, today)}.</p>`);
 
-  sleepThisWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id,
-    sleepRepo, userInfo, sleepRepo.calculateWeekSleep(today, id, userInfo)));
+  let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo);
+  console.log(weeksHours);
+
+  let weeksQuality = sleepRepo.calculateWeekSleepQuality(today, id, userInfo);
+  console.log(weeksQuality);
+
+  weeksHours.forEach(element => {
+    sleepThisWeek.insertAdjacentHTML('afterBegin', `
+      <li>${element} hours</li>
+    `)
+  })
+
+  sleepThisWeek.innerHTML += `QUALITY: PLACHEOLDER`;
+
+  sleepEarlierWeek.innerHTML += `
+    <p>All time average hours of sleep: ${sleepRepo.calculateAverageSleep(id)}</p>
+    <p>All time average quality of sleep: ${sleepRepo.calculateAverageSleepQuality(id)}</p>
+  `;
 }
 
 function pickUser(listRepo) {
@@ -180,13 +197,13 @@ function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
 //   sleepEarlierWeek.insertAdjacentHTML('afterBegin', makeSleepHTML(id, sleepInfo, userStorage, sleepInfo.calculateWeekSleep(laterDateString, id, userStorage)));
 // }
 
-function makeSleepHTML(id, sleepInfo, userStorage, method) {
-  return method.map(sleepData => `<li class="historical-list-listItem">On ${sleepData} hours</li>`).join('');
-}
-
-function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
-  return method.map(sleepQualityData => `<li class="historical-list-listItem">On ${sleepQualityData}/5 quality of sleep</li>`).join('');
-}
+// function makeSleepHTML(id, sleepInfo, userStorage, method) {
+//   return method.map(sleepData => `<li class="historical-list-listItem">On ${sleepData} hours</li>`).join('');
+// }
+//
+// function makeSleepQualityHTML(id, sleepInfo, userStorage, method) {
+//   return method.map(sleepQualityData => `<li class="historical-list-listItem">On ${sleepQualityData}/5 quality of sleep</li>`).join('');
+// }
 
 function addActivityInfo(id, activityInfo, dateString, userStorage, laterDateString, user, winnerId) {
   userStairsToday.insertAdjacentHTML("afterBegin", `<p>Stair Count:</p><p>You</><p><span class="number">${activityInfo.userDataForToday(id, dateString, userStorage, 'flightsOfStairs')}</span></p>`)
