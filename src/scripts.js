@@ -61,6 +61,11 @@ const streakList = document.getElementById('streakList');
 const streakListMinutes = document.getElementById('streakListMinutes')
 const avStepGoalCard = document.getElementById('avStepGoalCard');
 const enterProgressDropdown = document.querySelector('#enter-progress-dropdown');
+const activityForm = document.querySelector('#activityForm');
+const hydrationForm = document.querySelector('#hydrationForm');
+const sleepForm = document.querySelector('#sleepForm');
+const userForms = document.querySelector('.user-form');
+const formInputs = document.querySelectorAll('.form-input');
 
 function testPost() {
   fetch("http://localhost:3001/api/v1/activity", {
@@ -254,28 +259,29 @@ const removeClass = (element, className) => {
 };
 ///////form and post functionality
 function updateFormView(event) {
+  resetForm()
   switch (event.target.value) {
-    case '':
-      //clear all form fields
-      break;
     case 'activity':
-      //do something
+      removeClass(activityForm);
       break;
     case 'hydration':
-      //do something
+      removeClass(hydrationForm);
       break;
     case 'sleep':
-      //do something
+      removeClass(sleepForm);
       break;
   }
 }
 
-
+function resetForm(domElements) {
+  formInputs.forEach(ele => ele.value = '');
+  userForms.forEach(ele => addClass(ele))
+}
 
 
 ///////event listeners
 window.addEventListener('load', loadThisFirst)
 
 enterProgressDropdown.addEventListener('change', function (event) {
-  //call function here and pass in event
+  updateFormView(event)
 })
