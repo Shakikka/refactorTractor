@@ -112,7 +112,7 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
     `)
   })
 
-  sleepThisWeek.innerHTML += `QUALITY: PLACHEOLDER`;
+  sleepThisWeek.innerHTML += `<li>QUALITY: PLACHEOLDER</li>`;
 
   allTimeSleep.innerHTML += `
     <p>All time average hours of sleep: ${sleepRepo.calculateAverageSleep(id)}</p>

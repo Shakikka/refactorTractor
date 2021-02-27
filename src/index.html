@@ -11,29 +11,29 @@
 
   <body>
 
-    <div class="main-container">
-      <h1 class="header">Activity Tracker</h1>
+    <main class="main-container">
+      <h1 tabindex="0" class="header">Activity Tracker</h1>
 
-      <section class="user-dash">
+      <article tabindex="0" class="user-dash">
 
-        <div class="user-info">
+        <section tabindex="0" class="user-info">
           <h2 id="sidebarName">Name Name</h2>
-          <img src="./images/The Rock.jpg" class="sidebar-header-userImage"></img>
+          <img src="./images/The Rock.jpg"  alt="Dewayne 'The Rock' Johnson's smiling face"class="sidebar-header-userImage"></img>
           <p class="sidebar-header-userInfo" id="userAddress">1000 Mulberry Lane</p>
           <p class="sidebar-header-userInfo" id="userEmail">muffinMan@hotmail.com</p>
           <p class="sidebar-header-userInfo">Friends:</p>
-        </div>
+        </section>
 
         <div class="sidebar-header-line"></div>
 
-        <div class="user-friends">
+        <section tabindex="0" class="user-friends">
           <h2 id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
-          <img src="./images/person walking on path.jpg" class="sidebar-header-userImage"></img>
+          <img src="./images/person walking on path.jpg" alt="A person's legs walking down a path" class="sidebar-header-userImage"></img>
           <p>WINNER: <span id="bigWinner">PLACEHOLDER</span></p>
             <ul class="card-vertical-list" id="friendList">
               <!-- friend list goes here -->
-              NEED TO ADD STEPS FOR WEEK TO EVERY FRIEND LISTED ABOVE
-              THEY ALSO NEED TO BE RANKED? I THINK?
+              <!-- NEED TO ADD STEPS FOR WEEK TO EVERY FRIEND LISTED ABOVE
+              THEY ALSO NEED TO BE RANKED? I THINK? -->
             </ul>
 
   <!-- DO WE NEED THIS COMMENTED OUT STUFF???????????????????????  -->
@@ -55,29 +55,29 @@
                     </ul>
                   </section>
           </section> -->
-        </div>
+        </section>
 
-      </section>
+      </article>
 
 
 <!-- Start Activity column -->
-      <section class="activity-column">
+      <article tabindex="0" class="activity-column">
 
-        <div class="user-activity">
+        <section tabindex="0" class="user-activity">
           <h1>Activity</h1>
           <p id="userStridelength">STRIDE-LENGTH: 1000 strides per second</p>
           <p id="stepGoalCard">GOAL: 2,000,000 steps a day</p>
           <p id="avStepGoalCard"><p>
-        </div>
+        </section>
 
         <div class="sidebar-header-line"></div>
 
-        <section class="horizontalCard-activity-container">
+        <section tabindex="0" class="horizontalCard-activity-container">
 
           <div class="card-history-activity">
             <p class="thisWeek">Your steps this week</p>
             <ul class="card-vertical-list" id="userStepsThisWeek">
-                Activity week list goes here
+                <!-- Activity week list goes here -->
             </ul>
           </div>
 
@@ -85,7 +85,7 @@
             <p class="thisWeek">Your stair count this week</p>
 
             <ul class="card-vertical-list" id="userStairsThisWeek">
-                Activity week list goes here
+                <!-- Activity week list goes here -->
             </ul>
           </div>
 
@@ -93,13 +93,13 @@
 
         <div class="sidebar-header-line"></div>
 
-        <section class="horizontalCard-activity-container">
+        <section tabindex="0" class="horizontalCard-activity-container">
 
           <div class="card-history-activity">
             <p class="thisWeek">Your minutes of activity this week</p>
 
             <ul class="card-vertical-list" id="userMinutesThisWeek">
-              Activity week list goes here
+              <!-- Activity week list goes here -->
             </ul>
           </div>
 
@@ -107,7 +107,7 @@
             <p class="thisWeek">Winner's steps this week</p>
 
             <ul class="card-vertical-list" id="bestUserSteps">
-              Activity week list goes here
+              <!-- Activity week list goes here -->
             </ul>
           </div>
 
@@ -184,81 +184,58 @@
 
         </section> -->
 
-    </section>
+    </article>
 
 <!-- End Activity Column -->
 <!-- Start Hydration Column -->
 
-        <section class="main-column-hydration">
+        <article tabindex="0" class="main-column-hydration">
 
-            <div class="card-today-hydration">
+            <div tabindex="0" class="card-today-hydration">
               <p id="hydrationToday"></p>
             </div>
-            <div class="card-today-hydration">
-              <p id="hydrationAverage"></p>
-            </div>
+
+            <div class="sidebar-header-line"></div>
 
           <!-- <section class="infoContainer-cardContainer-card-vertical"> -->
-            <div class="card-history-hydration">
+            <div tabindex="0" class="card-history-hydration">
               <p class="thisWeek">Water intake this week:</p>
+
+              <div>
+                <ul class="card-vertical-list" id="hydrationThisWeek">
+                </ul>
+              </div>
             </div>
 
-            <div class="sidebar-header-line"></div>
-
-            <div>
-              <ul class="card-vertical-list" id="hydrationThisWeek">
-              </ul>
-            </div>
-
-            <div class="sidebar-header-line"></div>
-
-            <div class="card-history-hydration">
-              <p class="historicalWeek"></p>
-
-              <ul class="card-vertical-list" id="hydrationEarlierWeek">
-              </ul>
-            </div>
-          <!-- </section> -->
-
-        </section>
+        </article>
 
 <!-- END HYDRATION COLUMN -->
 <!-- Start Sleep column -->
 
-        <section class="main-column-sleep">
+        <section tabindex="0" class="main-column-sleep">
 
-            <div class="card-today-sleep">
+            <div tabindex="0" class="card-today-sleep">
               <p id="sleepToday"></p>
             </div>
-            <div class="card-today-sleep">
-              <p id="sleepQualityToday"></p>
-            </div>
-            <div class="card-today-sleep">
-              <p id="avUserSleepQuality"></p>
-            </div>
-
-            <p class="thisWeek">Hours of sleep this week:</p>
 
             <div class="sidebar-header-line"></div>
 
-            <div class="card-history-sleep">
-              <ul class="card-vertical-list" id="sleepThisWeek">
-              </ul>
-            </div>
+            <div tabindex="0">
 
-            <div class="card-history-sleep">
-              <p class="thisWeek"></p>
+              <p class="thisWeek">Hours of sleep this week:</p>
 
-              <ul class="card-vertical-list" id="sleepThisWeek">
-              </ul>
+              <div class="card-history-sleep">
+                <ul class="card-vertical-list" id="sleepThisWeek">
+                </ul>
+              </div>
+
             </div>
 
             <div class="sidebar-header-line"></div>
 
-            <div class="card-vertical-list" id="allTimeSleep">
-            </div>
+            <div tabindex="0" class="card-vertical-list" id="allTimeSleep"></div>
+          </section>
 
-    </div>
+    </main>
   </body>
-
 </html>
