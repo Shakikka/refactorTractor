@@ -61,12 +61,6 @@ export const fakeSleepData = [{
     "sleepQuality": 4.7
   },
   {
-    "userID": 4,
-    "date": "2019/06/15",
-    "hoursSlept": 5.4,
-    "sleepQuality": 3
-  },
-  {
     "userID": 1,
     "date": "2019/06/16",
     "hoursSlept": 4.1,
@@ -85,12 +79,6 @@ export const fakeSleepData = [{
     "sleepQuality": 3.4
   },
   {
-    "userID": 4,
-    "date": "2019/06/16",
-    "hoursSlept": 8.3,
-    "sleepQuality": 4.5
-  },
-  {
     "userID": 1,
     "date": "2019/06/17",
     "hoursSlept": 8,
@@ -107,12 +95,6 @@ export const fakeSleepData = [{
     "date": "2019/06/17",
     "hoursSlept": 5.3,
     "sleepQuality": 4.9
-  },
-  {
-    "userID": 4,
-    "date": "2019/06/17",
-    "hoursSlept": 5.7,
-    "sleepQuality": 1.1
   }
 ]
 
