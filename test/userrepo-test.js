@@ -51,9 +51,10 @@ describe.only('User Repo', function () {
       fakeHydrationData[13], fakeHydrationData[14], fakeHydrationData[15], fakeHydrationData[16], fakeHydrationData[17], fakeHydrationData[3]]);
   });
 
-  it.skip('should get a sorted week of data for a single user from a date', function() {
-    expect(userRepo.findWeekOfData('2019/09/17', 1, fakeSleepData2)[3].date).to.eql("2019/04/15");
-    expect(userRepo.findWeekOfData('2019/09/18', 1, fakeSleepData2)[3].date).to.eql("2019/09/15");
+  it('should get a sorted week of data for a single user from a date', function() {
+    const a = fakeSleepData2
+    expect(userRepo.findWeekOfData('2019/06/26', 1, fakeSleepData2)).to.deep.equal([a[12], a[11], a[9], a[8], a[10], a[6], a[5]]);
+    expect(userRepo.findWeekOfData('2019/06/21', 1, fakeSleepData2)).to.deep.equal([a[6], a[5], a[4], a[3], a[2], a[1], a[0]]);
   });
 
 // HARD STOP
