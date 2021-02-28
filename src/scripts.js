@@ -117,10 +117,10 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
   class="number">${sleepRepo.findInfoForDate(id, today, 'hoursSlept')}</span></p><p> hours today.</p>
   <p>Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}</p>`);
 
-  let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo);
+  let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksHours);
 
-  let weeksQuality = sleepRepo.calculateWeekSleep(today, id, userInfo);
+  let weeksQuality = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksQuality);
 
   weeksHours.forEach(element => {

@@ -17,11 +17,13 @@ class Sleep {
     return infoForDate[key];
   }
 
-  calculateWeekSleep(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.sleepData).map((data) => {
+  calculateWeekSleep(date, id, userRepo, sleepData) {
+    return userRepo.findWeekOfData(date, id, sleepData).map((data) => {
       return `${data.date}: hours: ${data.hoursSlept}, quality: ${data.sleepQuality}`
     })
   }
+
+// ITERATION 3 BREAK
 
   calculateAllUserSleepQuality() {
     var totalSleepQuality = this.sleepData.reduce(function(sumSoFar, dataItem) {

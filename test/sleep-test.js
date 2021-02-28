@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import {fakeSleepData, fakeUserData} from '../src/data/fakeData'
+import {fakeSleepData, fakeSleepData2, fakeUserData} from '../src/data/fakeData'
 
 import Sleep from '../src/Sleep';
 import UserRepo from '../src/User-repo';
@@ -44,22 +44,20 @@ describe('Sleep', function() {
     expect(sleep.findInfoForDate(1, '2019/06/15', 'sleepQuality')).to.equal(2.2);
     expect(sleep.findInfoForDate(1, '2019/06/17', 'sleepQuality')).to.equal(2.6);
   });
-// BREAK
-  it.skip('should find sleep by day for that days week', function() {
 
-    expect(sleep.calculateWeekSleep('2019/06/18', 4, userRepo)[0]).to.eql('2019/06/18: 7.9');
-    expect(sleep.calculateWeekSleep('2019/06/18', 4, userRepo)[6]).to.eql('2017/06/15: 5.4');
-  })
+  it('should find sleep by day for that days week', function() {
+    expect(sleep.calculateWeekSleep('2019/06/25', 1, userRepo, fakeSleepData2)[3])
+    .to.equal('2019/06/22: hours: 7, quality: 3');
+    expect(sleep.calculateWeekSleep('2019/06/21', 1, userRepo, fakeSleepData2)[5])
+    .to.equal('2019/06/16: hours: 4.1, quality: 3.8');
+  });
 
-  it.skip('should find sleep quality by day for that days week', function() {
+// ITERATION 3 BREAK
 
-    expect(sleep.calculateWeekSleepQuality('2019/06/18', 4, userRepo)[0]).to.eql('2019/06/18: 1.6');
-    expect(sleep.calculateWeekSleepQuality('2019/06/18', 4, userRepo)[6]).to.eql('2017/06/15: 3');
-  })
   it.skip('should determine the best quality sleepers for a week', function() {
-
     expect(sleep.determineBestSleepers("2019/06/21", userRepo)).to.eql(["Allie McCarthy", "Bugs Bunny"]);
   })
+
   it.skip('should return person with best quality sleep for the week', function() {
 
     expect(sleep.determineSleepWinnerForWeek("2019/06/21", userRepo)).to.eql(["Bugs Bunny"]);

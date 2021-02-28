@@ -12,7 +12,7 @@ import {
   fakeActivityData,
 } from '../src/data/fakeData';
 
-describe.only('User Repo', function () {
+describe('User Repo', function () {
 
   let userOne, userTwo, users, userRepo;
 
