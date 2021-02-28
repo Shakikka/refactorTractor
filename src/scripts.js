@@ -7,8 +7,8 @@ import {
   sleepDataAPI,
   userDataAPI,
   hydrationDataAPI,
-  activityDataAPI,
-  sleepDataPost
+  activityDataAPI
+  // sleepDataPost
   // hydrationDataPost
   // activityDataPost
 } from './api.js'
@@ -314,9 +314,9 @@ function postFormEntry() {
     case 'hydration':
       postHydrationData(userID, date);
       break;
-      // case 'sleep':
-      //   postSleepData(userID, date);
-      //   break;
+    case 'sleep':
+      postSleepData(userID, date);
+      break;
   }
   enterProgressDropdown.value = '';
 }
@@ -395,17 +395,41 @@ function postHydrationData(userID, date) {
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
+//sleep API POST request
+const sleepDataPost = (dataFormEntry) => {
+  fetch("http://localhost:3001/api/v1/sleep", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataFormEntry)
+    })
+    .then(response => response.json())
+    .then(json => sleepRepo.sleepData.push(json))
+    .catch(err => console.log('too much sauce')) //err.message
+}
 
 // parent function: sleep API post request
 function postSleepData(userID, date) {
   //check if date exist in activity data
   //if yes - alert saying data exists for this date already
+  if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
+    return alert('Data exists for this date already')
+  }
   //if no - 
   //1. create object (relevant params) to pass into post request
-  //2. run post request and pass in obect
-  //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
+  const postData = {
+    'userID': userID,
+    'date': date,
+    'hoursSlept': sleepFormHours.value,
+    'sleepQuality': sleepFormQuality.value
+  }
+  //2. run post request and pass in object. push return object to local data if promise resolves
+  sleepDataPost(postData);
   //reset form
+  resetForm();
   //run dom updates based on new dataset (run whole dom update or just category specific?)
+  //
 }
 
 ///////event listeners

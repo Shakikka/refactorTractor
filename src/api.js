@@ -17,18 +17,19 @@ export const hydrationDataAPI = fetch("http://localhost:3001/api/v1/hydration")
 
 
 //POST requests
-export const sleepDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/sleep", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch(err => console.log('too much sauce')) //err.message
-}
+//moved to scripts for now
+// export const sleepDataPost = (dataFormEntry) => {
+//   fetch("http://localhost:3001/api/v1/sleep", {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(dataFormEntry)
+//     })
+//     .then(response => response.json())
+//     .then(json => console.log(json))
+//     .catch(err => console.log('too much sauce')) //err.message
+// }
 
 //moved to scripts for now
 // export const hydrationDataPost = (dataFormEntry) => {
