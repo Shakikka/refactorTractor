@@ -298,6 +298,9 @@ function resetForm() {
   addClass(submitFormButton)
 }
 
+function resetDropdown() {
+  enterProgressDropdown.value = '';
+}
 //master post function called on submit button click
 function postFormEntry() {
   const userID = randomUser.id;
@@ -314,7 +317,7 @@ function postFormEntry() {
       postSleepData(userID, date);
       break;
   }
-  enterProgressDropdown.value = '';
+  //enterProgressDropdown.value = '';
 }
 
 //activity API POST request
@@ -352,6 +355,7 @@ function postActivityData(userID, date) {
     return alert('Please fill in all fields before submitting')
   } else if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
     resetForm();
+    resetDropdown()
     return alert('Data exists for this date already')
   }
 
@@ -364,6 +368,7 @@ function postActivityData(userID, date) {
   }
   activityDataPost(postData)
   resetForm();
+  resetDropdown();
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -388,6 +393,7 @@ function postHydrationData(userID, date) {
     return alert('Please fill in all fields before submitting')
   } else if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
     resetForm();
+    resetDropdown();
     return alert('Data exists for this date already')
   }
 
@@ -398,6 +404,7 @@ function postHydrationData(userID, date) {
   }
   hydrationDataPost(postData);
   resetForm();
+  resetDropdown();
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -423,6 +430,7 @@ function postSleepData(userID, date) {
     return alert('Please fill in all fields before submitting')
   } else if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
     resetForm();
+    resetDropdown();
     return alert('Data exists for this date already')
   }
 
@@ -434,6 +442,7 @@ function postSleepData(userID, date) {
   }
   sleepDataPost(postData);
   resetForm();
+  resetDropdown();
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
