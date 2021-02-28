@@ -30,18 +30,19 @@ export const sleepDataPost = (dataFormEntry) => {
     .catch(err => console.log('too much sauce')) //err.message
 }
 
-export const hydrationDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/hydration", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch(err => console.log('too much sauce')) //err.message
-}
+//moved to scripts for now
+// export const hydrationDataPost = (dataFormEntry) => {
+//   fetch("http://localhost:3001/api/v1/hydration", {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(dataFormEntry)
+//     })
+//     .then(response => response.json())
+//     .then(json => console.log(json))
+//     .catch(err => console.log('too much sauce')) //err.message
+// }
 
 //moved to scripts for now
 // export const activityDataPost = (dataFormEntry) => {

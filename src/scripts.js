@@ -8,8 +8,8 @@ import {
   userDataAPI,
   hydrationDataAPI,
   activityDataAPI,
-  sleepDataPost,
-  hydrationDataPost
+  sleepDataPost
+  // hydrationDataPost
   // activityDataPost
 } from './api.js'
 // import userData from './data/users';
@@ -311,9 +311,9 @@ function postFormEntry() {
     case 'activity':
       postActivityData(userID, date);
       break;
-      // case 'hydration':
-      //   postHydrationData(userID, date);
-      //   break;
+    case 'hydration':
+      postHydrationData(userID, date);
+      break;
       // case 'sleep':
       //   postSleepData(userID, date);
       //   break;
@@ -331,11 +331,9 @@ const activityDataPost = (dataFormEntry) => {
       body: JSON.stringify(dataFormEntry)
     })
     .then(response => response.json())
-    // .then(json => console.log(json))
     .then(json => {
       activityRepo.activityData.push(json)
     })
-    // .then(() => console.log(activityRepo.activityData))
     .catch(err => console.log('too much sauce')) //log err.message once this is working
 }
 
@@ -355,25 +353,45 @@ function postActivityData(userID, date) {
     'minutesActive': activityFormMinutes.value,
     'flightsOfStairs': activityFormStairs.value
   }
-  //2. run post request and pass in obect
+  //2. run post request and pass in object. push return object to local data if promise resolves
   activityDataPost(postData)
-  //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
-  activityRepo.activityData.push(postData)
   //reset form
   resetForm();
   //run dom updates based on new dataset (run whole dom update or just category specific?)
+  //
 }
-
+//hydration API POST request
+const hydrationDataPost = (dataFormEntry) => {
+  fetch("http://localhost:3001/api/v1/hydration", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataFormEntry)
+    })
+    .then(response => response.json())
+    .then(json => hydrationRepo.hydrationData.push(json))
+    .catch(err => console.log('too much sauce')) //log err.message once this is working
+}
 
 // parent function: hydration API post request
 function postHydrationData(userID, date) {
   //check if date exist in activity data
   //if yes - alert saying data exists for this date already
+  if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
+    return alert('Data exists for this date already')
+  }
   //if no - 
   //1. create object (relevant params) to pass into post request
-  //2. run post request and pass in obect
-  //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
+  const postData = {
+    'userID': userID,
+    'date': date,
+    'numOunces': hydrationFormOunces.value
+  }
+  //2. run post request and pass in object. push return object to local data if promise resolves
+  hydrationDataPost(postData);
   //reset form
+  resetForm();
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
