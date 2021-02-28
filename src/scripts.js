@@ -338,6 +338,7 @@ const activityDataPost = (dataFormEntry) => {
 function postActivityData(userID, date) {
 
   if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
+    resetForm();
     return alert('Data exists for this date already')
   }
 
@@ -371,6 +372,7 @@ const hydrationDataPost = (dataFormEntry) => {
 function postHydrationData(userID, date) {
 
   if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
+    resetForm();
     return alert('Data exists for this date already')
   }
 
@@ -403,6 +405,7 @@ const sleepDataPost = (dataFormEntry) => {
 function postSleepData(userID, date) {
 
   if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
+    resetForm();
     return alert('Data exists for this date already')
   }
 
