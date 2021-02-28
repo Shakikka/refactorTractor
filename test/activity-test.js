@@ -4,37 +4,35 @@ import {
 
 import Activity from '../src/Activity';
 import UserRepo from '../src/User-repo';
-import User from '../src/User';
 import {
   fakeUserData,
   fakeActivityData
 } from '../src/data/fakeData';
 
-describe('Activity', function() {
+describe('Activity', function () {
 
 
-  let userOne, userTwo, userThree, users, userRepo, activityOne, activityTwo, activityThree;
+  let userOne, userTwo, userThree, userRepo, activityRepo;
 
-  beforeEach(function() {
-    userOne = new User(fakeUserData[0]);
-    userTwo = new User(fakeUserData[1]);
-    userThree = new User(fakeUserData[2]);
-    users = [userOne, userTwo, userThree];
-    userRepo = new UserRepo(users);
-    activityOne = new Activity(fakeActivityData[0]);
-    activityTwo = new Activity(fakeActivityData[1]);
-    activityThree = new Activity(fakeActivityData[2]);
+  beforeEach(function () {
+    userRepo = new UserRepo(fakeUserData);
+    userOne = userRepo.users[0];
+    userTwo = userRepo.users[1];
+    userThree = userRepo.users[2];
+    activityRepo = new Activity(fakeActivityData);
   });
 
-  it('should take in data', function() {
-    expect(activity.activityData[0].userID).to.eql(1);
-    expect(activity.activityData[4].date).to.eql("2019/06/15");
-    expect(activity.activityData[3].numSteps).to.eql(3486);
-    expect(activity.activityData[8].minutesActive).to.eql(41);
-    expect(activity.activityData[10].flightsOfStairs).to.eql(24);
+
+  it('should be a function', function () {
+    expect(Activity).to.be.a('function');
   });
-  it('should return the miles a given user has walked on a given date', function() {
-    expect(activity.getMilesFromStepsByDate(1, "2019/06/15", userRepo.users[0])).to.eql(2.9);
+
+  it('should be an instance of Activity', function () {
+    expect(activityRepo).to.be.an.instanceof(Activity);
+  });
+
+  it.only('should calculate miles user has walked on a given date', function() {
+    expect(activityRepo.calculateMilesWalked(userOne, "2019/06/15", userRepo)).to.eql(2.91);
   });
   it('should return the number of minutes a given user was active for on a given day', function() {
     expect(activity.getActiveMinutesByDate(1, "2019/06/16")).to.eql(12);
