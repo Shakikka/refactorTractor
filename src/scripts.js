@@ -292,15 +292,15 @@ function updateFormView(event) {
   }
 }
 
-function resetForm() {
+function resetForm(dropdownStatus) {
   formInputs.forEach(ele => ele.value = '');
   userForms.forEach(ele => addClass(ele))
   addClass(submitFormButton)
+  if (dropdownStatus === 'hide') {
+    enterProgressDropdown.value = '';
+  }
 }
 
-function resetDropdown() {
-  enterProgressDropdown.value = '';
-}
 //master post function called on submit button click
 function postFormEntry() {
   const userID = randomUser.id;
@@ -317,7 +317,6 @@ function postFormEntry() {
       postSleepData(userID, date);
       break;
   }
-  //enterProgressDropdown.value = '';
 }
 
 //activity API POST request
@@ -354,8 +353,7 @@ function postActivityData(userID, date) {
   if (checkForEmptyFields('activity')) {
     return alert('Please fill in all fields before submitting')
   } else if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
-    resetForm();
-    resetDropdown()
+    resetForm('hide');
     return alert('Data exists for this date already')
   }
 
@@ -367,8 +365,7 @@ function postActivityData(userID, date) {
     'flightsOfStairs': activityFormStairs.value
   }
   activityDataPost(postData)
-  resetForm();
-  resetDropdown();
+  resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -392,8 +389,7 @@ function postHydrationData(userID, date) {
   if (checkForEmptyFields('hydration')) {
     return alert('Please fill in all fields before submitting')
   } else if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
-    resetForm();
-    resetDropdown();
+    resetForm('hide');
     return alert('Data exists for this date already')
   }
 
@@ -403,8 +399,7 @@ function postHydrationData(userID, date) {
     'numOunces': hydrationFormOunces.value
   }
   hydrationDataPost(postData);
-  resetForm();
-  resetDropdown();
+  resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -429,8 +424,7 @@ function postSleepData(userID, date) {
   if (checkForEmptyFields('sleep')) {
     return alert('Please fill in all fields before submitting')
   } else if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
-    resetForm();
-    resetDropdown();
+    resetForm('hide');
     return alert('Data exists for this date already')
   }
 
@@ -441,8 +435,7 @@ function postSleepData(userID, date) {
     'sleepQuality': sleepFormQuality.value
   }
   sleepDataPost(postData);
-  resetForm();
-  resetDropdown();
+  resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
