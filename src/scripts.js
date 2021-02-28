@@ -333,10 +333,24 @@ const activityDataPost = (dataFormEntry) => {
     .catch(err => console.log(err.message))
 }
 
+function checkForEmptyFields(category) {
+  switch (category) {
+    case 'activity':
+      return activityFormSteps.value === "" || activityFormMinutes.value === "" || activityFormStairs.value === "";
+    case 'hydration':
+      return hydrationFormOunces.value === "";
+    case 'sleep':
+      return sleepFormHours.value === "" || sleepFormQuality.value === "";
+  }
+}
+
+
 // parent function: activity API post request
 function postActivityData(userID, date) {
 
-  if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
+  if (checkForEmptyFields('activity')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
     resetForm();
     return alert('Data exists for this date already')
   }
@@ -370,7 +384,9 @@ const hydrationDataPost = (dataFormEntry) => {
 // parent function: hydration API post request
 function postHydrationData(userID, date) {
 
-  if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
+  if (checkForEmptyFields('hydration')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
     resetForm();
     return alert('Data exists for this date already')
   }
@@ -403,7 +419,9 @@ const sleepDataPost = (dataFormEntry) => {
 // parent function: sleep API post request
 function postSleepData(userID, date) {
 
-  if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
+  if (checkForEmptyFields('sleep')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
     resetForm();
     return alert('Data exists for this date already')
   }
