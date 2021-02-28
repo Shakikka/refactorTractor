@@ -102,7 +102,7 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo) {
 
 function displayHydrationInfo(userInfo, id, hydrationInfo) {
   hydrationRepo = new Hydration(hydrationInfo);
-  let today = makeToday(userInfo, id, hydrationRepo.hydrationData);
+  let today = userInfo.getToday(id, hydrationRepo.hydrationData);
 
   console.log('Result of makeToday function called upon the hydrationData:', today);
 
@@ -115,7 +115,7 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 
 function displaySleepInfo(userInfo, id, sleepInfo) {
   sleepRepo = new Sleep(sleepInfo);
-  let today = makeToday(userInfo, id, sleepRepo.sleepData);
+  let today = userInfo.getToday(id, sleepRepo.sleepData);
 
   console.log('Result of makeToday function called upon the sleepData:', today);
 
@@ -188,7 +188,7 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) {
 }
 
 function makeToday(userStorage, id, dataSet) {
- return userStorage.getToday()
+  return userStorage.getToday()
 
 }
 
@@ -428,4 +428,3 @@ enterProgressDropdown.addEventListener('change', function (event) {
 })
 
 submitFormButton.addEventListener('click', postFormEntry)
-
