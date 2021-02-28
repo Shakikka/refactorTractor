@@ -331,7 +331,7 @@ const activityDataPost = (dataFormEntry) => {
     .then(json => {
       activityRepo.activityData.push(json)
     })
-    .catch(err => console.log('too much sauce')) //log err.message once this is working
+    .catch(err => console.log(err.message))
 }
 
 // parent function: activity API post request
@@ -365,7 +365,7 @@ const hydrationDataPost = (dataFormEntry) => {
     })
     .then(response => response.json())
     .then(json => hydrationRepo.hydrationData.push(json))
-    .catch(err => console.log('too much sauce')) //log err.message once this is working
+    .catch(err => console.log(err.message))
 }
 
 // parent function: hydration API post request
@@ -398,7 +398,7 @@ const sleepDataPost = (dataFormEntry) => {
     })
     .then(response => response.json())
     .then(json => sleepRepo.sleepData.push(json))
-    .catch(err => console.log('too much sauce')) //log err.message once this is working
+    .catch(err => console.log(err.message))
 }
 
 // parent function: sleep API post request
