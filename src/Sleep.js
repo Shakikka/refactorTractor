@@ -1,35 +1,30 @@
-import sleepData from './data/sleep';
+// import sleepData from './data/sleep';
 
 class Sleep {
   constructor(sleepData) {
     this.sleepData = sleepData;
   }
-  calculateAverageSleep(id) {
-    let perDaySleep = this.sleepData.filter((data) => id === data.userID);
-    return perDaySleep.reduce((sumSoFar, data) => {
-      return sumSoFar += data.hoursSlept;
-    }, 0) / perDaySleep.length;
+
+  calculateAverage(id, key) {
+    let dailyValues = this.sleepData.filter((userData) => id === userData.userID);
+    let totalValue = dailyValues.reduce((total, userData) => total += userData[key], 0)
+    let averageValue = totalValue / dailyValues.length
+    return averageValue
   }
-  calculateAverageSleepQuality(id) {
-    let perDaySleepQuality = this.sleepData.filter((data) => id === data.userID);
-    return perDaySleepQuality.reduce((sumSoFar, data) => {
-      return sumSoFar += data.sleepQuality;
-    }, 0) / perDaySleepQuality.length;
+
+  findInfoForDate(id, date, key) {
+    let infoForDate = this.sleepData.find((userData) => id === userData.userID && date === userData.date);
+    return infoForDate[key];
   }
-  calculateDailySleep(id, date) {
-    let findSleepByDate = this.sleepData.find((data) => id === data.userID && date === data.date);
-    return findSleepByDate.hoursSlept;
+
+  calculateWeekSleep(date, id, userRepo, sleepData) {
+    return userRepo.findWeekOfData(date, id, sleepData).map((data) => {
+      return `${data.date}: hours: ${data.hoursSlept}, quality: ${data.sleepQuality}`
+    })
   }
-  calculateDailySleepQuality(id, date) {
-    let findSleepQualityByDate = this.sleepData.find((data) => id === data.userID && date === data.date);
-    return findSleepQualityByDate.sleepQuality;
-  }
-  calculateWeekSleep(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.sleepData).map((data) => `${data.date}: ${data.hoursSlept}`);
-  }
-  calculateWeekSleepQuality(date, id, userRepo) {
-    return userRepo.getWeekFromDate(date, id, this.sleepData).map((data) => `${data.date}: ${data.sleepQuality}`);
-  }
+
+// ITERATION 3 BREAK
+
   calculateAllUserSleepQuality() {
     var totalSleepQuality = this.sleepData.reduce(function(sumSoFar, dataItem) {
       sumSoFar += dataItem.sleepQuality;

@@ -7,13 +7,10 @@ import {
   sleepDataAPI,
   userDataAPI,
   hydrationDataAPI,
-  activityDataAPI,
-  sleepDataPost,
-  hydrationDataPost,
-  activityDataPost
+  activityDataAPI
 } from './api.js'
 // import userData from './data/users';
-import hydrationData from './data/hydration';
+// import hydrationData from './data/hydration';
 import sleepData from './data/sleep';
 import activityData from './data/activity';
 
@@ -68,28 +65,35 @@ const userForms = document.querySelectorAll('.user-form');
 const formInputs = document.querySelectorAll('.form-input');
 const submitFormButton = document.querySelector('#submitForm');
 
+const activityFormSteps = document.querySelector('#activityFormSteps')
+const activityFormMinutes = document.querySelector('#activityFormMinutes')
+const activityFormStairs = document.querySelector('#activityFormStairs')
+const hydrationFormOunces = document.querySelector('#hydrationFormOunces')
+const sleepFormHours = document.querySelector('#sleepFormHours')
+const sleepFormQuality = document.querySelector('#sleepFormQuality')
 
+let activityRepo, randomUser, userRepo, sleepRepo, hydrationRepo; // may not need userRepo globally
 
 function loadThisFirst() {
   Promise.all([sleepDataAPI, userDataAPI, activityDataAPI, hydrationDataAPI])
     .then((values) => {
-    displayInfo(values[1].userData, values[3].hydrationData, values[0].sleepData)
-    // let sleepRepo = new Sleep(values[0].sleepData);
-    let activityRepo = new Activity(values[2].activityData);
-    // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
-    // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
-    // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
-    // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
-    // addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
-    // let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
-    // addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
-    // addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
-  })
+      // let sleepRepo = new Sleep(values[0].sleepData);
+      activityRepo = new Activity(values[2].activityData);
+      // let today = makeToday(userRepo, userNowId, values[3].hydrationData);
+      // let randomHistory = makeRandomDate(userRepo, userNowId, hydrationData);
+      // historicalWeek.forEach(instance => instance.insertAdjacentHTML('afterBegin', `Week of ${randomHistory}`));
+      // addHydrationInfo(userNowId, hydrationRepo, today, userRepo, randomHistory);
+      // addSleepInfo(userNowId, sleepRepo, today, userRepo, randomHistory);
+      // let winnerNow = makeWinnerID(activityRepo, userNow, today, userRepo);
+      // addActivityInfo(userNowId, activityRepo, today, userRepo, randomHistory, userNow, winnerNow);
+      // addFriendGameInfo(userNowId, activityRepo, userRepo, today, randomHistory, userNow);
+      displayInfo(values[1].userData, values[3].hydrationData, values[0].sleepData)
+    })
 }
 
 function displayInfo(userInfo, hydrationInfo, sleepInfo) {
-  let userRepo = new UserRepo(userInfo);
-  let randomUser = pickUser(userRepo);
+  userRepo = new UserRepo(userInfo);
+  randomUser = pickUser(userRepo);
 
   addInfoToSidebar(randomUser, userRepo);
   displayHydrationInfo(userRepo, randomUser.id, hydrationInfo);
@@ -97,8 +101,9 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo) {
 }
 
 function displayHydrationInfo(userInfo, id, hydrationInfo) {
-  let hydrationRepo = new Hydration(hydrationInfo);
-  let today = makeToday(userInfo, id, hydrationRepo.hydrationData);
+  hydrationRepo = new Hydration(hydrationInfo);
+  let today = userInfo.getToday(id, hydrationRepo.hydrationData);
+
   console.log('Result of makeToday function called upon the hydrationData:', today);
 
   hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span
@@ -109,31 +114,31 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 }
 
 function displaySleepInfo(userInfo, id, sleepInfo) {
-  let sleepRepo = new Sleep(sleepInfo);
-  let today = makeToday(userInfo, id, sleepRepo.sleepData);
+  sleepRepo = new Sleep(sleepInfo);
+  let today = userInfo.getToday(id, sleepRepo.sleepData);
+
   console.log('Result of makeToday function called upon the sleepData:', today);
 
   sleepToday.insertAdjacentHTML('afterBegin', `<p>You slept:</p><p><span
-  class="number">${sleepRepo.calculateDailySleep(id, today)}</span></p><p> hours today.</p>
-  <p>Quality of sleep: ${sleepRepo.calculateDailySleepQuality(id, today)}</p>`);
+  class="number">${sleepRepo.findInfoForDate(id, today, 'hoursSlept')}</span></p><p> hours today.</p>
+  <p>Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}</p>`);
 
-  let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo);
+  let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksHours);
 
-  let weeksQuality = sleepRepo.calculateWeekSleepQuality(today, id, userInfo);
+  let weeksQuality = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksQuality);
 
   weeksHours.forEach(element => {
     sleepThisWeek.insertAdjacentHTML('afterBegin', `
-      <li>${element} hours</li>
+      <li>${element}</li>
     `)
   })
 
-  sleepThisWeek.innerHTML += `<li>QUALITY: PLACHEOLDER</li>`;
 
   allTimeSleep.innerHTML += `
-    <p>All time average hours of sleep: ${sleepRepo.calculateAverageSleep(id)}</p>
-    <p>All time average quality of sleep: ${sleepRepo.calculateAverageSleepQuality(id)}</p>
+    <p>All time average hours of sleep: ${sleepRepo.calculateAverage(id, 'hoursSlept').toFixed(2)}</p>
+    <p>All time average quality of sleep: ${sleepRepo.calculateAverage(id, 'sleepQuality').toFixed(2)}</p>
   `;
 }
 
@@ -145,8 +150,8 @@ function pickUser(listRepo) {
 function addInfoToSidebar(user, userStorage) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
-  stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal}.`
-  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.findAverageStepGoal()}`;
+  stepGoalCard.innerText = `Your daily step goal is ${user.dailyStepGoal} steps.`
+  avStepGoalCard.innerText = `The average daily step goal is ${userStorage.findAverageStepGoal()} steps.`;
   userAddress.innerText = user.address;
   userEmail.innerText = user.email;
   userStridelength.innerText = `Your stridelength is ${user.strideLength} meters.`;
@@ -183,10 +188,8 @@ function makeWinnerID(activityInfo, user, dateString, userStorage) {
 }
 
 function makeToday(userStorage, id, dataSet) {
-  const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
-  // console.log(id)
-  // console.log('sortedArray:', sortedArray);
-  return sortedArray[0].date;
+  return userStorage.getToday()
+
 }
 
 function makeRandomDate(userStorage, id, dataSet) {
@@ -289,12 +292,153 @@ function updateFormView(event) {
   }
 }
 
-function resetForm() {
+function resetForm(dropdownStatus) {
   formInputs.forEach(ele => ele.value = '');
   userForms.forEach(ele => addClass(ele))
   addClass(submitFormButton)
+  if (dropdownStatus === 'hide') {
+    enterProgressDropdown.value = '';
+  }
 }
 
+//master post function called on submit button click
+function postFormEntry() {
+  const userID = randomUser.id;
+  const date = new Date().toISOString().replace(/-/g, "/").split("T")[0];
+
+  switch (enterProgressDropdown.value) {
+    case 'activity':
+      postActivityData(userID, date);
+      break;
+    case 'hydration':
+      postHydrationData(userID, date);
+      break;
+    case 'sleep':
+      postSleepData(userID, date);
+      break;
+  }
+}
+
+//activity API POST request
+const activityDataPost = (dataFormEntry) => {
+  fetch("http://localhost:3001/api/v1/activity", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataFormEntry)
+    })
+    .then(response => response.json())
+    .then(json => {
+      activityRepo.activityData.push(json)
+    })
+    .catch(err => console.log(err.message))
+}
+
+function checkForEmptyFields(category) {
+  switch (category) {
+    case 'activity':
+      return activityFormSteps.value === "" || activityFormMinutes.value === "" || activityFormStairs.value === "";
+    case 'hydration':
+      return hydrationFormOunces.value === "";
+    case 'sleep':
+      return sleepFormHours.value === "" || sleepFormQuality.value === "";
+  }
+}
+
+
+// parent function: activity API post request
+function postActivityData(userID, date) {
+
+  if (checkForEmptyFields('activity')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
+    resetForm('hide');
+    return alert('Data exists for this date already')
+  }
+
+  const postData = {
+    'userID': userID,
+    'date': date,
+    'numSteps': activityFormSteps.value,
+    'minutesActive': activityFormMinutes.value,
+    'flightsOfStairs': activityFormStairs.value
+  }
+  activityDataPost(postData)
+  resetForm('hide');
+
+  //run dom updates based on new dataset (run whole dom update or just category specific?)
+}
+//hydration API POST request
+const hydrationDataPost = (dataFormEntry) => {
+  fetch("http://localhost:3001/api/v1/hydration", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataFormEntry)
+    })
+    .then(response => response.json())
+    .then(json => hydrationRepo.hydrationData.push(json))
+    .catch(err => console.log(err.message))
+}
+
+// parent function: hydration API post request
+function postHydrationData(userID, date) {
+
+  if (checkForEmptyFields('hydration')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
+    resetForm('hide');
+    return alert('Data exists for this date already')
+  }
+
+  const postData = {
+    'userID': userID,
+    'date': date,
+    'numOunces': hydrationFormOunces.value
+  }
+  hydrationDataPost(postData);
+  resetForm('hide');
+
+  //run dom updates based on new dataset (run whole dom update or just category specific?)
+}
+
+//sleep API POST request
+const sleepDataPost = (dataFormEntry) => {
+  fetch("http://localhost:3001/api/v1/sleep", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataFormEntry)
+    })
+    .then(response => response.json())
+    .then(json => sleepRepo.sleepData.push(json))
+    .catch(err => console.log(err.message))
+}
+
+// parent function: sleep API post request
+function postSleepData(userID, date) {
+
+  if (checkForEmptyFields('sleep')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
+    resetForm('hide');
+    return alert('Data exists for this date already')
+  }
+
+  const postData = {
+    'userID': userID,
+    'date': date,
+    'hoursSlept': sleepFormHours.value,
+    'sleepQuality': sleepFormQuality.value
+  }
+  sleepDataPost(postData);
+  resetForm('hide');
+
+  //run dom updates based on new dataset (run whole dom update or just category specific?)
+}
 
 ///////event listeners
 window.addEventListener('load', loadThisFirst)
@@ -302,3 +446,7 @@ window.addEventListener('load', loadThisFirst)
 enterProgressDropdown.addEventListener('change', function (event) {
   updateFormView(event)
 })
+
+submitFormButton.addEventListener('click', postFormEntry)
+
+//test
