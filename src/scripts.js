@@ -292,10 +292,13 @@ function updateFormView(event) {
   }
 }
 
-function resetForm() {
+function resetForm(dropdownStatus) {
   formInputs.forEach(ele => ele.value = '');
   userForms.forEach(ele => addClass(ele))
   addClass(submitFormButton)
+  if (dropdownStatus === 'hide') {
+    enterProgressDropdown.value = '';
+  }
 }
 
 //master post function called on submit button click
@@ -314,7 +317,6 @@ function postFormEntry() {
       postSleepData(userID, date);
       break;
   }
-  enterProgressDropdown.value = '';
 }
 
 //activity API POST request
@@ -333,11 +335,25 @@ const activityDataPost = (dataFormEntry) => {
     .catch(err => console.log(err.message))
 }
 
+function checkForEmptyFields(category) {
+  switch (category) {
+    case 'activity':
+      return activityFormSteps.value === "" || activityFormMinutes.value === "" || activityFormStairs.value === "";
+    case 'hydration':
+      return hydrationFormOunces.value === "";
+    case 'sleep':
+      return sleepFormHours.value === "" || sleepFormQuality.value === "";
+  }
+}
+
+
 // parent function: activity API post request
 function postActivityData(userID, date) {
 
-  if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
-    resetForm();
+  if (checkForEmptyFields('activity')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
+    resetForm('hide');
     return alert('Data exists for this date already')
   }
 
@@ -349,7 +365,7 @@ function postActivityData(userID, date) {
     'flightsOfStairs': activityFormStairs.value
   }
   activityDataPost(postData)
-  resetForm();
+  resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -370,8 +386,10 @@ const hydrationDataPost = (dataFormEntry) => {
 // parent function: hydration API post request
 function postHydrationData(userID, date) {
 
-  if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
-    resetForm();
+  if (checkForEmptyFields('hydration')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
+    resetForm('hide');
     return alert('Data exists for this date already')
   }
 
@@ -381,7 +399,7 @@ function postHydrationData(userID, date) {
     'numOunces': hydrationFormOunces.value
   }
   hydrationDataPost(postData);
-  resetForm();
+  resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -403,8 +421,10 @@ const sleepDataPost = (dataFormEntry) => {
 // parent function: sleep API post request
 function postSleepData(userID, date) {
 
-  if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
-    resetForm();
+  if (checkForEmptyFields('sleep')) {
+    return alert('Please fill in all fields before submitting')
+  } else if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
+    resetForm('hide');
     return alert('Data exists for this date already')
   }
 
@@ -415,7 +435,7 @@ function postSleepData(userID, date) {
     'sleepQuality': sleepFormQuality.value
   }
   sleepDataPost(postData);
-  resetForm();
+  resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -428,3 +448,5 @@ enterProgressDropdown.addEventListener('change', function (event) {
 })
 
 submitFormButton.addEventListener('click', postFormEntry)
+
+//test
