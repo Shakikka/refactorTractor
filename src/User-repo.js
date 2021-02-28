@@ -50,10 +50,10 @@ class UserRepo {
     let foundDate = organizedData.find(sortedItem => sortedItem.date === date);
     let dateIndex = organizedData.indexOf(foundDate);
     let foundWeek = organizedData.slice(dateIndex, dateIndex + 7)
-    console.log(foundWeek)
+
     return foundWeek
   }
-
+// HARD STOP
   chooseWeekDataForAllUsers(dataSet, date) {
     return dataSet.filter(function(dataItem) {
       return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
