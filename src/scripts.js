@@ -68,6 +68,13 @@ const userForms = document.querySelectorAll('.user-form');
 const formInputs = document.querySelectorAll('.form-input');
 const submitFormButton = document.querySelector('#submitForm');
 
+const activityFormSteps = document.querySelector('#activityFormSteps')
+const activityFormMinutes = document.querySelector('#activityFormMinutes')
+const activityFormStairs = document.querySelector('#activityFormStairs')
+const hydrationFormOunces = document.querySelector('#hydrationFormOunces')
+const sleepFormHours = document.querySelector('#sleepFormHours')
+const sleepFormQuality = document.querySelector('#sleepFormQuality')
+
 let activityRepo, randomUser, userRepo, sleepRepo, hydrationRepo; // may not need userRepo globally
 
 function loadThisFirst() {
@@ -296,7 +303,7 @@ function resetForm() {
 }
 
 function postFormEntry() {
-  // const userID = ;
+  const userID = randomUser;
   const date = new Date().toISOString().replace(/-/g, "/").split("T")[0];
 
   switch (enterProgressDropdown.value) {
@@ -316,10 +323,19 @@ function postFormEntry() {
 
 function postActivityData(userID, date) {
   //check if date exist in activity data
+  if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
+    return alert('Data exists for this date already')
+  }
   //if yes - alert saying data exists for this date already
   //if no - 
   //1. create object (relevant params) to pass into post request
+  const postData = {
+    'userID': userID,
+    'date': date,
+    'numSteps':
+  }
   //2. run post request and pass in obect
+  activityDataPost(postData)
   //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
@@ -332,6 +348,11 @@ function postSleepData(userID, date) {
   //
 }
 
+function checkForDataEntry(userID, date, dataSet) {
+  if () {
+    return alert('Data exists for this date already')
+  }
+}
 ///////event listeners
 window.addEventListener('load', loadThisFirst)
 
