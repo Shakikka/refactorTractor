@@ -45,15 +45,16 @@ class UserRepo {
     return this.makeSortedUserArray(id, dataSet).slice(0, 7);
   }
 
-  getWeekFromDate(date, id, dataSet) {
+  findWeekOfData(date, id, dataSet) {
     let organizedData = this.makeSortedUserArray(id, dataSet)
     let foundDate = organizedData.find(sortedItem => sortedItem.date === date);
     let dateIndex = organizedData.indexOf(foundDate);
     let foundWeek = organizedData.slice(dateIndex, dateIndex + 7)
-
     return foundWeek
   }
+
 // HARD STOP
+
   chooseWeekDataForAllUsers(dataSet, date) {
     return dataSet.filter(function(dataItem) {
       return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)

@@ -8,6 +8,7 @@ import {
   fakeUserData,
   fakeHydrationData,
   fakeSleepData,
+  fakeSleepData2,
   fakeActivityData,
 } from '../src/data/fakeData';
 
@@ -51,9 +52,11 @@ describe.only('User Repo', function () {
   });
 
   it.skip('should get a sorted week of data for a single user from a date', function() {
-    expect(userRepo.getWeekFromDate('2019/09/17', 4, hydrationData)[3].date).to.eql("2019/04/15");
-    expect(userRepo.getWeekFromDate('2019/09/18', 4, hydrationData)[3].date).to.eql("2019/09/15");
+    expect(userRepo.findWeekOfData('2019/09/17', 1, fakeSleepData2)[3].date).to.eql("2019/04/15");
+    expect(userRepo.findWeekOfData('2019/09/18', 1, fakeSleepData2)[3].date).to.eql("2019/09/15");
   });
+
+// HARD STOP
 
   it.skip('should get a week of data for all users in data set', function() {
     expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[2].date).to.eql("2019/09/15");
