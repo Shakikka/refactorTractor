@@ -43,18 +43,23 @@ export const hydrationDataPost = (dataFormEntry) => {
     .catch(err => console.log('too much sauce')) //err.message
 }
 
-export const activityDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/activity", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch(err => console.log('too much sauce')) //err.message
-}
+//moved to scripts for now
+// export const activityDataPost = (dataFormEntry) => {
+//   fetch("http://localhost:3001/api/v1/activity", {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(dataFormEntry)
+//     })
+//     .then(response => response.json())
+//     // .then(json => console.log(json))
+//     .then(json => {
+//       activityRepo.activityData.push(json)
+//     })
+//     // .then(() => console.log(activityRepo.activityData))
+//     .catch(err => console.log('too much sauce')) //err.message
+// }
 
 
 //activity....leaving here for example with data

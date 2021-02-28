@@ -9,8 +9,8 @@ import {
   hydrationDataAPI,
   activityDataAPI,
   sleepDataPost,
-  hydrationDataPost,
-  activityDataPost
+  hydrationDataPost
+  // activityDataPost
 } from './api.js'
 // import userData from './data/users';
 import hydrationData from './data/hydration';
@@ -302,13 +302,14 @@ function resetForm() {
   addClass(submitFormButton)
 }
 
+//master post function called on submit button click
 function postFormEntry() {
-  const userID = randomUser;
+  const userID = randomUser.id;
   const date = new Date().toISOString().replace(/-/g, "/").split("T")[0];
 
   switch (enterProgressDropdown.value) {
     case 'activity':
-      // postActivityData(userID, date);
+      postActivityData(userID, date);
       break;
       // case 'hydration':
       //   postHydrationData(userID, date);
@@ -317,42 +318,78 @@ function postFormEntry() {
       //   postSleepData(userID, date);
       //   break;
   }
-  resetForm();
   enterProgressDropdown.value = '';
 }
 
+//activity API POST request
+const activityDataPost = (dataFormEntry) => {
+  fetch("http://localhost:3001/api/v1/activity", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataFormEntry)
+    })
+    .then(response => response.json())
+    // .then(json => console.log(json))
+    .then(json => {
+      activityRepo.activityData.push(json)
+    })
+    // .then(() => console.log(activityRepo.activityData))
+    .catch(err => console.log('too much sauce')) //log err.message once this is working
+}
+
+// parent function: activity API post request
 function postActivityData(userID, date) {
   //check if date exist in activity data
+  //if yes - alert saying data exists for this date already
   if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
     return alert('Data exists for this date already')
   }
-  //if yes - alert saying data exists for this date already
   //if no - 
   //1. create object (relevant params) to pass into post request
   const postData = {
     'userID': userID,
     'date': date,
-    'numSteps':
+    'numSteps': activityFormSteps.value,
+    'minutesActive': activityFormMinutes.value,
+    'flightsOfStairs': activityFormStairs.value
   }
   //2. run post request and pass in obect
   activityDataPost(postData)
   //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
+  activityRepo.activityData.push(postData)
+  //reset form
+  resetForm();
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
+
+// parent function: hydration API post request
 function postHydrationData(userID, date) {
-  //
+  //check if date exist in activity data
+  //if yes - alert saying data exists for this date already
+  //if no - 
+  //1. create object (relevant params) to pass into post request
+  //2. run post request and pass in obect
+  //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
+  //reset form
+  //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
+
+// parent function: sleep API post request
 function postSleepData(userID, date) {
-  //
+  //check if date exist in activity data
+  //if yes - alert saying data exists for this date already
+  //if no - 
+  //1. create object (relevant params) to pass into post request
+  //2. run post request and pass in obect
+  //3. add new data to local dataset (push to array or fetch and replace whole dataset?)
+  //reset form
+  //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
-function checkForDataEntry(userID, date, dataSet) {
-  if () {
-    return alert('Data exists for this date already')
-  }
-}
 ///////event listeners
 window.addEventListener('load', loadThisFirst)
 
