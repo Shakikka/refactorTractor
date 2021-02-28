@@ -8,9 +8,6 @@ import {
   userDataAPI,
   hydrationDataAPI,
   activityDataAPI
-  // sleepDataPost
-  // hydrationDataPost
-  // activityDataPost
 } from './api.js'
 // import userData from './data/users';
 import hydrationData from './data/hydration';
@@ -339,13 +336,11 @@ const activityDataPost = (dataFormEntry) => {
 
 // parent function: activity API post request
 function postActivityData(userID, date) {
-  //check if date exist in activity data
-  //if yes - alert saying data exists for this date already
+
   if (activityRepo.activityData.find(data => data.userID === userID && data.date === date)) {
     return alert('Data exists for this date already')
   }
-  //if no - 
-  //1. create object (relevant params) to pass into post request
+
   const postData = {
     'userID': userID,
     'date': date,
@@ -353,12 +348,10 @@ function postActivityData(userID, date) {
     'minutesActive': activityFormMinutes.value,
     'flightsOfStairs': activityFormStairs.value
   }
-  //2. run post request and pass in object. push return object to local data if promise resolves
   activityDataPost(postData)
-  //reset form
   resetForm();
+
   //run dom updates based on new dataset (run whole dom update or just category specific?)
-  //
 }
 //hydration API POST request
 const hydrationDataPost = (dataFormEntry) => {
@@ -376,22 +369,19 @@ const hydrationDataPost = (dataFormEntry) => {
 
 // parent function: hydration API post request
 function postHydrationData(userID, date) {
-  //check if date exist in activity data
-  //if yes - alert saying data exists for this date already
+
   if (hydrationRepo.hydrationData.find(data => data.userID === userID && data.date === date)) {
     return alert('Data exists for this date already')
   }
-  //if no - 
-  //1. create object (relevant params) to pass into post request
+
   const postData = {
     'userID': userID,
     'date': date,
     'numOunces': hydrationFormOunces.value
   }
-  //2. run post request and pass in object. push return object to local data if promise resolves
   hydrationDataPost(postData);
-  //reset form
   resetForm();
+
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
@@ -406,30 +396,26 @@ const sleepDataPost = (dataFormEntry) => {
     })
     .then(response => response.json())
     .then(json => sleepRepo.sleepData.push(json))
-    .catch(err => console.log('too much sauce')) //err.message
+    .catch(err => console.log('too much sauce')) //log err.message once this is working
 }
 
 // parent function: sleep API post request
 function postSleepData(userID, date) {
-  //check if date exist in activity data
-  //if yes - alert saying data exists for this date already
+
   if (sleepRepo.sleepData.find(data => data.userID === userID && data.date === date)) {
     return alert('Data exists for this date already')
   }
-  //if no - 
-  //1. create object (relevant params) to pass into post request
+
   const postData = {
     'userID': userID,
     'date': date,
     'hoursSlept': sleepFormHours.value,
     'sleepQuality': sleepFormQuality.value
   }
-  //2. run post request and pass in object. push return object to local data if promise resolves
   sleepDataPost(postData);
-  //reset form
   resetForm();
+
   //run dom updates based on new dataset (run whole dom update or just category specific?)
-  //
 }
 
 ///////event listeners
