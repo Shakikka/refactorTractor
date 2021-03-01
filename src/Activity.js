@@ -27,24 +27,19 @@ class Activity {
     }
   };
 
-  //Below is not required to display on UI ????
-
-  getDaysGoalExceeded(user, userRepo) {
-    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
-    return sortedArray.filter(data => user.id === data.userID && data.numSteps >= user.dailyStepGoal).map(data => data.date);
-  };
-
-  getStairRecord(user) {
-    let userActivities = this.activityData.filter(data => user.id === data.userID);
-    let sortedStairCount = userActivities.sort((a, b) => b.flightsOfStairs - a.flightsOfStairs);
-    return sortedStairCount[0].flightsOfStairs;
-    };
-
-  //
-
   getUserStat(date, user, stat) {
     let activityByDate = this.activityData.find(activity => activity.date === date && activity.userID === user.id);
     return activityByDate[stat];
+  };
+
+  getUserTotalsForWeek(user, date, userRepo, stat) {
+    let userWeek = userRepo.findWeekOfData(date, user.id, this.activityData);
+    console.log(stat, userWeek)
+    let statTotal = userWeek.reduce((accu, current) => {
+      accu = accu + current[stat];
+      return accu;
+    }, 0);
+    return statTotal;
   };
 
   getAllUserAverageByDate(date, stat) {
@@ -58,24 +53,26 @@ class Activity {
     return Number(average.toFixed(2));
   };
 
+  //The methods below are not currently displayed on UI but should be considered for
+  //future iterations
+
+  getDaysGoalExceeded(user, userRepo) {
+    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
+    return sortedArray.filter(data => user.id === data.userID && data.numSteps >= user.dailyStepGoal).map(data => data.date);
+  };
+
+  getStairRecord(user) {
+    let userActivities = this.activityData.filter(data => user.id === data.userID);
+    let sortedStairCount = userActivities.sort((a, b) => b.flightsOfStairs - a.flightsOfStairs);
+    return sortedStairCount[0].flightsOfStairs;
+    };
+
+//END future iteration suggestions
 
 
 
 
 
-
-
-
-
-  // userDataForWeek(id, date, userRepo, releventData) {
-  //   return userRepo.getWeekFromDate(date, id, this.activityData).map((data) => `${data.date}: ${data[releventData]}`);
-  // }
-
-
-
-
-
-  
 
   // Friends
 

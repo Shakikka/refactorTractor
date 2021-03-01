@@ -53,8 +53,18 @@ describe('Activity', function () {
 
     stat = 'minutesActive';
     expect(activityRepo.getUserStat("2019/06/15", userOne, stat)).to.eql(140);
-  })
+  });
 
+  it('should find user/s stat totals by week', function() {
+    let stat = 'flightsOfStairs';
+    expect(activityRepo.getUserTotalsForWeek(userThree, "2019/06/15", userRepo, stat)).to.eql(398);
+
+    stat = 'numSteps';
+    expect(activityRepo.getUserTotalsForWeek(userThree, "2019/06/15", userRepo, stat)).to.eql(51814);
+
+    stat = 'minutesActive';
+    expect(activityRepo.getUserTotalsForWeek(userThree, "2019/06/15", userRepo, stat)).to.eql(812);
+  });
 
   it('should find average activity stats for all users on a given day', function() {
     let stat = 'flightsOfStairs';
@@ -68,11 +78,8 @@ describe('Activity', function () {
   });
 
 
-
-
-
-
-  //Below is not required to display on UI ????
+  //The methods below are not currently displayed on UI but should be considered for
+  //future iterations
 
   it('should return all days that a given user exceeded their step goal', function() {
     expect(activityRepo.getDaysGoalExceeded(userThree, userRepo)).to.eql([
@@ -91,23 +98,9 @@ describe('Activity', function () {
     expect(activityRepo.getStairRecord(userThree)).to.eql(200);
   });
 
-  //
+  //END future iteration suggestions
 
-
-  it('should return a weeks worth steps for a given user', function() {
-    expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'numSteps')[0]).to.eql("2019/06/23: 9000");
-    expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'numSteps')[3]).to.eql("2019/06/20: 9303");
-  });
-  it('should return a weeks worth active minutes for a given user', function() {
-    expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'minutesActive')[0]).to.eql("2019/06/23: 8");
-    expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'minutesActive')[3]).to.eql("2019/06/20: 7");
-  });
-  it('should return a weeks worth stairs for a given user', function() {
-    expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'flightsOfStairs')[0]).to.eql("2019/06/23: 9");
-    expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'flightsOfStairs')[3]).to.eql("2019/06/20: 4");
-  });
 });
-
 
 
 
