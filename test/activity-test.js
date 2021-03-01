@@ -51,7 +51,7 @@ describe('Activity', function () {
 
   //Below is not required to display on UI ????
 
-  it.only('should return all days that a given user exceeded their step goal', function() {
+  it('should return all days that a given user exceeded their step goal', function() {
     expect(activityRepo.getDaysGoalExceeded(userThree, userRepo)).to.eql([
       '2019/06/15',
       '2019/06/14',
@@ -63,8 +63,9 @@ describe('Activity', function () {
     ]);
   });
 
-  it('should return the highest number of stairs climbed in a day for all time', function() {
-    expect(activity.getStairRecord(11)).to.eql(33);
+  it.only('should return user/s record for flights of stairs climbed in a day', function() {
+    expect(activityRepo.getStairRecord(userOne)).to.eql(16);
+    expect(activityRepo.getStairRecord(userThree)).to.eql(200);
   });
 
   it('should return the average flight of stairs for all users on given day', function() {

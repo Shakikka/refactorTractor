@@ -237,7 +237,7 @@ export const fakeActivityData = [{
     "date": "2019/06/12",
     "numSteps": 7402,
     "minutesActive": 116,
-    "flightsOfStairs": 33
+    "flightsOfStairs": 200
   },
   {
     "userID": 3,

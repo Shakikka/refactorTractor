@@ -37,11 +37,17 @@ class Activity {
   getDaysGoalExceeded(user, userRepo) {
     let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
     return sortedArray.filter(data => user.id === data.userID && data.numSteps >= user.dailyStepGoal).map(data => data.date);
-  }
+  };
 
-  getStairRecord(id) {
-    return this.activityData.filter(data => id === data.userID).reduce((acc, elem) => (elem.flightsOfStairs > acc) ? elem.flightsOfStairs : acc, 0);
-  }
+  getStairRecord(user) {
+    let userActivities = this.activityData.filter(data => user.id === data.userID);
+    let sortedStairCount = userActivities.sort((a, b) => b.flightsOfStairs - a.flightsOfStairs);
+    return sortedStairCount[0].flightsOfStairs;
+    };
+
+  //
+
+
   getAllUserAverageForDay(date, userRepo, relevantData) {
     let selectedDayData = userRepo.chooseDayDataForAllUsers(this.activityData, date);
     return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[relevantData], 0) / selectedDayData.length).toFixed(1));
