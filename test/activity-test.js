@@ -44,9 +44,13 @@ describe('Activity', function () {
     expect(activityRepo.findMinutesActiveAverage(userThree, "2019/06/15", userRepo)).to.eql(116);
   });
 
-  it('should return true/false if the given user met their step goal on a given day', function() {
-    expect(activity.accomplishStepGoal(4, "2019/06/15", userRepo.users[3])).to.eql(false);
+  it.only('should determine whether user met their step goal on a given day', function() {
+    expect(activityRepo.accomplishStepGoal(userThree, "2019/06/15", userRepo)).to.eql(true);
+    expect(activityRepo.accomplishStepGoal(userTwo, "2019/06/15", userRepo)).to.eql(false);
   });
+  //step goal is 5000
+  //steps on date: 7402
+
   it('should return all days that a given user exceeded their step goal', function() {
     expect(activity.getDaysGoalExceeded(1, userRepo.users[0])).to.eql([
       "2019/06/17",

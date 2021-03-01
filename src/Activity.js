@@ -23,13 +23,15 @@ class Activity {
     }, 0)) / 7;
   };
 
-  accomplishStepGoal(id, date, userRepo) {
-    let userStepsByDate = this.activityData.find(data => id === data.userID && date === data.date);
-    if (userStepsByDate.numSteps === userRepo.dailyStepGoal) {
+  accomplishStepGoal(user, date, userRepo) {
+    let foundActivityByDate = this.activityData.find(activity => activity.userID === user.id && activity.date === date);
+    if (foundActivityByDate.numSteps >= user.dailyStepGoal) {
       return true;
+    } else {
+      return false;
     }
-    return false
-  }
+  };
+
   getDaysGoalExceeded(id, userRepo) {
     return this.activityData.filter(data => id === data.userID && data.numSteps > userRepo.dailyStepGoal).map(data => data.date);
   }
