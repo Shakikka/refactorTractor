@@ -11,11 +11,6 @@ class Activity {
     return Number(milesTraveled);
   };
 
-  findMinutesActive(user, date) {
-    let userActivityByDate = this.activityData.find(activity => activity.userID === user.id && activity.date === date);
-    return userActivityByDate.minutesActive;
-  };
-
   findMinutesActiveAverage(user, date, userRepo) {
     let foundWeek = userRepo.findWeekOfData(date, user.id, this.activityData);
     return (foundWeek.reduce((totalMinutes, day) => {
@@ -47,8 +42,12 @@ class Activity {
 
   //
 
+  getUserStat(date, user, stat) {
+    let activityByDate = this.activityData.find(activity => activity.date === date && activity.userID === user.id);
+    return activityByDate[stat];
+  };
 
-  getAllUserAverageByDate(date, userRepo, stat) {
+  getAllUserAverageByDate(date, stat) {
     let activitiesByDate = this.activityData.filter(activity => activity.date === date);
 
     let average = (activitiesByDate.reduce((accu, current) => {
@@ -68,13 +67,15 @@ class Activity {
 
 
 
-  userDataForToday(id, date, userRepo, relevantData) {
-    let userData = userRepo.getDataFromUserID(id, this.activityData);
-    return userData.find(data => data.date === date)[relevantData];
-  }
-  userDataForWeek(id, date, userRepo, releventData) {
-    return userRepo.getWeekFromDate(date, id, this.activityData).map((data) => `${data.date}: ${data[releventData]}`);
-  }
+  // userDataForWeek(id, date, userRepo, releventData) {
+  //   return userRepo.getWeekFromDate(date, id, this.activityData).map((data) => `${data.date}: ${data[releventData]}`);
+  // }
+
+
+
+
+
+  
 
   // Friends
 
