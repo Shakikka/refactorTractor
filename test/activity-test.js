@@ -49,6 +49,24 @@ describe('Activity', function () {
     expect(activityRepo.accomplishStepGoal(userTwo, "2019/06/15", userRepo)).to.eql(false);
   });
 
+
+  it('should find average activity stats for all users on a given day', function() {
+
+    let stat = 'flightsOfStairs';
+    expect(activityRepo.getAllUserAverageByDate("2019/06/15", userRepo, stat)).to.eql(19.67);
+
+    stat = 'numSteps';
+    expect(activityRepo.getAllUserAverageByDate("2019/06/15", userRepo, stat)).to.eql(5091);
+
+    stat = 'minutesActive';
+    expect(activityRepo.getAllUserAverageByDate("2019/06/15", userRepo, stat)).to.eql(131.33);
+  });
+
+
+
+
+
+
   //Below is not required to display on UI ????
 
   it('should return all days that a given user exceeded their step goal', function() {
@@ -63,60 +81,16 @@ describe('Activity', function () {
     ]);
   });
 
-  it.only('should return user/s record for flights of stairs climbed in a day', function() {
+  it('should return user/s record for flights of stairs climbed in a day', function() {
     expect(activityRepo.getStairRecord(userOne)).to.eql(16);
     expect(activityRepo.getStairRecord(userThree)).to.eql(200);
   });
 
-  it('should return the average flight of stairs for all users on given day', function() {
-    expect(activity.getAllUserAverageForDay("2019/06/15", userRepo, "flightsOfStairs")).to.eql(21.2)
-  })
+  //
 
-  it('should return average steps taken for given date for all users', function() {
-    activityData = activityData.push({
-      "userID": 1,
-      "date": "2019/06/23",
-      "numSteps": 12000,
-      "minutesActive": 13,
-      "flightsOfStairs": 26
-    }, {
-      "userID": 2,
-      "date": "2019/06/23",
-      "numSteps": 9000,
-      "minutesActive": 21,
-      "flightsOfStairs": 14
-    }, {
-      "userID": 3,
-      "date": "2019/06/23",
-      "numSteps": 2000,
-      "minutesActive": 8,
-      "flightsOfStairs": 9
-    });
-    expect(activity.getAllUserAverageForDay("2019/06/23", userRepo, "numSteps")).to.eql(8000)
-  });
 
-  it('should return average minutes active given date for all users', function() {
-    activityData = activityData.push({
-      "userID": 1,
-      "date": "2019/06/23",
-      "numSteps": 12000,
-      "minutesActive": 13,
-      "flightsOfStairs": 26
-    }, {
-      "userID": 2,
-      "date": "2019/06/23",
-      "numSteps": 9000,
-      "minutesActive": 21,
-      "flightsOfStairs": 14
-    }, {
-      "userID": 3,
-      "date": "2019/06/23",
-      "numSteps": 2000,
-      "minutesActive": 8,
-      "flightsOfStairs": 9
-    });
-    expect(activity.getAllUserAverageForDay("2019/06/23", userRepo, "minutesActive")).to.eql(12.5)
-  });
+
+
 
   it('should return steps for given user on given date', function() {
     expect(activity.userDataForToday(2, "2019/06/15", userRepo, 'numSteps')).to.eql(4294);
@@ -136,7 +110,14 @@ describe('Activity', function () {
     expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'flightsOfStairs')[0]).to.eql("2019/06/23: 9");
     expect(activity.userDataForWeek(1, "2019/06/23", userRepo, 'flightsOfStairs')[3]).to.eql("2019/06/20: 4");
   });
-})
+});
+
+
+
+
+
+
+//START FRIENDS STEP CHALLENGE HERE
 
 describe('Friend Activity', function() {
   let activityData;

@@ -48,10 +48,26 @@ class Activity {
   //
 
 
-  getAllUserAverageForDay(date, userRepo, relevantData) {
-    let selectedDayData = userRepo.chooseDayDataForAllUsers(this.activityData, date);
-    return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[relevantData], 0) / selectedDayData.length).toFixed(1));
-  }
+  getAllUserAverageByDate(date, userRepo, stat) {
+    let activitiesByDate = this.activityData.filter(activity => activity.date === date);
+
+    let average = (activitiesByDate.reduce((accu, current) => {
+      accu = accu + current[stat];
+      return accu;
+    }, 0) / activitiesByDate.length);
+
+    return Number(average.toFixed(2));
+  };
+
+
+
+
+
+
+
+
+
+
   userDataForToday(id, date, userRepo, relevantData) {
     let userData = userRepo.getDataFromUserID(id, this.activityData);
     return userData.find(data => data.date === date)[relevantData];
