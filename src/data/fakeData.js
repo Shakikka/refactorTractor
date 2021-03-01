@@ -206,6 +206,48 @@ export const fakeActivityData = [{
   },
   {
     "userID": 3,
+    "date": "2019/06/09",
+    "numSteps": 7402,
+    "minutesActive": 116,
+    "flightsOfStairs": 33
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/11",
+    "numSteps": 7402,
+    "minutesActive": 116,
+    "flightsOfStairs": 33
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/10",
+    "numSteps": 7402,
+    "minutesActive": 116,
+    "flightsOfStairs": 33
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/13",
+    "numSteps": 7402,
+    "minutesActive": 116,
+    "flightsOfStairs": 33
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/12",
+    "numSteps": 7402,
+    "minutesActive": 116,
+    "flightsOfStairs": 200
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/14",
+    "numSteps": 7402,
+    "minutesActive": 116,
+    "flightsOfStairs": 33
+  },
+  {
+    "userID": 3,
     "date": "2019/06/15",
     "numSteps": 7402,
     "minutesActive": 116,
