@@ -34,7 +34,6 @@ class Activity {
 
   getUserTotalsForWeek(user, date, userRepo, stat) {
     let userWeek = userRepo.findWeekOfData(date, user.id, this.activityData);
-    console.log(stat, userWeek)
     let statTotal = userWeek.reduce((accu, current) => {
       accu = accu + current[stat];
       return accu;
