@@ -9,6 +9,7 @@ import {
   fakeHydrationData,
   fakeSleepData,
   fakeSleepData2,
+  fakeSleepData3,
   fakeActivityData,
 } from '../src/data/fakeData';
 
@@ -57,21 +58,19 @@ describe('User Repo', function () {
     expect(userRepo.findWeekOfData('2019/06/21', 1, fakeSleepData2)).to.deep.equal([a[6], a[5], a[4], a[3], a[2], a[1], a[0]]);
   });
 
-// HARD STOP
 
-  it.skip('should get a week of data for all users in data set', function() {
-    expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[2].date).to.eql("2019/09/15");
-    expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[2].userID).to.eql(4);
-    expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[3].date).to.eql("2019/09/17");
-    expect(userRepo.chooseWeekDataForAllUsers(hydrationData, '2019/09/17')[3].userID).to.eql(3);
+  // it('should get a week of data for all users in data set', function() {
+  //   console.log(userRepo.chooseWeekDataForAllUsers(fakeSleepData3, '2019/06/26'))
+  //   expect(userRepo.chooseWeekDataForAllUsers(fakeSleepData3, '2019/06/22')[1]).to.deep.equal(fakeSleepData3[3]);
+  //   expect(userRepo.chooseWeekDataForAllUsers(fakeSleepData3, '2019/06/22')[7]).to.deep.equal(fakeSleepData3[10]);
+  // });
+
+  it('should get a day of data for all users in data set', function() {
+    const a = fakeSleepData
+    expect(userRepo.chooseDayDataForAllUsers(fakeSleepData, '2019/06/16')).to.deep.equal([a[3], a[4], a[5]])
   });
 
-  it.skip('should get a day of data for all users in data set', function() {
-    expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[0].date).to.eql('2019/06/15');
-    expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[0].hoursSlept).to.eql(9);
-    expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[2].date).to.eql('2019/06/15');
-    expect(userRepo.chooseDayDataForAllUsers(sleepData, '2019/06/15')[2].userID).to.eql(5);
-  });
+  // HARD STOP
 
   it.skip('should isolate a user ID and its values of any relevant data', function() {
     expect(userRepo.isolateUsernameAndRelevantData(sleepData, "2019/06/21", 'sleepQuality', userRepo.chooseWeekDataForAllUsers(sleepData, "2019/06/21"))).to.eql({

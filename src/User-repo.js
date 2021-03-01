@@ -55,16 +55,14 @@ class UserRepo {
 
 // HARD STOP
 
-  chooseWeekDataForAllUsers(dataSet, date) {
-    return dataSet.filter(function(dataItem) {
-      return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
-    })
-  }
+  // chooseWeekDataForAllUsers(dataSet, date) {
+  //   return dataSet.filter(dataItem => {
+  //     return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
+  //   })
+  // }
 
   chooseDayDataForAllUsers(dataSet, date) {
-    return dataSet.filter(function(dataItem) {
-      return dataItem.date === date
-    });
+    return dataSet.filter(dataItem => dataItem.date === date)
   }
 
   isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod) {
