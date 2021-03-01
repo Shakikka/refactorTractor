@@ -11,10 +11,11 @@ class Activity {
     return Number(milesTraveled);
   };
 
-  getActiveMinutesByDate(id, date) {
-    let userActivityByDate = this.activityData.find(data => id === data.userID && date === data.date);
+  findMinutesActive(user, date) {
+    let userActivityByDate = this.activityData.find(activity => activity.userID === user.id && activity.date === date);
     return userActivityByDate.minutesActive;
-  }
+  };
+  
   calculateActiveAverageForWeek(id, date, userRepo) {
     return parseFloat((userRepo.getWeekFromDate(date, id, this.activityData).reduce((acc, elem) => {
       return acc += elem.minutesActive;

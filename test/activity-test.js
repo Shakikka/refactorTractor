@@ -31,12 +31,15 @@ describe('Activity', function () {
     expect(activityRepo).to.be.an.instanceof(Activity);
   });
 
-  it.only('should calculate miles user has walked on a given date', function() {
+  it('should calculate miles user has walked on a given date', function() {
     expect(activityRepo.calculateMilesWalked(userOne, "2019/06/15", userRepo)).to.eql(2.91);
   });
-  it('should return the number of minutes a given user was active for on a given day', function() {
-    expect(activity.getActiveMinutesByDate(1, "2019/06/16")).to.eql(12);
+
+  it.only('should return the number of minutes a user was active on a given day', function() {
+    expect(activityRepo.findMinutesActive(userOne, "2019/06/15")).to.eql(140);
+    expect(activityRepo.findMinutesActive(userTwo, "2019/06/15")).to.eql(138);
   });
+  
   it('should return average active minutes in a given week', function() {
     expect(activity.calculateActiveAverageForWeek(1, "2019/06/21", userRepo)).to.eql(40.4);
   });
