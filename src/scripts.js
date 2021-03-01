@@ -11,7 +11,7 @@ import {
 } from './api.js'
 // import userData from './data/users';
 // import hydrationData from './data/hydration';
-import sleepData from './data/sleep';
+// import sleepData from './data/sleep';
 import activityData from './data/activity';
 
 import User from './User';

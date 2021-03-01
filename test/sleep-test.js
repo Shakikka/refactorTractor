@@ -1,11 +1,17 @@
 import { expect } from 'chai';
-import {fakeSleepData, fakeSleepData2, fakeUserData} from '../src/data/fakeData'
+import {
+  fakeSleepData,
+  fakeSleepData2,
+  fakeSleepData3,
+  fakeSleepData4,
+  fakeUserData
+  } from '../src/data/fakeData'
 
 import Sleep from '../src/Sleep';
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 
-describe('Sleep', function() {
+describe.only('Sleep', function() {
   let sleepData;
   let sleep;
   let user1;
@@ -52,62 +58,19 @@ describe('Sleep', function() {
     .to.equal('2019/06/16: hours: 4.1, quality: 3.8');
   });
 
-// ITERATION 3 BREAK
+  it('should be able to calculate average sleep hours for all users', function() {
+    expect(sleep.averageOfAllUsers(fakeSleepData, 'hoursSlept').toFixed(2)).to.equal('7.24');
+  });
 
-  it.skip('should determine the best quality sleepers for a week', function() {
-    expect(sleep.determineBestSleepers("2019/06/21", userRepo)).to.eql(["Allie McCarthy", "Bugs Bunny"]);
+  it('should be able to calculate average quality of sleep for all users', function() {
+    expect(sleep.averageOfAllUsers(fakeSleepData, 'sleepQuality').toFixed(2)).to.equal('3.68');
+  });
+
+  it('should return person with longest sleep for the day', function() {
+    expect(sleep.mostHoursSlept('2019/06/24', userRepo, fakeSleepData4)).to.deep.equal([fakeUserData[1]]);
   })
-
-  it.skip('should return person with best quality sleep for the week', function() {
-
-    expect(sleep.determineSleepWinnerForWeek("2019/06/21", userRepo)).to.eql(["Bugs Bunny"]);
+  it('should return all qualifying users if longest sleep is a tie', function() {
+    expect(sleep.mostHoursSlept('2019/06/23', userRepo, fakeSleepData4))
+    .to.deep.equal([fakeUserData[1], fakeUserData[2]]);
   })
-  it.skip('should return all qualifying users if best quality sleep is a tie', function() {
-    sleepData = sleepData.push({
-      "userID": 6,
-      "date": "2019/06/15",
-      "hoursSlept": 9,
-      "sleepQuality": 4
-    })
-    let user6 = new User({
-      id: 6,
-      name: "Richmond",
-      address: "1234 Looney Street, Denver CO 80301-1697",
-      email: "BugsB1@hotmail.com",
-      strideLength: 3.8,
-      dailyStepGoal: 7000,
-      friends: [1, 2, 3]
-    });
-    users = [user1, user2, user3, user4, user5, user6];
-    userRepo = new UserRepo(users);
-
-    expect(sleep.determineSleepWinnerForWeek("2019/06/21", userRepo)).to.eql(["Bugs Bunny", "Richmond"]);
-  })
-
-  it.skip('should return person with longest sleep for the day', function() {
-
-    expect(sleep.determineSleepHoursWinnerForDay('2019/06/21', userRepo)).to.eql(["Bugs Bunny"]);
-  })
-  it.skip('should return all qualifying users if longest sleep is a tie', function() {
-    sleepData = sleepData.push({
-      "userID": 6,
-      "date": "2019/06/21",
-      "hoursSlept": 9,
-      "sleepQuality": 4
-    })
-    let user6 = new User({
-      id: 6,
-      name: "Richmond",
-      address: "1234 Looney Street, Denver CO 80301-1697",
-      email: "BugsB1@hotmail.com",
-      strideLength: 3.8,
-      dailyStepGoal: 7000,
-      friends: [1, 2, 3]
-    });
-    users = [user1, user2, user3, user4, user5, user6];
-    userRepo = new UserRepo(users);
-
-    expect(sleep.determineSleepHoursWinnerForDay('2019/06/21', userRepo)).to.eql(["Bugs Bunny", "Richmond"]);
-  })
-  //make this test fail when user is NOT best in week
 });

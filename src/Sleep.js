@@ -23,53 +23,62 @@ class Sleep {
     })
   }
 
-// ITERATION 3 BREAK
 
-  calculateAllUserSleepQuality() {
-    var totalSleepQuality = this.sleepData.reduce(function(sumSoFar, dataItem) {
-      sumSoFar += dataItem.sleepQuality;
-      return sumSoFar;
+  averageOfAllUsers(dataToAverage, key) {
+    const completeData = dataToAverage.reduce((totalData, usersInfo) => {
+      totalData += usersInfo[key];
+      return totalData;
     }, 0)
-    return totalSleepQuality / sleepData.length
+    return completeData / dataToAverage.length
   }
-  determineBestSleepers(date, userRepo) {
-    let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
-    let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, 'sleepQuality', timeline);
 
-    return Object.keys(userSleepObject).filter(function(key) {
-      return (userSleepObject[key].reduce(function(sumSoFar, sleepQualityValue) {
-        sumSoFar += sleepQualityValue
-        return sumSoFar;
-      }, 0) / userSleepObject[key].length) > 3
-    }).map(function(sleeper) {
-      return userRepo.getDataFromID(parseInt(sleeper)).name;
+  mostHoursSlept(date, userRepo, dataSet) {
+    let timeline = userRepo.chooseDayDataForAllUsers(dataSet, date);
+    let sortedTimeline = timeline.sort((a, b) => b.hoursSlept - a.hoursSlept)
+    let winner = sortedTimeline[0]
+    let winners = sortedTimeline.filter(person => winner.hoursSlept === person.hoursSlept)
+    let trueWinners = winners.map(person => {
+      return userRepo.users.find(user => person.userID === user.id)
     })
+    return trueWinners
   }
-  determineSleepWinnerForWeek(date, userRepo) {
-    let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
-    let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.sleepData, date, 'sleepQuality', timeline);
 
-    return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
-  }
-  determineSleepHoursWinnerForDay(date, userRepo) {
-    let timeline = userRepo.chooseDayDataForAllUsers(this.sleepData, date);
-    let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.sleepData, date, 'hoursSlept', timeline);
+  //BREAK
 
-    return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
-  }
-  getWinnerNamesFromList(sortedArray, userRepo) {
-    let bestSleepers = sortedArray.filter(function(element) {
-      return element[Object.keys(element)] === Object.values(sortedArray[0])[0]
-    });
+  // determineBestSleepers(date, userRepo) {
+  //   let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
+  //   let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, 'sleepQuality', timeline);
+  //
+  //   return Object.keys(userSleepObject).filter(function(key) {
+  //     return (userSleepObject[key].reduce(function(sumSoFar, sleepQualityValue) {
+  //       sumSoFar += sleepQualityValue
+  //       return sumSoFar;
+  //     }, 0) / userSleepObject[key].length) > 3
+  //   }).map(function(sleeper) {
+  //     return userRepo.getDataFromID(parseInt(sleeper)).name;
+  //   })
+  // }
+  // determineSleepWinnerForWeek(date, userRepo) {
+  //   let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
+  //   let sleepRankWithData = userRepo.combineRankedUserIDsAndAveragedData(this.sleepData, date, 'sleepQuality', timeline);
+  //
+  //   return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
+  // }
 
-    let bestSleeperIds = bestSleepers.map(function(bestSleeper) {
-      return (Object.keys(bestSleeper));
-    });
 
-    return bestSleeperIds.map(function(sleepNumber) {
-      return userRepo.getDataFromID(parseInt(sleepNumber)).name;
-    });
-  }
+  // getWinnerNamesFromList(sortedArray, userRepo) {
+  //   let bestSleepers = sortedArray.filter(function(element) {
+  //     return element[Object.keys(element)] === Object.values(sortedArray[0])[0]
+  //   });
+  //
+  //   let bestSleeperIds = bestSleepers.map(function(bestSleeper) {
+  //     return (Object.keys(bestSleeper));
+  //   });
+  //
+  //   return bestSleeperIds.map(function(sleepNumber) {
+  //     return userRepo.getDataFromID(parseInt(sleepNumber)).name;
+  //   });
+  // }
 }
 
 
