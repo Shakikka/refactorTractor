@@ -32,9 +32,13 @@ class Activity {
     }
   };
 
-  getDaysGoalExceeded(id, userRepo) {
-    return this.activityData.filter(data => id === data.userID && data.numSteps > userRepo.dailyStepGoal).map(data => data.date);
+  //Below is not required to display on UI ????
+
+  getDaysGoalExceeded(user, userRepo) {
+    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
+    return sortedArray.filter(data => user.id === data.userID && data.numSteps >= user.dailyStepGoal).map(data => data.date);
   }
+
   getStairRecord(id) {
     return this.activityData.filter(data => id === data.userID).reduce((acc, elem) => (elem.flightsOfStairs > acc) ? elem.flightsOfStairs : acc, 0);
   }

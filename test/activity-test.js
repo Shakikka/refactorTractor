@@ -44,23 +44,25 @@ describe('Activity', function () {
     expect(activityRepo.findMinutesActiveAverage(userThree, "2019/06/15", userRepo)).to.eql(116);
   });
 
-  it.only('should determine whether user met their step goal on a given day', function() {
+  it('should determine whether user met their step goal on a given day', function() {
     expect(activityRepo.accomplishStepGoal(userThree, "2019/06/15", userRepo)).to.eql(true);
     expect(activityRepo.accomplishStepGoal(userTwo, "2019/06/15", userRepo)).to.eql(false);
   });
-  //step goal is 5000
-  //steps on date: 7402
 
-  it('should return all days that a given user exceeded their step goal', function() {
-    expect(activity.getDaysGoalExceeded(1, userRepo.users[0])).to.eql([
-      "2019/06/17",
-      "2019/06/19",
-      "2019/06/20",
-      "2019/06/21",
-      "2019/06/22",
-      "2019/06/23"
+  //Below is not required to display on UI ????
+
+  it.only('should return all days that a given user exceeded their step goal', function() {
+    expect(activityRepo.getDaysGoalExceeded(userThree, userRepo)).to.eql([
+      '2019/06/15',
+      '2019/06/14',
+      '2019/06/13',
+      '2019/06/12',
+      '2019/06/11',
+      '2019/06/10',
+      '2019/06/09'
     ]);
   });
+
   it('should return the highest number of stairs climbed in a day for all time', function() {
     expect(activity.getStairRecord(11)).to.eql(33);
   });
