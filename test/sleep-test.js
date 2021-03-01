@@ -5,7 +5,7 @@ import Sleep from '../src/Sleep';
 import UserRepo from '../src/User-repo';
 import User from '../src/User';
 
-describe('Sleep', function() {
+describe.only('Sleep', function() {
   let sleepData;
   let sleep;
   let user1;
@@ -52,7 +52,13 @@ describe('Sleep', function() {
     .to.equal('2019/06/16: hours: 4.1, quality: 3.8');
   });
 
-// ITERATION 3 BREAK
+  it('should be able to calculate average sleep hours for all users', function() {
+    expect(sleep.averageOfAllUsers(fakeSleepData, 'hoursSlept').toFixed(2)).to.equal('7.24');
+  });
+
+  it('should be able to calculate average quality of sleep for all users', function() {
+    expect(sleep.averageOfAllUsers(fakeSleepData, 'sleepQuality').toFixed(2)).to.equal('3.68');
+  });
 
   it.skip('should determine the best quality sleepers for a week', function() {
     expect(sleep.determineBestSleepers("2019/06/21", userRepo)).to.eql(["Allie McCarthy", "Bugs Bunny"]);

@@ -23,15 +23,16 @@ class Sleep {
     })
   }
 
-// ITERATION 3 BREAK
 
-  calculateAllUserSleepQuality() {
-    var totalSleepQuality = this.sleepData.reduce(function(sumSoFar, dataItem) {
-      sumSoFar += dataItem.sleepQuality;
-      return sumSoFar;
+  averageOfAllUsers(dataToAverage, key) {
+    const completeData = dataToAverage.reduce((totalData, usersInfo) => {
+      totalData += usersInfo[key];
+      return totalData;
     }, 0)
-    return totalSleepQuality / sleepData.length
+    return completeData / dataToAverage.length
   }
+
+  // ITERATION 3 BREAK
   determineBestSleepers(date, userRepo) {
     let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
     let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, 'sleepQuality', timeline);
