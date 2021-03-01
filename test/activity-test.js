@@ -35,14 +35,15 @@ describe('Activity', function () {
     expect(activityRepo.calculateMilesWalked(userOne, "2019/06/15", userRepo)).to.eql(2.91);
   });
 
-  it.only('should return the number of minutes a user was active on a given day', function() {
+  it('should return the number of minutes a user was active on a given day', function() {
     expect(activityRepo.findMinutesActive(userOne, "2019/06/15")).to.eql(140);
     expect(activityRepo.findMinutesActive(userTwo, "2019/06/15")).to.eql(138);
   });
-  
+
   it('should return average active minutes in a given week', function() {
-    expect(activity.calculateActiveAverageForWeek(1, "2019/06/21", userRepo)).to.eql(40.4);
+    expect(activityRepo.findMinutesActiveAverage(userThree, "2019/06/15", userRepo)).to.eql(116);
   });
+
   it('should return true/false if the given user met their step goal on a given day', function() {
     expect(activity.accomplishStepGoal(4, "2019/06/15", userRepo.users[3])).to.eql(false);
   });
