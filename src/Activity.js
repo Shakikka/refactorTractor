@@ -1,44 +1,77 @@
 class Activity {
   constructor(activityData) {
-    this.activityData = activityData
-  }
-  getMilesFromStepsByDate(id, date, userRepo) {
-    let userStepsByDate = this.activityData.find(data => id === data.userID && date === data.date);
-    return parseFloat(((userStepsByDate.numSteps * userRepo.strideLength) / 5280).toFixed(1));
-  }
-  getActiveMinutesByDate(id, date) {
-    let userActivityByDate = this.activityData.find(data => id === data.userID && date === data.date);
-    return userActivityByDate.minutesActive;
-  }
-  calculateActiveAverageForWeek(id, date, userRepo) {
-    return parseFloat((userRepo.getWeekFromDate(date, id, this.activityData).reduce((acc, elem) => {
-      return acc += elem.minutesActive;
-    }, 0) / 7).toFixed(1));
-  }
-  accomplishStepGoal(id, date, userRepo) {
-    let userStepsByDate = this.activityData.find(data => id === data.userID && date === data.date);
-    if (userStepsByDate.numSteps === userRepo.dailyStepGoal) {
+    this.activityData = activityData;
+  };
+
+  calculateMilesWalked(user, date) {
+    let foundUser = this.activityData.find(data => user.id === data.userID && date === data.date);
+    let userSteps = foundUser.numSteps;
+    let stepsNeededforOneMile = 5280 / user.strideLength;
+    let milesTraveled = (userSteps / stepsNeededforOneMile).toFixed(2);
+    return Number(milesTraveled);
+  };
+
+  findMinutesActiveAverage(user, date, userRepo) {
+    let foundWeek = userRepo.findWeekOfData(date, user.id, this.activityData);
+    return (foundWeek.reduce((totalMinutes, day) => {
+      return totalMinutes + day.minutesActive
+    }, 0)) / 7;
+  };
+
+  accomplishStepGoal(user, date) {
+    let foundActivityByDate = this.activityData.find(activity => activity.userID === user.id && activity.date === date);
+    if (foundActivityByDate.numSteps >= user.dailyStepGoal) {
       return true;
+    } else {
+      return false;
     }
-    return false
-  }
-  getDaysGoalExceeded(id, userRepo) {
-    return this.activityData.filter(data => id === data.userID && data.numSteps > userRepo.dailyStepGoal).map(data => data.date);
-  }
-  getStairRecord(id) {
-    return this.activityData.filter(data => id === data.userID).reduce((acc, elem) => (elem.flightsOfStairs > acc) ? elem.flightsOfStairs : acc, 0);
-  }
-  getAllUserAverageForDay(date, userRepo, relevantData) {
-    let selectedDayData = userRepo.chooseDayDataForAllUsers(this.activityData, date);
-    return parseFloat((selectedDayData.reduce((acc, elem) => acc += elem[relevantData], 0) / selectedDayData.length).toFixed(1));
-  }
-  userDataForToday(id, date, userRepo, relevantData) {
-    let userData = userRepo.getDataFromUserID(id, this.activityData);
-    return userData.find(data => data.date === date)[relevantData];
-  }
-  userDataForWeek(id, date, userRepo, releventData) {
-    return userRepo.getWeekFromDate(date, id, this.activityData).map((data) => `${data.date}: ${data[releventData]}`);
-  }
+  };
+
+  getUserStat(date, user, stat) {
+    let activityByDate = this.activityData.find(activity => activity.date === date && activity.userID === user.id);
+    return activityByDate[stat];
+  };
+
+  getUserTotalsForWeek(user, date, userRepo, stat) {
+    let userWeek = userRepo.findWeekOfData(date, user.id, this.activityData);
+    let statTotal = userWeek.reduce((accu, current) => {
+      accu = accu + current[stat];
+      return accu;
+    }, 0);
+    return statTotal;
+  };
+
+  getAllUserAverageByDate(date, stat) {
+    let activitiesByDate = this.activityData.filter(activity => activity.date === date);
+
+    let average = (activitiesByDate.reduce((accu, current) => {
+      accu = accu + current[stat];
+      return accu;
+    }, 0) / activitiesByDate.length);
+
+    return Number(average.toFixed(2));
+  };
+
+  //The methods below are not currently displayed on UI but should be considered for
+  //future iterations
+
+  getDaysGoalExceeded(user, userRepo) {
+    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
+    return sortedArray.filter(data => user.id === data.userID && data.numSteps >= user.dailyStepGoal).map(data => data.date);
+  };
+
+  getStairRecord(user) {
+    let userActivities = this.activityData.filter(data => user.id === data.userID);
+    let sortedStairCount = userActivities.sort((a, b) => b.flightsOfStairs - a.flightsOfStairs);
+    return sortedStairCount[0].flightsOfStairs;
+    };
+
+//END future iteration suggestions
+
+
+
+
+
 
   // Friends
 
