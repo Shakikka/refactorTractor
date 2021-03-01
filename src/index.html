@@ -24,29 +24,30 @@
           <p class="sidebar-header-userInfo">Friends:</p>
         </section>
 
-        <div>
-          <label for="activity-type">Enter your progress for today:</label>
-          <select name="activity-type" id="enter-progress-dropdown">
-            <option value="" selected></option>
-            <option value="activity">Activity</option>
-            <option value="hydration">Hydration</option>
-            <option value="sleep">Sleep</option>
-          </select>
+        <section tabindex="0" class="post-form">
+          <div class="">
+            <label for="activity-type">Enter your progress for today:</label>
+            <select name="activity-type" id="enter-progress-dropdown">
+              <option value="" selected></option>
+              <option value="activity">Activity</option>
+              <option value="hydration">Hydration</option>
+              <option value="sleep">Sleep</option>
+            </select>
+          </div>
           <form id="activityForm" class="user-form hidden">
             <input id="activityFormSteps" class="form-input" type="number" min="0" placeholder="number of steps">
             <input id="activityFormMinutes" class="form-input" type="number" min="0" placeholder="minutes active">
             <input id="activityFormStairs" class="form-input" type="number" min="0" placeholder="flights of stairs">
           </form>
           <form id="hydrationForm" class="user-form hidden">
-            <input id="hydrationFormOunces" class="form-input" type="number" min="0" placeholder="fluid ounces consumed">
+            <input id="hydrationFormOunces" class="form-input" type="number" min="0" placeholder="fl oz consumed">
           </form>
           <form id="sleepForm" class="user-form hidden">
             <input id="sleepFormHours" class="form-input" type="number" min="0" placeholder="hours slept">
-            <input id="sleepFormQuality" class="form-input" type="number" min="1" max="5" placeholder="sleep quality (1-5)">
+            <input id="sleepFormQuality" class="form-input" type="number" min="1" max="5" placeholder="sleep quality(1-5)">
           </form>
           <button id="submitForm" class="hidden">Submit</button>
-
-        </div>
+        </section>
 
         <div class="sidebar-header-line"></div>
 
