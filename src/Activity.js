@@ -3,7 +3,7 @@ class Activity {
     this.activityData = activityData;
   };
 
-  calculateMilesWalked(user, date, userRepo) {
+  calculateMilesWalked(user, date) {
     let foundUser = this.activityData.find(data => user.id === data.userID && date === data.date);
     let userSteps = foundUser.numSteps;
     let stepsNeededforOneMile = 5280 / user.strideLength;
@@ -18,7 +18,7 @@ class Activity {
     }, 0)) / 7;
   };
 
-  accomplishStepGoal(user, date, userRepo) {
+  accomplishStepGoal(user, date) {
     let foundActivityByDate = this.activityData.find(activity => activity.userID === user.id && activity.date === date);
     if (foundActivityByDate.numSteps >= user.dailyStepGoal) {
       return true;

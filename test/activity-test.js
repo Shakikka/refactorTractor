@@ -32,7 +32,7 @@ describe('Activity', function () {
   });
 
   it('should calculate miles user has walked on a given date', function() {
-    expect(activityRepo.calculateMilesWalked(userOne, "2019/06/15", userRepo)).to.eql(2.91);
+    expect(activityRepo.calculateMilesWalked(userOne, "2019/06/15")).to.eql(2.91);
   });
 
   it('should return average active minutes in a given week', function() {
@@ -40,8 +40,8 @@ describe('Activity', function () {
   });
 
   it('should determine whether user met their step goal on a given day', function() {
-    expect(activityRepo.accomplishStepGoal(userThree, "2019/06/15", userRepo)).to.eql(true);
-    expect(activityRepo.accomplishStepGoal(userTwo, "2019/06/15", userRepo)).to.eql(false);
+    expect(activityRepo.accomplishStepGoal(userThree, "2019/06/15")).to.eql(true);
+    expect(activityRepo.accomplishStepGoal(userTwo, "2019/06/15")).to.eql(false);
   });
 
   it('should find user/s stats by date', function() {
