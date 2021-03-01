@@ -32,7 +32,19 @@ class Sleep {
     return completeData / dataToAverage.length
   }
 
-  // ITERATION 3 BREAK
+  mostHoursSlept(date, userRepo, dataSet) {
+    let timeline = userRepo.chooseDayDataForAllUsers(dataSet, date);
+    let sortedTimeline = timeline.sort((a, b) => b.hoursSlept - a.hoursSlept)
+    let winner = sortedTimeline[0]
+    let winners = sortedTimeline.filter(person => winner.hoursSlept === person.hoursSlept)
+    let trueWinners = winners.map(person => {
+      return userRepo.users.find(user => person.userID === user.id)
+    })
+    return trueWinners
+  }
+
+  //BREAK
+
   // determineBestSleepers(date, userRepo) {
   //   let timeline = userRepo.chooseWeekDataForAllUsers(this.sleepData, date);
   //   let userSleepObject = userRepo.isolateUsernameAndRelevantData(this.sleepData, date, 'sleepQuality', timeline);
@@ -52,17 +64,7 @@ class Sleep {
   //
   //   return this.getWinnerNamesFromList(sleepRankWithData, userRepo);
   // }
-  
-  mostHoursSlept(date, userRepo, dataSet) {
-    let timeline = userRepo.chooseDayDataForAllUsers(dataSet, date);
-    let sortedTimeline = timeline.sort((a, b) => b.hoursSlept - a.hoursSlept)
-    let winner = sortedTimeline[0]
-    let winners = sortedTimeline.filter(person => winner.hoursSlept === person.hoursSlept)
-    let trueWinners = winners.map(person => {
-      return userRepo.users.find(user => person.userID === user.id)
-    })
-    return trueWinners
-  }
+
 
   // getWinnerNamesFromList(sortedArray, userRepo) {
   //   let bestSleepers = sortedArray.filter(function(element) {
