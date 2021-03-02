@@ -66,6 +66,12 @@ const formInputs = document.querySelectorAll('.form-input');
 const submitFormButton = document.querySelector('#submitForm');
 const userDistanceMiles = document.getElementById('userDistanceMiles');
 const weeklyStepCount = document.getElementById('weeklyStepCount');
+const userStepCountToday = document.getElementById('userStepCountToday');
+const allStepCountToday = document.getElementById('allStepCountToday');
+const userMinToday = document.getElementById('userMinutesToday');
+const allMinutesToday = document.getElementById('allMinutesToday');
+const userFlightsToday = document.getElementById('userFlightsToday');
+const allFlightsToday = document.getElementById('allFlightsToday');
 
 const activityFormSteps = document.querySelector('#activityFormSteps')
 const activityFormMinutes = document.querySelector('#activityFormMinutes')
@@ -73,6 +79,7 @@ const activityFormStairs = document.querySelector('#activityFormStairs')
 const hydrationFormOunces = document.querySelector('#hydrationFormOunces')
 const sleepFormHours = document.querySelector('#sleepFormHours')
 const sleepFormQuality = document.querySelector('#sleepFormQuality')
+
 
 let activityRepo, randomUser, userRepo, sleepRepo, hydrationRepo; // may not need userRepo globally
 
@@ -120,11 +127,17 @@ function displayActivityInfo(userInfo, id, activityInfo) {
   userMinutesToday.insertAdjacentHTML("afterBegin", `<p>Active Minutes: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')}</p>`)
   //the distance they have walked (in miles) for the latest day based on their step count
   userDistanceMiles.insertAdjacentHTML("afterBegin", `<p>Miles walked on recent day: ${activityRepo.calculateMilesWalked(randomUser, today)}</p>`)
-
-
-  //How their number of steps, minutes active, and flights of stairs climbed compares to all users for the latest day
-
-
+  ////
+  //number of steps today (user and all user avg)
+  userStepCountToday.insertAdjacentHTML("afterBegin", `<p>Step Count for table: ${activityRepo.getUserStat(today, randomUser, 'numSteps')}</p>`);
+  allStepCountToday.insertAdjacentHTML("afterBegin", `<p>All user average steps for table: ${activityRepo.getAllUserAverageByDate(today, 'numSteps')}</p>`);
+  //minutes active (user and all user avg)
+  userMinToday.insertAdjacentHTML("afterBegin", `<p>Active Minutes for table: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')}</p>`)
+  allMinutesToday.insertAdjacentHTML("afterBegin", `<p>All user average min for table: ${activityRepo.getAllUserAverageByDate(today, 'minutesActive')}</p>`);
+  //flights of stairs today  (user and all user avg)
+  userFlightsToday.insertAdjacentHTML("afterBegin", `<p>Flight Count for table: ${activityRepo.getUserStat(today, randomUser, 'flightsOfStairs')}</p>`);
+  allFlightsToday.insertAdjacentHTML("afterBegin", `<p>All user average flights for table: ${activityRepo.getAllUserAverageByDate(today, 'flightsOfStairs')}</p>`);
+  ////
   //a weekly view of their step count
   weeklyStepCount.insertAdjacentHTML("afterBegin", `<p>Total steps this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'numSteps')}</p>`);
   //a weekly view of their flights of stairs climbed
