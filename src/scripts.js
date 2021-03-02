@@ -116,12 +116,12 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
 
 function displayActivityInfo(userInfo, id, activityInfo) {
   activityRepo = new Activity(activityInfo);
+  let today = userInfo.getToday(id, activityRepo.activityData);
 
   userStridelength.innerText = `Your stridelength is ${randomUser.strideLength} meters.`; //do we need to display this?
   stepGoalCard.innerText = `Your daily step goal is ${randomUser.dailyStepGoal} steps.`;
   avStepGoalCard.innerText = `The average daily step goal is ${userRepo.findAverageStepGoal()} steps.`;
   //the number of steps for the latest day
-  let today = userInfo.getToday(id, activityRepo.activityData);
   userStepsToday.insertAdjacentHTML("afterBegin", `<p>Step Count: ${activityRepo.getUserStat(today, randomUser, 'numSteps')}</p>`)
   //the number of minutes active for the latest day
   userMinutesToday.insertAdjacentHTML("afterBegin", `<p>Active Minutes: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')}</p>`)
