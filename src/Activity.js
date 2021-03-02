@@ -80,11 +80,9 @@ class Activity {
     let userDatalist = user.friends.map(friend => {
       return userRepo.getDataFromUserID(friend, data)
     });
-    return userDatalist.reduce((arraySoFar, listItem) => {
-      console.log(arraySoFar.concat(listItem))
-      return arraySoFar.concat(listItem);
+    return userDatalist.reduce((allFriendData, friendData) => {
+      return allFriendData.concat(friendData);
     }, []);
-    console.log('userDatalist:', userDatalist)
   }
   getFriendsAverageStepsForWeek(user, date, userRepo) {
     let friendsActivity = this.getFriendsActivity(user, userRepo);
