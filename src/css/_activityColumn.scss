@@ -10,6 +10,29 @@
   justify-content: space-around;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+
+  tr {
+
+    border: 1px solid black;
+
+    th {
+      border: 1px solid black;
+      padding: 1%;
+    }
+
+    td {
+      border: 1px solid black;
+      padding: 1%;
+    }
+  }
+}
+
+
+
 // .card-today-activity {
 //   text-align: center;
 //   background-color: #DFE166;
