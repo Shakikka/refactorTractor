@@ -169,10 +169,6 @@ describe.only('Friend Activity', function() {
     ])
   });
 
-  it('should find winner/s name', function() {
-    expect(activityRepo.getWinnerName(user4, "2019/06/15", userRepo)).to.eql(2)
-  })
-
   it.skip('should show a 3-day increasing streak for a users step count', function() {
     expect(activity.getStreak(userRepo, 1, 'numSteps')).to.eql(['2019/06/17', '2019/06/18'])
   });

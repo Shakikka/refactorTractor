@@ -142,11 +142,7 @@ class Activity {
       return streak.date;
     })
   }
-  getWinnerName(user, date, userRepo) {
-    let rankedList = this.friendsWeeklyRanking(user, date, userRepo);
-    let keysList = rankedList.map(listItem => Object.keys(listItem));
-    return parseInt(keysList[0].join(''))
-  }
+
 }
 
 
