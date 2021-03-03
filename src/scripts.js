@@ -149,11 +149,18 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 
   console.log('Result of makeToday function called upon the hydrationData:', today);
 
-  hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span
-  class="number">${hydrationRepo.calculateDailyOunces(id, today)}</span></p><p>oz water today.</p>`);
+  hydrationToday.innerText = `You drank ${hydrationRepo.calculateDailyOunces(id, today)} oz of water today.`;
 
-  hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id,
-    hydrationRepo, userInfo, hydrationRepo.calculateFirstWeekOunces(userInfo, id)))
+  hydrationThisWeek.innerHTML = ''
+
+  let hydrationWeekData = hydrationRepo.calculateFirstWeekOunces(userInfo, id);
+  console.log('sauce', hydrationWeekData)
+
+  hydrationWeekData.forEach(day => {
+    hydrationThisWeek.innerHTML +=
+      `<li>${day}oz</li> `
+  });
+
 }
 
 function displaySleepInfo(userInfo, id, sleepInfo) {
@@ -250,6 +257,10 @@ function makeToday(userStorage, id, dataSet) {
 
 }
 
+function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
+  return method.map(drinkData => `<li class="historical-list-listItem">${drinkData}oz</li>`).join('');
+}
+
 function makeRandomDate(userStorage, id, dataSet) {
   const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date
@@ -263,9 +274,7 @@ function makeRandomDate(userStorage, id, dataSet) {
 //   hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
 // }
 
-function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
-  return method.map(drinkData => `<li class="historical-list-listItem">${drinkData}oz</li>`).join('');
-}
+
 
 // function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
 //   sleepToday.insertAdjacentHTML("afterBegin", `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(id, dateString)}</span></p> <p>hours today.</p>`);
