@@ -444,9 +444,9 @@ function postSleepData(userID, date) {
   }
 
   postNewData('sleep', postData)
-    .then(response => response.json())
+    .then(checkForError)
     .then(json => sleepRepo.sleepData.push(json))
-    .catch(err => console.log(err.message))
+    .catch(err => alert(err))
 
   resetForm('hide');
 
