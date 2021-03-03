@@ -98,6 +98,19 @@ class Activity {
     return friendSteps
   }
 
+  friendsStepsWithNames(user, date, userRepo) {
+    let friendsStepsWithID = this.totalFriendsStepCount(user, date, userRepo)
+    return friendsStepsWithID.map(({id, totalSteps}) => {
+      let user = userRepo.findUserData(id)
+      return ({id, name: user.name , totalSteps})
+    })
+  }
+
+  friendsWeeklyRanking(user, date, userRepo) {
+    let friends = friendsStepsWithNames(user, date, userRepo)
+    let winnerFirst = friends.sort((a, b) => a.totalSteps - b.totalSteps)
+    console.log('winners', winnerFirst);
+  }
   // getFriendsAverageStepsForWeek(user, date, userRepo) {
   //   let friendsActivity = this.getFriendsActivity(user, userRepo);
   //   let timeline = userRepo.chooseWeekDataForAllUsers(friendsActivity, date);
