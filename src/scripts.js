@@ -9,7 +9,8 @@ import {
   hydrationDataAPI,
   activityDataAPI,
   sleepDataPost,
-  hydrationDataPost
+  hydrationDataPost,
+  activityDataPost
 } from './api.js'
 // import userData from './data/users';
 // import hydrationData from './data/hydration';
@@ -356,21 +357,6 @@ function postFormEntry() {
   }
 }
 
-//activity API POST request
-const activityDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/activity", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => {
-      activityRepo.activityData.push(json)
-    })
-    .catch(err => console.log(err.message))
-}
 
 function checkForEmptyFields(category) {
   switch (category) {
@@ -384,7 +370,8 @@ function checkForEmptyFields(category) {
 }
 
 
-// parent function: activity API post request
+
+//activity API post request
 function postActivityData(userID, date) {
 
   if (checkForEmptyFields('activity')) {
@@ -402,6 +389,10 @@ function postActivityData(userID, date) {
     'flightsOfStairs': activityFormStairs.value
   }
   activityDataPost(postData)
+    .then(response => response.json())
+    .then(json => activityRepo.activityData.push(json))
+    .catch(err => console.log(err.message))
+
   resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)

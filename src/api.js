@@ -36,3 +36,13 @@ export const hydrationDataPost = (body) => {
     body: JSON.stringify(body)
   })
 }
+
+export const activityDataPost = (dataFormEntry) => {
+  return fetch("http://localhost:3001/api/v1/activity", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataFormEntry)
+  })
+}
