@@ -112,11 +112,8 @@ class Activity {
     console.log('winners', winnerFirst);
     return winnerFirst
   }
-  // getFriendsAverageStepsForWeek(user, date, userRepo) {
-  //   let friendsActivity = this.getFriendsActivity(user, userRepo);
-  //   let timeline = userRepo.chooseWeekDataForAllUsers(friendsActivity, date);
-  //   return userRepo.combineRankedUserIDsAndAveragedData(friendsActivity, date, 'numSteps', timeline)
-  // }
+
+  // FOR FUTURE EXTENSIONS
 
   showChallengeListAndWinner(user, date, userRepo) {
     let rankedList = this.getFriendsAverageStepsForWeek(user, date, userRepo);
