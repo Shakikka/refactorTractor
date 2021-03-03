@@ -125,22 +125,28 @@ class Activity {
     return rankedList;
   };
 
-  showcaseWinner(user, date, userRepo) {
-    let namedList = this.showChallengeListAndWinner(user, date, userRepo);
-    let winner = this.showChallengeListAndWinner(user, date, userRepo).shift();
-    return winner;
-  }
-  getStreak(userRepo, id, relevantData) {
-    let data = this.activityData;
-    let sortedUserArray = (userRepo.makeSortedUserArray(id, data)).reverse();
-    let streaks = sortedUserArray.filter(function(element, index) {
-      if (index >= 2) {
-        return (sortedUserArray[index - 2][relevantData] < sortedUserArray[index - 1][relevantData] && sortedUserArray[index - 1][relevantData] < sortedUserArray[index][relevantData])
+  getStreak(userRepo, user) {
+    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
+
+    let streaks = sortedArray.reduce((list, currentActivity, i) => {
+      if (sortedArray.indexOf(currentActivity) !== sortedArray.length - 1) {
+        if (currentActivity.numSteps > sortedArray[i + 1].numSteps) {
+          list.push(currentActivity);
+          list.push(sortedArray[i + 1])
+        }
       }
-    });
-    return streaks.map(function(streak) {
-      return streak.date;
-    })
+      return list
+    }, []);
+
+    let filteredStreaks = streaks.reduce((list, currentActivity) => {
+      if (!list.includes(currentActivity)) {
+        list.push(currentActivity)
+      }
+      return list
+    }, []);
+
+  return filteredStreaks;
+
   }
 
 }

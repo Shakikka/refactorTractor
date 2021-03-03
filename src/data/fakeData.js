@@ -342,8 +342,8 @@ export const fakeActivityData2 = [
   {
     "userID": 3,
     "date": "2019/06/15",
-    "numSteps": 7402,
-    "minutesActive": 116,
+    "numSteps": 1,
+    "minutesActive": 20,
     "flightsOfStairs": 33
   },
   {
@@ -377,8 +377,8 @@ export const fakeActivityData2 = [
   {
     "userID": 3,
     "date": "2019/06/16",
-    "numSteps": 12304,
-    "minutesActive": 152,
+    "numSteps": 2,
+    "minutesActive": 50,
     "flightsOfStairs": 8
   },
   {
@@ -412,8 +412,8 @@ export const fakeActivityData2 = [
   {
     "userID": 3,
     "date": "2019/06/17",
-    "numSteps": 4547,
-    "minutesActive": 97,
+    "numSteps": 3,
+    "minutesActive": 100,
     "flightsOfStairs": 5
   },
   {
