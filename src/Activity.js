@@ -107,23 +107,24 @@ class Activity {
   }
 
   friendsWeeklyRanking(user, date, userRepo) {
-    let friends = this.friendsStepsWithNames(user, date, userRepo)
-    let winnerFirst = friends.sort((a, b) => b.totalSteps - a.totalSteps)
-    console.log('winners', winnerFirst);
+    let friends = this.friendsStepsWithNames(user, date, userRepo);
+    let winnerFirst = friends.sort((a, b) => b.totalSteps - a.totalSteps);
     return winnerFirst
   }
 
   // FOR FUTURE EXTENSIONS
 
-  showChallengeListAndWinner(user, date, userRepo) {
-    let rankedList = this.getFriendsAverageStepsForWeek(user, date, userRepo);
+  findRank(user, date, userRepo) {
+    let winnerFirst = this.friendsWeeklyRanking(user, date, userRepo);
 
-    return rankedList.map(function(listItem) {
-      let userID = Object.keys(listItem)[0];
-      let userName = userRepo.getDataFromID(parseInt(userID)).name;
-      return `${userName}: ${listItem[userID]}`
-    })
-  }
+    let rankedList = winnerFirst.reduce((list, friend, i) => {
+      friend['rank'] = i + 1;
+      list.push(friend)
+      return list
+    }, []);
+    return rankedList;
+  };
+
   showcaseWinner(user, date, userRepo) {
     let namedList = this.showChallengeListAndWinner(user, date, userRepo);
     let winner = this.showChallengeListAndWinner(user, date, userRepo).shift();
@@ -141,8 +142,8 @@ class Activity {
       return streak.date;
     })
   }
-  getWinnerId(user, date, userRepo) {
-    let rankedList = this.getFriendsAverageStepsForWeek(user, date, userRepo);
+  getWinnerName(user, date, userRepo) {
+    let rankedList = this.friendsWeeklyRanking(user, date, userRepo);
     let keysList = rankedList.map(listItem => Object.keys(listItem));
     return parseInt(keysList[0].join(''))
   }
