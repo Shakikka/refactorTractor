@@ -148,7 +148,14 @@ describe.only('Friend Activity', function() {
     let friendsTotal = [{id: 5, name: 'Erick Schaden', totalSteps: 53729},
     {id: 1, name: 'Luisa Hane', totalSteps: 65341}, {id: 3, name: 'Herminia Witting', totalSteps: 54567}]
     expect(activityRepo.friendsStepsWithNames(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal);
-  })
+  });
+
+  it('should organize friends from winner to loser', function() {
+    activityRepo = new Activity(fakeActivityData3);
+    let friendsTotal = [{id: 1, name: 'Luisa Hane', totalSteps: 65341},
+    {id: 3, name: 'Herminia Witting', totalSteps: 54567}, {id: 5, name: 'Erick Schaden', totalSteps: 53729}]
+    expect(activityRepo.friendsWeeklyRanking(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal)
+  });
 
   it.skip('should get a users ranked friendslist activity for a chosen week with names', function() {
     expect(activity.showChallengeListAndWinner(user4, "2019/06/15", userRepo)).to.eql([

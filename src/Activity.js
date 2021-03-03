@@ -107,9 +107,10 @@ class Activity {
   }
 
   friendsWeeklyRanking(user, date, userRepo) {
-    let friends = friendsStepsWithNames(user, date, userRepo)
-    let winnerFirst = friends.sort((a, b) => a.totalSteps - b.totalSteps)
+    let friends = this.friendsStepsWithNames(user, date, userRepo)
+    let winnerFirst = friends.sort((a, b) => b.totalSteps - a.totalSteps)
     console.log('winners', winnerFirst);
+    return winnerFirst
   }
   // getFriendsAverageStepsForWeek(user, date, userRepo) {
   //   let friendsActivity = this.getFriendsActivity(user, userRepo);
