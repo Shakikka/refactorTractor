@@ -8,9 +8,10 @@ import {
   userDataAPI,
   hydrationDataAPI,
   activityDataAPI,
-  sleepDataPost,
-  hydrationDataPost,
-  activityDataPost
+  postNewData
+  // sleepDataPost,
+  // hydrationDataPost,
+  // activityDataPost
 } from './api.js'
 // import userData from './data/users';
 // import hydrationData from './data/hydration';
@@ -388,7 +389,7 @@ function postActivityData(userID, date) {
     'minutesActive': activityFormMinutes.value,
     'flightsOfStairs': activityFormStairs.value
   }
-  activityDataPost(postData)
+  postNewData('activity', postData)
     .then(response => response.json())
     .then(json => activityRepo.activityData.push(json))
     .catch(err => console.log(err.message))
@@ -414,7 +415,7 @@ function postHydrationData(userID, date) {
     'numOunces': hydrationFormOunces.value
   }
 
-  hydrationDataPost(postData)
+  postNewData('hydration', postData)
     .then(response => response.json())
     .then(json => hydrationRepo.hydrationData.push(json))
     .catch(err => console.log(err.message))
@@ -443,7 +444,7 @@ function postSleepData(userID, date) {
     'sleepQuality': sleepFormQuality.value
   }
 
-  sleepDataPost(postData)
+  postNewData('sleep', postData)
     .then(response => response.json())
     .then(json => sleepRepo.sleepData.push(json))
     .catch(err => console.log(err.message))

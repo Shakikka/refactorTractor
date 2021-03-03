@@ -17,8 +17,9 @@ export const hydrationDataAPI = fetch("http://localhost:3001/api/v1/hydration")
 
 
 //POST requests
-export const sleepDataPost = (body) => {
-  return fetch("http://localhost:3001/api/v1/sleep", {
+
+export const postNewData = (path, body) => {
+  return fetch(`http://localhost:3001/api/v1/${path}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -27,22 +28,33 @@ export const sleepDataPost = (body) => {
   })
 }
 
-export const hydrationDataPost = (body) => {
-  return fetch("http://localhost:3001/api/v1/hydration", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  })
-}
 
-export const activityDataPost = (dataFormEntry) => {
-  return fetch("http://localhost:3001/api/v1/activity", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dataFormEntry)
-  })
-}
+// export const sleepDataPost = (body) => {
+//   return fetch("http://localhost:3001/api/v1/sleep", {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(body)
+//   })
+// }
+
+// export const hydrationDataPost = (body) => {
+//   return fetch("http://localhost:3001/api/v1/hydration", {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(body)
+//   })
+// }
+
+// export const activityDataPost = (dataFormEntry) => {
+//   return fetch("http://localhost:3001/api/v1/activity", {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(dataFormEntry)
+//   })
+// }
