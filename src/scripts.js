@@ -418,9 +418,9 @@ function postHydrationData(userID, date) {
   }
 
   postNewData('hydration', postData)
-    .then(response => response.json())
+    .then(checkForError)
     .then(json => hydrationRepo.hydrationData.push(json))
-    .catch(err => console.log(err.message))
+    .catch(err => alert(err))
 
   resetForm('hide');
 
