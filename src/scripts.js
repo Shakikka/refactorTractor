@@ -121,12 +121,9 @@ function displayActivityInfo(userInfo, id, activityInfo) {
   userStridelength.innerText = `Your stridelength is ${randomUser.strideLength} meters.`; //do we need to display this?
   stepGoalCard.innerText = `Your daily step goal is ${randomUser.dailyStepGoal} steps.`;
   avStepGoalCard.innerText = `The average daily step goal is ${userRepo.findAverageStepGoal()} steps.`;
-  //the number of steps for the latest day
-  userStepsToday.innerText = `Step Count: ${activityRepo.getUserStat(today, randomUser, 'numSteps')}`
-  //the number of minutes active for the latest day
-  userMinutesToday.insertAdjacentHTML("afterBegin", `<p>Active Minutes: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')}</p>`)
-  //the distance they have walked (in miles) for the latest day based on their step count
-  userDistanceMiles.insertAdjacentHTML("afterBegin", `<p>Miles walked on recent day: ${activityRepo.calculateMilesWalked(randomUser, today)}</p>`)
+  userStepsToday.innerText = `Step Count on most recent day: ${activityRepo.getUserStat(today, randomUser, 'numSteps')}`
+  userMinutesToday.innerText = `Active Minutes on most recent day: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')}`;
+  userDistanceMiles.innerText = `Miles walked on recent day: ${activityRepo.calculateMilesWalked(randomUser, today)}`;
   ////table start
   userStepCountToday.innerText = activityRepo.getUserStat(today, randomUser, 'numSteps');
   allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
@@ -134,13 +131,10 @@ function displayActivityInfo(userInfo, id, activityInfo) {
   allMinutesToday.innerText = activityRepo.getAllUserAverageByDate(today, 'minutesActive');
   userFlightsToday.innerText = activityRepo.getUserStat(today, randomUser, 'flightsOfStairs');
   allFlightsToday.innerText = activityRepo.getAllUserAverageByDate(today, 'flightsOfStairs');
-  //a weekly view of their step count
-  weeklyStepCount.insertAdjacentHTML("afterBegin", `<p>Total steps this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'numSteps')}</p>`);
-  //a weekly view of their flights of stairs climbed
-  userStairsThisWeek.insertAdjacentHTML("afterBegin", `<p>Flights of stairs climbed this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'flightsOfStairs')}</p>`);
-  //a weekly view of their minutes active
-  userMinutesThisWeek.insertAdjacentHTML("afterBegin", `<p>Minutes active this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'minutesActive')}</p>`);
-
+  //bottom section
+  weeklyStepCount.innerText = `Total steps this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'numSteps')}`;
+  userStairsThisWeek.innerText = `Flights of stairs climbed this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'flightsOfStairs')}`;
+  userMinutesThisWeek.innerText = `Minutes active this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'minutesActive')}`;
 }
 
 
