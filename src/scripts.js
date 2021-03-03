@@ -340,7 +340,6 @@ function resetForm(dropdownStatus) {
   }
 }
 
-//master post function called on submit button click
 function postFormEntry() {
   const userID = randomUser.id;
   const date = new Date().toISOString().replace(/-/g, "/").split("T")[0];
@@ -358,7 +357,6 @@ function postFormEntry() {
   }
 }
 
-
 function checkForEmptyFields(category) {
   switch (category) {
     case 'activity':
@@ -370,9 +368,6 @@ function checkForEmptyFields(category) {
   }
 }
 
-
-
-//activity API post request
 function postActivityData(userID, date) {
 
   if (checkForEmptyFields('activity')) {
@@ -399,7 +394,6 @@ function postActivityData(userID, date) {
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
-//hydration API post request
 function postHydrationData(userID, date) {
 
   if (checkForEmptyFields('hydration')) {
@@ -425,9 +419,6 @@ function postHydrationData(userID, date) {
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
-
-
-// sleep API post request
 function postSleepData(userID, date) {
 
   if (checkForEmptyFields('sleep')) {
@@ -462,5 +453,3 @@ enterProgressDropdown.addEventListener('change', function (event) {
 })
 
 submitFormButton.addEventListener('click', postFormEntry)
-
-//test
