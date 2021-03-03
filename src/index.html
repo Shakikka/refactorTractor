@@ -89,9 +89,42 @@
 
         <section tabindex="0" class="user-activity">
           <h1>Activity</h1>
-          <p id="userStridelength">STRIDE-LENGTH: 1000 strides per second</p>
-          <p id="stepGoalCard">GOAL: 2,000,000 steps a day</p>
+          <p id="stepGoalCard"></p>
           <p id="avStepGoalCard"><p>
+          <p id="userStepsToday"></p>
+          <p id="userStridelength"></p>
+          <p id="userMinutesToday"></p>
+          <p id="userDistanceMiles"></p>
+        </section>
+
+        <div class="sidebar-header-line"></div>
+
+        <section tabindex="0" class="horizontalCard-activity-container">
+          <p>Activity comparison for your last active day</p>
+          <!-- TABLE START -->
+          <table >
+            <tbody>
+              <tr>
+                <td></td>
+                <th>Steps</th>
+                <th>Stair Flights</th>
+                <th>Minutes Active</th>
+              </tr>
+              <tr>
+                <th>You</th>
+                <td id="userStepCountToday"></td>
+                <td id="userFlightsToday"></td>
+                <td id="userMinToday"></td>
+
+              </tr>
+              <tr>
+                <th>Global Average</th>
+                <td id="allStepCountToday"></td>
+                <td id="allFlightsToday"></td>
+                <td id="allMinutesToday"></td>
+              </tr>
+            </tbody>
+          </table>
         </section>
 
         <div class="sidebar-header-line"></div>
@@ -99,37 +132,15 @@
         <section tabindex="0" class="horizontalCard-activity-container">
 
           <div class="card-history-activity">
-            <p class="thisWeek">Your steps this week</p>
-            <ul class="card-vertical-list" id="userStepsThisWeek">
-                <!-- Activity week list goes here -->
-            </ul>
+            <p class="thisWeek">Your activity for this week:</p>
+            <p id="userMinutesThisWeek"></p>
+            <p id="weeklyStepCount"></p>
+            <p id="userStairsThisWeek"></p>
           </div>
 
-          <div class="card-history-activity">
-            <p class="thisWeek">Your stair count this week</p>
-
-            <ul class="card-vertical-list" id="userStairsThisWeek">
-                <!-- Activity week list goes here -->
-            </ul>
-          </div>
-
-        </section>
-
-        <div class="sidebar-header-line"></div>
-
-        <section tabindex="0" class="horizontalCard-activity-container">
-
-          <div class="card-history-activity">
-            <p class="thisWeek">Your minutes of activity this week</p>
-
-            <ul class="card-vertical-list" id="userMinutesThisWeek">
-              <!-- Activity week list goes here -->
-            </ul>
-          </div>
-
+          <!-- do we need the below div? -->
           <div class="card-history-activity">
             <p class="thisWeek">Winner's steps this week</p>
-
             <ul class="card-vertical-list" id="bestUserSteps">
               <!-- Activity week list goes here -->
             </ul>
@@ -138,7 +149,6 @@
         </section>
 
         <div class="sidebar-header-line"></div>
-
 
 
         <!-- <div class="card-today-activity">
@@ -160,9 +170,7 @@
         </section>
 
         <section class="horizontalCard-activity-container">
-          <div class="card-today-activity">
-            <p id="userMinutesToday"></p>
-          </div>
+      
 
           <div class="card-today-activity">
             <p id="avgMinutesToday"></p>
