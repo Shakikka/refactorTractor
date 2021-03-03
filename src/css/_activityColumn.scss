@@ -1,13 +1,8 @@
 .activity-column {
+  @extend .user-dash;
   background-color: #F6F3FF;
   grid-column: 2 / 3;
   grid-row: 2 / 4;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: space-around;
 }
 
 table {
