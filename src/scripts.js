@@ -162,9 +162,8 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
 
   console.log('Result of makeToday function called upon the sleepData:', today);
 
-  sleepToday.insertAdjacentHTML('afterBegin', `<p>You slept:</p><p><span
-  class="number">${sleepRepo.findInfoForDate(id, today, 'hoursSlept')}</span></p><p> hours today.</p>
-  <p>Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}</p>`);
+  sleepToday.innerText = `You slept ${sleepRepo.findInfoForDate(id, today, 'hoursSlept')} hours today.`
+  sleepQualityToday.innerText = `Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}`;
 
   let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksHours);
