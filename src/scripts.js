@@ -110,23 +110,24 @@ function loadThisFirst() {
 
 function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
   userRepo = new UserRepo(userInfo);
-  randomUser = pickUser(userRepo);
   activityRepo = new Activity(activityInfo);
   hydrationRepo = new Hydration(hydrationInfo);
   sleepRepo = new Sleep(sleepInfo);
+  randomUser = pickUser(userRepo);
 
 
+
+  displayHydrationInfo(userRepo, randomUser.id);
+  displaySleepInfo(userRepo, randomUser.id);
+  displayActivityInfo(userRepo, randomUser.id)
   addInfoToSidebar(randomUser, userRepo);
-  displayHydrationInfo(userRepo, randomUser.id, hydrationInfo);
-  displaySleepInfo(userRepo, randomUser.id, sleepInfo);
-  displayActivityInfo(userRepo, randomUser.id, activityInfo)
 }
 
 // function 
 
 
 
-function displayActivityInfo(userInfo, id, activityInfo) {
+function displayActivityInfo(userInfo, id) {
   // activityRepo = new Activity(activityInfo);
   let today = userInfo.getToday(id, activityRepo.activityData);
   populateStepChallenge(randomUser, userRepo)
@@ -151,7 +152,7 @@ function displayActivityInfo(userInfo, id, activityInfo) {
 }
 
 
-function displayHydrationInfo(userInfo, id, hydrationInfo) {
+function displayHydrationInfo(userInfo, id) {
   // hydrationRepo = new Hydration(hydrationInfo);
   let today = userInfo.getToday(id, hydrationRepo.hydrationData);
 
@@ -171,7 +172,7 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 
 }
 
-function displaySleepInfo(userInfo, id, sleepInfo) {
+function displaySleepInfo(userInfo, id) {
   // sleepRepo = new Sleep(sleepInfo);
   let today = userInfo.getToday(id, sleepRepo.sleepData);
 
