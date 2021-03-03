@@ -452,4 +452,5 @@ enterProgressDropdown.addEventListener('change', function (event) {
   updateFormView(event)
 })
 
+
 submitFormButton.addEventListener('click', postFormEntry)

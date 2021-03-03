@@ -14,19 +14,19 @@
     <main class="main-container">
       <h1 tabindex="0" class="header">Activity Tracker</h1>
 
-      <article tabindex="0" class="user-dash">
+      <article tabindex="0" class="user-dash" aria-label="User Dashboard">
 
         <section tabindex="0" class="user-info">
           <h2 id="sidebarName">Name Name</h2>
           <img src="./images/The Rock.jpg"  alt="Dewayne 'The Rock' Johnson's smiling face"class="sidebar-header-userImage"></img>
-          <p class="sidebar-header-userInfo" id="userAddress">1000 Mulberry Lane</p>
-          <p class="sidebar-header-userInfo" id="userEmail">muffinMan@hotmail.com</p>
+          <p tabindex="0" class="sidebar-header-userInfo" id="userAddress">1000 Mulberry Lane</p>
+          <p tabindex="0" class="sidebar-header-userInfo" id="userEmail">muffinMan@hotmail.com</p>
         </section>
 
         <section tabindex="0" class="post-form">
           <div>
             <label for="activity-type">Enter your progress for today:</label>
-            <select name="activity-type" id="enter-progress-dropdown">
+            <select name="activity-type" id="enter-progress-dropdown" aria-label="enter-progress-here">
               <option value="" selected></option>
               <option value="activity">Activity</option>
               <option value="hydration">Hydration</option>
@@ -34,16 +34,16 @@
             </select>
           </div>
           <form id="activityForm" class="user-form hidden">
-            <input id="activityFormSteps" class="form-input" type="number" min="0" placeholder="number of steps">
-            <input id="activityFormMinutes" class="form-input" type="number" min="0" placeholder="minutes active">
-            <input id="activityFormStairs" class="form-input" type="number" min="0" placeholder="flights of stairs">
+            <input id="activityFormSteps" class="form-input" type="number" min="0" placeholder="number of steps" aria-required="true" aria-label="steps-taken">
+            <input id="activityFormMinutes" class="form-input" type="number" min="0" placeholder="minutes active" aria-required="true" aria-label="minutes-active">
+            <input id="activityFormStairs" class="form-input" type="number" min="0" placeholder="flights of stairs" aria-required="true" aria-label="flights-climbed">
           </form>
           <form id="hydrationForm" class="user-form hidden">
-            <input id="hydrationFormOunces" class="form-input" type="number" min="0" placeholder="fl oz consumed">
+            <input id="hydrationFormOunces" class="form-input" type="number" min="0" placeholder="fl oz consumed" aria-required="true" aria-label="ounces-water-consumed">
           </form>
           <form id="sleepForm" class="user-form hidden">
-            <input id="sleepFormHours" class="form-input" type="number" min="0" placeholder="hours slept">
-            <input id="sleepFormQuality" class="form-input" type="number" min="1" max="5" placeholder="sleep quality(1-5)">
+            <input id="sleepFormHours" class="form-input" type="number" min="0" placeholder="hours slept" aria-required="true" aria-label="hours-slept">
+            <input id="sleepFormQuality" class="form-input" type="number" min="1" max="5" placeholder="sleep quality(1-5)" aria-required="true" aria-label="sleep-quality">
           </form>
           <button id="submitForm" class="hidden">Submit</button>
         </section>
@@ -52,9 +52,9 @@
 
         <section tabindex="0" class="user-friends">
           <h2 id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
-          <img src="./images/person walking on path.jpg" alt="A person's legs walking down a path" class="sidebar-header-userImage"></img>
-          <p>WINNER: <span id="bigWinner">PLACEHOLDER</span></p>
-            <ul class="card-vertical-list" id="friendList">
+          <img src="./images/person walking on path.jpg" alt="A person's legs walking down a path" class="sidebar-header-challengeImage"></img>
+          <p tabindex="0">WINNER: <span id="bigWinner" tabindex:"0">PLACEHOLDER</span></p>
+            <ul tabindex="0" class="card-vertical-list" id="friendList" aria-label="Friend List">
               <!-- friend list goes here -->
               <!-- NEED TO ADD STEPS FOR WEEK TO EVERY FRIEND LISTED ABOVE
               THEY ALSO NEED TO BE RANKED? I THINK? -->
@@ -88,7 +88,7 @@
       <article tabindex="0" class="activity-column">
 
         <section tabindex="0" class="user-activity">
-          <h1>Activity</h1>
+          <h2>Activity</h2>
           <p id="stepGoalCard"></p>
           <p id="avStepGoalCard"><p>
           <p id="userStepsToday"></p>
@@ -170,7 +170,7 @@
         </section>
 
         <section class="horizontalCard-activity-container">
-      
+
 
           <div class="card-today-activity">
             <p id="avgMinutesToday"></p>
@@ -222,6 +222,7 @@
 <!-- Start Hydration Column -->
 
         <article tabindex="0" class="main-column-hydration">
+          <h2>Hydration</h2>
 
             <div tabindex="0" class="card-today-hydration">
               <p id="hydrationToday"></p>
@@ -245,6 +246,7 @@
 <!-- Start Sleep column -->
 
         <section tabindex="0" class="main-column-sleep">
+          <h2>Sleep</h2>
 
             <div tabindex="0" class="card-today-sleep">
               <p id="sleepToday"></p>

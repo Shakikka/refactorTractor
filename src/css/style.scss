@@ -2,18 +2,6 @@
   margin: 0;
 }
 
-// body {
-//   font-family: 'Open Sans';
-//   margin: 0;
-//   height: auto;
-// }
-//
-// h1 {
-//   text-align: center;
-//   height: 80px;
-//   padding-top: 10px;
-// }
-
 .main-container {
   height: 100vh;
   padding: 20px;
@@ -26,6 +14,7 @@
 .header {
   background-color: #FFF2E3;
   grid-column: 1 / 4;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,35 +134,4 @@
 //   // padding: .3em;
 //   font-weight: bold;
 //   font-family: sans-serif;
-// }
-
-
-
-// @media screen and (max-width: 550px) {
-//   .container {
-//     display: grid;
-//     grid-gap: 10px;
-//     grid-template-columns: 1fr;
-//     grid-template-rows: 1fr 1fr 1fr 1fr;
-//     grid-template-areas:
-//     "user"
-//     "activity"
-//     "hydration"
-//     "sleep"
-//   }
-//   .user-dash {
-//     grid-area: user;
-//   }
-//
-//   .main-column-hydration {
-//     grid-area: hydration;
-//   }
-//
-//   .main-column-activity {
-//     grid-area: activity;
-//   }
-//
-//   .main-column-sleep {
-//     grid-area: sleep;
-//   }
 // }
