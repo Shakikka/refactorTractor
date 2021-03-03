@@ -151,69 +151,33 @@
 
 @media screen and (max-width: 550px) {
   .main-container {
-    // height: 100vh;
-    // padding: 20px;
-    display: grid;
-    grid-gap: 20px;
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(6, 1fr);
   }
 
   .header {
-    background-color: #FFF2E3;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
   }
 
   .user-dash {
-    background-color: #F6F3FF;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
-    // border: 1px solid black;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // text-align: center;
-    // justify-content: space-around;
   }
 
   .activity-column {
-    background-color: #F6F3FF;
     grid-column: 1 / 2;
     grid-row: 3 / 4;
-    // border: 1px solid black;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // text-align: center;
-    // justify-content: space-around;
   }
 
   .main-column-hydration {
-    background-color: #F6F3FF;
     grid-column: 1 / 2;
     grid-row: 4 / 5;
-    border: 1px solid black;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // text-align: center;
-    // justify-content: space-around;
   }
 
   .main-column-sleep {
-    background-color: #F6F3FF;
     grid-column: 1 / 2;
     grid-row: 5 / 6;
-    // border: 1px solid black;
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // text-align: center;
-    // justify-content: space-around;
   }
 
 }
