@@ -54,17 +54,19 @@ class UserRepo {
   }
 
 
-  // chooseWeekDataForAllUsers(dataSet, date) {
-  //   return dataSet.filter(dataItem => {
-  //     return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
-  //   })
-  // }
 
   chooseDayDataForAllUsers(dataSet, date) {
     return dataSet.filter(dataItem => dataItem.date === date)
   }
+}
 
   // HARD STOP
+
+  // chooseWeekDataForAllUsers(dataSet, date) {
+    //   return dataSet.filter(dataItem => {
+      //     return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
+      //   })
+      // }
 
 //   isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod) {
 //     return listFromMethod.reduce(function(objectSoFar, dataItem) {

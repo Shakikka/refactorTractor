@@ -8,7 +8,8 @@ import {
   fakeUserData,
   fakeUserData2,
   fakeActivityData,
-  fakeActivityData2
+  fakeActivityData2,
+  fakeActivityData3
 } from '../src/data/fakeData';
 
 describe('Activity', function () {
@@ -137,13 +138,9 @@ describe.only('Friend Activity', function() {
   });
 
   it('should show total steps for friends for the week', function() {
-    expect(activity.getFriendsAverageStepsForWeek(user4, "2019/06/15", userRepo)).to.eql([{
-        '2': 9552
-      },
-      {
-        '1': 7475.5
-      }
-    ]);
+    activityRepo = new Activity(fakeActivityData3);
+    let friendsTotal = [{id: 5, totalSteps: 53729}, {id: 1, totalSteps: 65341}, {id: 3, totalSteps: 54567}]
+    expect(activityRepo.totalFriendsStepCount(user4, "2019/06/22", userRepo)).to.deep.equal(friendsTotal);
   });
 
   it.skip('should get a users ranked friendslist activity for a chosen week with names', function() {

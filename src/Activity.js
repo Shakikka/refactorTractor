@@ -87,14 +87,23 @@ class Activity {
 
   totalFriendsStepCount(user, date, userRepo) {
     let friendsActivity = this.getFriendsActivity(user, userRepo);
-    let week = findWeekOfData(date, id, dataSet)
+    let friendSteps = user.friends.map((friend) => {
+      let friendly = friendsActivity.filter(activity => activity.userID === friend)
+      let friendStepWeek = userRepo.findWeekOfData(date, friend, friendly);
+      let totalSteps = friendStepWeek.reduce((totalFriendSteps, day) => {
+        return totalFriendSteps += day.numSteps
+      }, 0)
+      return ({id: friend, totalSteps})
+    })
+    return friendSteps
   }
 
-  getFriendsAverageStepsForWeek(user, date, userRepo) {
-    let friendsActivity = this.getFriendsActivity(user, userRepo);
-    let timeline = userRepo.chooseWeekDataForAllUsers(friendsActivity, date);
-    return userRepo.combineRankedUserIDsAndAveragedData(friendsActivity, date, 'numSteps', timeline)
-  }
+  // getFriendsAverageStepsForWeek(user, date, userRepo) {
+  //   let friendsActivity = this.getFriendsActivity(user, userRepo);
+  //   let timeline = userRepo.chooseWeekDataForAllUsers(friendsActivity, date);
+  //   return userRepo.combineRankedUserIDsAndAveragedData(friendsActivity, date, 'numSteps', timeline)
+  // }
+
   showChallengeListAndWinner(user, date, userRepo) {
     let rankedList = this.getFriendsAverageStepsForWeek(user, date, userRepo);
 
