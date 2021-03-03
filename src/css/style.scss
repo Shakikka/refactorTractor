@@ -14,9 +14,14 @@
 .header {
   background-color: #FFF2E3;
   grid-column: 1 / 4;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    background-color: #FE7A56;
+  }
 }
 
 .sidebar-header-line {
