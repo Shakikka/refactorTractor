@@ -157,6 +157,8 @@ describe.only('Friend Activity', function() {
     expect(activityRepo.friendsWeeklyRanking(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal)
   });
 
+  // END OF FRIEND TESTS BEWARE BELOW
+
   it.skip('should get a users ranked friendslist activity for a chosen week with names', function() {
     expect(activity.showChallengeListAndWinner(user4, "2019/06/15", userRepo)).to.eql([
       'Allie McCarthy: 9552', 'Alex Roth: 7475.5'
