@@ -22,8 +22,14 @@ class UserRepo {
     let totalStepGoal = this.users.reduce((sum, user) => {
       return sum = sum + user.dailyStepGoal;
     }, 0);
+
     return totalStepGoal / this.users.length;
   }
+
+
+//END OF ITERATION 1
+// START ITERATION 3
+
 
   makeSortedUserArray(id, dataSet) {
     let selectedID = this.getDataFromUserID(id, dataSet)
@@ -47,12 +53,20 @@ class UserRepo {
     return foundWeek
   }
 
+
+
   chooseDayDataForAllUsers(dataSet, date) {
     return dataSet.filter(dataItem => dataItem.date === date)
   }
 }
 
   // HARD STOP
+
+  // chooseWeekDataForAllUsers(dataSet, date) {
+    //   return dataSet.filter(dataItem => {
+      //     return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
+      //   })
+      // }
 
 //   isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod) {
 //     return listFromMethod.reduce(function(objectSoFar, dataItem) {
