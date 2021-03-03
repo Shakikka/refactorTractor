@@ -30,7 +30,7 @@
   }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (max-width: 800px) and (min-width: 700px) {
   .main-container {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(4, 1fr);
