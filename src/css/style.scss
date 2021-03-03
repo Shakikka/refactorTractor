@@ -2,6 +2,14 @@
   margin: 0;
 }
 
+body {
+  color: $plum;
+}
+
+h2 {
+  font-size: 130%;
+}
+
 .main-container {
   height: 100vh;
   padding: 20px;
@@ -13,13 +21,14 @@
 }
 
 .header {
-  background-color: $dark-orange;
+  background-color: $light-orange;
   grid-column: 1 / 4;
   border-radius: 10px;
+  font-size: 200%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $white;
+  color: $plum;
   border: $border;
   border-radius: $radius;
   box-shadow: $shadow;
