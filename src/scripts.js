@@ -7,12 +7,16 @@ import {
   sleepDataAPI,
   userDataAPI,
   hydrationDataAPI,
-  activityDataAPI
+  activityDataAPI,
+  postNewData
+  // sleepDataPost,
+  // hydrationDataPost,
+  // activityDataPost
 } from './api.js'
 // import userData from './data/users';
 // import hydrationData from './data/hydration';
 // import sleepData from './data/sleep';
-import activityData from './data/activity';
+// import activityData from './data/activity';
 
 import User from './User';
 import Activity from './Activity';
@@ -336,7 +340,6 @@ function resetForm(dropdownStatus) {
   }
 }
 
-//master post function called on submit button click
 function postFormEntry() {
   const userID = randomUser.id;
   const date = new Date().toISOString().replace(/-/g, "/").split("T")[0];
@@ -354,22 +357,6 @@ function postFormEntry() {
   }
 }
 
-//activity API POST request
-const activityDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/activity", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => {
-      activityRepo.activityData.push(json)
-    })
-    .catch(err => console.log(err.message))
-}
-
 function checkForEmptyFields(category) {
   switch (category) {
     case 'activity':
@@ -381,8 +368,6 @@ function checkForEmptyFields(category) {
   }
 }
 
-
-// parent function: activity API post request
 function postActivityData(userID, date) {
 
   if (checkForEmptyFields('activity')) {
@@ -399,26 +384,16 @@ function postActivityData(userID, date) {
     'minutesActive': activityFormMinutes.value,
     'flightsOfStairs': activityFormStairs.value
   }
-  activityDataPost(postData)
+  postNewData('activity', postData)
+    .then(response => response.json())
+    .then(json => activityRepo.activityData.push(json))
+    .catch(err => console.log(err.message))
+
   resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
-//hydration API POST request
-const hydrationDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/hydration", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => hydrationRepo.hydrationData.push(json))
-    .catch(err => console.log(err.message))
-}
 
-// parent function: hydration API post request
 function postHydrationData(userID, date) {
 
   if (checkForEmptyFields('hydration')) {
@@ -433,27 +408,17 @@ function postHydrationData(userID, date) {
     'date': date,
     'numOunces': hydrationFormOunces.value
   }
-  hydrationDataPost(postData);
+
+  postNewData('hydration', postData)
+    .then(response => response.json())
+    .then(json => hydrationRepo.hydrationData.push(json))
+    .catch(err => console.log(err.message))
+
   resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
-//sleep API POST request
-const sleepDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/sleep", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => sleepRepo.sleepData.push(json))
-    .catch(err => console.log(err.message))
-}
-
-// parent function: sleep API post request
 function postSleepData(userID, date) {
 
   if (checkForEmptyFields('sleep')) {
@@ -469,7 +434,12 @@ function postSleepData(userID, date) {
     'hoursSlept': sleepFormHours.value,
     'sleepQuality': sleepFormQuality.value
   }
-  sleepDataPost(postData);
+
+  postNewData('sleep', postData)
+    .then(response => response.json())
+    .then(json => sleepRepo.sleepData.push(json))
+    .catch(err => console.log(err.message))
+
   resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
@@ -483,5 +453,3 @@ enterProgressDropdown.addEventListener('change', function (event) {
 })
 
 submitFormButton.addEventListener('click', postFormEntry)
-
-//test

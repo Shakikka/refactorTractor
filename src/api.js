@@ -17,67 +17,44 @@ export const hydrationDataAPI = fetch("http://localhost:3001/api/v1/hydration")
 
 
 //POST requests
-//moved to scripts for now
-// export const sleepDataPost = (dataFormEntry) => {
-//   fetch("http://localhost:3001/api/v1/sleep", {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(dataFormEntry)
-//     })
-//     .then(response => response.json())
-//     .then(json => console.log(json))
-//     .catch(err => console.log('too much sauce')) //err.message
-// }
 
-//moved to scripts for now
-// export const hydrationDataPost = (dataFormEntry) => {
-//   fetch("http://localhost:3001/api/v1/hydration", {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(dataFormEntry)
-//     })
-//     .then(response => response.json())
-//     .then(json => console.log(json))
-//     .catch(err => console.log('too much sauce')) //err.message
-// }
-
-//moved to scripts for now
-// export const activityDataPost = (dataFormEntry) => {
-//   fetch("http://localhost:3001/api/v1/activity", {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(dataFormEntry)
-//     })
-//     .then(response => response.json())
-//     // .then(json => console.log(json))
-//     .then(json => {
-//       activityRepo.activityData.push(json)
-//     })
-//     // .then(() => console.log(activityRepo.activityData))
-//     .catch(err => console.log('too much sauce')) //err.message
-// }
+export const postNewData = (path, body) => {
+  return fetch(`http://localhost:3001/api/v1/${path}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+}
 
 
-//activity....leaving here for example with data
-// fetch("http://localhost:3001/api/v1/activity", {
+// export const sleepDataPost = (body) => {
+//   return fetch("http://localhost:3001/api/v1/sleep", {
 //     method: 'POST',
 //     headers: {
 //       'Content-Type': 'application/json'
 //     },
-//     body: JSON.stringify({
-//       userID: 33,
-//       date: "2021/01/01",
-//       numSteps: 68,
-//       minutesActive: 66,
-//       flightsOfStairs: 610
-//     })
+//     body: JSON.stringify(body)
 //   })
-//   .then(response => response.json())
-//   .then(json => console.log(json))
-//   .catch(err => console.log('too much sauce'))
+// }
+
+// export const hydrationDataPost = (body) => {
+//   return fetch("http://localhost:3001/api/v1/hydration", {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(body)
+//   })
+// }
+
+// export const activityDataPost = (dataFormEntry) => {
+//   return fetch("http://localhost:3001/api/v1/activity", {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(dataFormEntry)
+//   })
+// }
