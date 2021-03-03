@@ -457,7 +457,10 @@ function postHydrationData(userID, date) {
 
   postNewData('hydration', postData)
     .then(checkForError)
-    .then(json => hydrationRepo.hydrationData.push(json))
+    .then(json => {
+      hydrationRepo.hydrationData.push(json)
+      displayHydrationInfo(userRepo, randomUser.id);
+    })
     .catch(err => alert(err))
 
   resetForm('hide');
@@ -483,7 +486,10 @@ function postSleepData(userID, date) {
 
   postNewData('sleep', postData)
     .then(checkForError)
-    .then(json => sleepRepo.sleepData.push(json))
+    .then(json => {
+      sleepRepo.sleepData.push(json)
+      displaySleepInfo(userRepo, randomUser.id);
+    })
     .catch(err => alert(err))
 
   resetForm('hide');
