@@ -111,6 +111,10 @@ function loadThisFirst() {
 function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
   userRepo = new UserRepo(userInfo);
   randomUser = pickUser(userRepo);
+  activityRepo = new Activity(activityInfo);
+  hydrationRepo = new Hydration(hydrationInfo);
+  sleepRepo = new Sleep(sleepInfo);
+
 
   addInfoToSidebar(randomUser, userRepo);
   displayHydrationInfo(userRepo, randomUser.id, hydrationInfo);
@@ -118,8 +122,12 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
   displayActivityInfo(userRepo, randomUser.id, activityInfo)
 }
 
+// function 
+
+
+
 function displayActivityInfo(userInfo, id, activityInfo) {
-  activityRepo = new Activity(activityInfo);
+  // activityRepo = new Activity(activityInfo);
   let today = userInfo.getToday(id, activityRepo.activityData);
   populateStepChallenge(randomUser, userRepo)
 
@@ -144,7 +152,7 @@ function displayActivityInfo(userInfo, id, activityInfo) {
 
 
 function displayHydrationInfo(userInfo, id, hydrationInfo) {
-  hydrationRepo = new Hydration(hydrationInfo);
+  // hydrationRepo = new Hydration(hydrationInfo);
   let today = userInfo.getToday(id, hydrationRepo.hydrationData);
 
   console.log('Result of makeToday function called upon the hydrationData:', today);
@@ -164,7 +172,7 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 }
 
 function displaySleepInfo(userInfo, id, sleepInfo) {
-  sleepRepo = new Sleep(sleepInfo);
+  // sleepRepo = new Sleep(sleepInfo);
   let today = userInfo.getToday(id, sleepRepo.sleepData);
 
   console.log('Result of makeToday function called upon the sleepData:', today);
