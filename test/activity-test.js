@@ -134,26 +134,29 @@ describe.only('Friend Activity', function() {
   it('should get a users friend lists activity', function() {
     const a = fakeActivityData2
     expect(activityRepo.getFriendsActivity(user3, userRepo)).to.deep.equal([a[1],
-       a[6], a[11], a[3], a[8], a[13], a[4], a[9], a[14]]);
+       a[6], a[11], a[3], a[8], a[13], a[4], a[9], a[14], a[2], a[7], a[12]]);
   });
 
   it('should show total steps for friends for the week', function() {
     activityRepo = new Activity(fakeActivityData3);
-    let friendsTotal = [{id: 5, totalSteps: 53729}, {id: 1, totalSteps: 65341}, {id: 3, totalSteps: 54567}]
+    let friendsTotal = [{id: 5, totalSteps: 53729}, {id: 1, totalSteps: 65341},
+      {id: 3, totalSteps: 54567}, {id: 4, totalSteps: 61072}]
     expect(activityRepo.totalFriendsStepCount(user4, "2019/06/22", userRepo)).to.deep.equal(friendsTotal);
   });
 
   it('should be able to get names for friends', function() {
     activityRepo = new Activity(fakeActivityData3);
     let friendsTotal = [{id: 5, name: 'Erick Schaden', totalSteps: 53729},
-    {id: 1, name: 'Luisa Hane', totalSteps: 65341}, {id: 3, name: 'Herminia Witting', totalSteps: 54567}]
+    {id: 1, name: 'Luisa Hane', totalSteps: 65341}, {id: 3, name: 'Herminia Witting', totalSteps: 54567},
+     {id: 4, name: 'Mae Connelly', totalSteps: 61072}]
     expect(activityRepo.friendsStepsWithNames(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal);
   });
 
   it('should organize friends from winner to loser', function() {
     activityRepo = new Activity(fakeActivityData3);
     let friendsTotal = [{id: 1, name: 'Luisa Hane', totalSteps: 65341},
-    {id: 3, name: 'Herminia Witting', totalSteps: 54567}, {id: 5, name: 'Erick Schaden', totalSteps: 53729}]
+    {id: 4, name: 'Mae Connelly', totalSteps: 61072}, {id: 3, name: 'Herminia Witting', totalSteps: 54567},
+    {id: 5, name: 'Erick Schaden', totalSteps: 53729}]
     expect(activityRepo.friendsWeeklyRanking(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal)
   });
 

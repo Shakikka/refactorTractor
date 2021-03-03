@@ -77,7 +77,8 @@ class Activity {
 
   getFriendsActivity(user, userRepo) {
     let data = this.activityData;
-    let userDatalist = user.friends.map(friend => {
+    let userAndFriends = [...user.friends, user.id]
+    let userDatalist = userAndFriends.map(friend => {
       return userRepo.getDataFromUserID(friend, data)
     });
     return userDatalist.reduce((allFriendData, friendData) => {
@@ -87,7 +88,8 @@ class Activity {
 
   totalFriendsStepCount(user, date, userRepo) {
     let friendsActivity = this.getFriendsActivity(user, userRepo);
-    let friendSteps = user.friends.map((friend) => {
+    let userAndFriends = [...user.friends, user.id]
+    let friendSteps = userAndFriends.map((friend) => {
       let friendly = friendsActivity.filter(activity => activity.userID === friend)
       let friendStepWeek = userRepo.findWeekOfData(date, friend, friendly);
       let totalSteps = friendStepWeek.reduce((totalFriendSteps, day) => {
