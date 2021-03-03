@@ -149,11 +149,18 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 
   console.log('Result of makeToday function called upon the hydrationData:', today);
 
-  hydrationToday.insertAdjacentHTML('afterBegin', `<p>You drank</p><p><span
-  class="number">${hydrationRepo.calculateDailyOunces(id, today)}</span></p><p>oz water today.</p>`);
+  hydrationToday.innerText = `You drank ${hydrationRepo.calculateDailyOunces(id, today)} oz of water today.`;
 
-  hydrationThisWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id,
-    hydrationRepo, userInfo, hydrationRepo.calculateFirstWeekOunces(userInfo, id)))
+  hydrationThisWeek.innerHTML = ''
+
+  let hydrationWeekData = hydrationRepo.calculateFirstWeekOunces(userInfo, id);
+  console.log('sauce', hydrationWeekData)
+
+  hydrationWeekData.forEach(day => {
+    hydrationThisWeek.innerHTML +=
+      `<li>${day}oz</li> `
+  });
+
 }
 
 function displaySleepInfo(userInfo, id, sleepInfo) {
@@ -162,9 +169,8 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
 
   console.log('Result of makeToday function called upon the sleepData:', today);
 
-  sleepToday.insertAdjacentHTML('afterBegin', `<p>You slept:</p><p><span
-  class="number">${sleepRepo.findInfoForDate(id, today, 'hoursSlept')}</span></p><p> hours today.</p>
-  <p>Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}</p>`);
+  sleepToday.innerText = `You slept ${sleepRepo.findInfoForDate(id, today, 'hoursSlept')} hours today.`
+  sleepQualityToday.innerText = `Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}`;
 
   let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksHours);
@@ -172,13 +178,14 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
   let weeksQuality = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksQuality);
 
+  sleepThisWeek.innerHTML = '';
+
   weeksHours.forEach(element => {
-    sleepThisWeek.insertAdjacentHTML('afterBegin', `
-      <li>${element}</li>
-    `)
+    sleepThisWeek.innerHTML +=
+      `<li>${element}</li>`
   })
 
-  allTimeSleep.innerHTML += `
+  allTimeSleep.innerHTML = `
     <p>All time average hours of sleep: ${sleepRepo.calculateAverage(id, 'hoursSlept').toFixed(2)}</p>
     <p>All time average quality of sleep: ${sleepRepo.calculateAverage(id, 'sleepQuality').toFixed(2)}</p>
   `;
@@ -250,6 +257,10 @@ function makeToday(userStorage, id, dataSet) {
 
 }
 
+function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
+  return method.map(drinkData => `<li class="historical-list-listItem">${drinkData}oz</li>`).join('');
+}
+
 function makeRandomDate(userStorage, id, dataSet) {
   const sortedArray = userStorage.makeSortedUserArray(id, dataSet);
   return sortedArray[Math.floor(Math.random() * sortedArray.length + 1)].date
@@ -263,9 +274,7 @@ function makeRandomDate(userStorage, id, dataSet) {
 //   hydrationEarlierWeek.insertAdjacentHTML('afterBegin', makeHydrationHTML(id, hydrationInfo, userStorage, hydrationInfo.calculateRandomWeekOunces(laterDateString, id, userStorage)));
 // }
 
-function makeHydrationHTML(id, hydrationInfo, userStorage, method) {
-  return method.map(drinkData => `<li class="historical-list-listItem">${drinkData}oz</li>`).join('');
-}
+
 
 // function addSleepInfo(id, sleepInfo, dateString, userStorage, laterDateString) {
 //   sleepToday.insertAdjacentHTML("afterBegin", `<p>You slept</p> <p><span class="number">${sleepInfo.calculateDailySleep(id, dateString)}</span></p> <p>hours today.</p>`);
