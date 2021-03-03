@@ -15,9 +15,12 @@
   border-color: black;
   border-style: solid;
   border-width: 1px;
-  height: 200px;
-  width: 200px;
-  justify-content: center;
+  width: 50%;
+}
+
+.sidebar-header-challengeImage {
+  @extend .sidebar-header-userImage;
+  width: 33%;
 }
 
 .post-form {
