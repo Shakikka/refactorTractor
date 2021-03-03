@@ -7,12 +7,13 @@ import {
   sleepDataAPI,
   userDataAPI,
   hydrationDataAPI,
-  activityDataAPI
+  activityDataAPI,
+  sleepDataPost
 } from './api.js'
 // import userData from './data/users';
 // import hydrationData from './data/hydration';
 // import sleepData from './data/sleep';
-import activityData from './data/activity';
+// import activityData from './data/activity';
 
 import User from './User';
 import Activity from './Activity';
@@ -440,18 +441,7 @@ function postHydrationData(userID, date) {
 }
 
 //sleep API POST request
-const sleepDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/sleep", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => sleepRepo.sleepData.push(json))
-    .catch(err => console.log(err.message))
-}
+
 
 // parent function: sleep API post request
 function postSleepData(userID, date) {
@@ -469,7 +459,12 @@ function postSleepData(userID, date) {
     'hoursSlept': sleepFormHours.value,
     'sleepQuality': sleepFormQuality.value
   }
-  sleepDataPost(postData);
+
+  sleepDataPost(postData)
+    .then(response => response.json())
+    .then(json => sleepRepo.sleepData.push(json))
+    .catch(err => console.log(err.message))
+
   resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
