@@ -8,7 +8,8 @@ import {
   userDataAPI,
   hydrationDataAPI,
   activityDataAPI,
-  sleepDataPost
+  sleepDataPost,
+  hydrationDataPost
 } from './api.js'
 // import userData from './data/users';
 // import hydrationData from './data/hydration';
@@ -405,21 +406,8 @@ function postActivityData(userID, date) {
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
-//hydration API POST request
-const hydrationDataPost = (dataFormEntry) => {
-  fetch("http://localhost:3001/api/v1/hydration", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataFormEntry)
-    })
-    .then(response => response.json())
-    .then(json => hydrationRepo.hydrationData.push(json))
-    .catch(err => console.log(err.message))
-}
 
-// parent function: hydration API post request
+//hydration API post request
 function postHydrationData(userID, date) {
 
   if (checkForEmptyFields('hydration')) {
@@ -434,16 +422,20 @@ function postHydrationData(userID, date) {
     'date': date,
     'numOunces': hydrationFormOunces.value
   }
-  hydrationDataPost(postData);
+
+  hydrationDataPost(postData)
+    .then(response => response.json())
+    .then(json => hydrationRepo.hydrationData.push(json))
+    .catch(err => console.log(err.message))
+
   resetForm('hide');
 
   //run dom updates based on new dataset (run whole dom update or just category specific?)
 }
 
-//sleep API POST request
 
 
-// parent function: sleep API post request
+// sleep API post request
 function postSleepData(userID, date) {
 
   if (checkForEmptyFields('sleep')) {
