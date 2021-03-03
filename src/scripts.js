@@ -172,13 +172,14 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
   let weeksQuality = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksQuality);
 
+  sleepThisWeek.innerHTML = '';
+
   weeksHours.forEach(element => {
-    sleepThisWeek.insertAdjacentHTML('afterBegin', `
-      <li>${element}</li>
-    `)
+    sleepThisWeek.innerHTML +=
+      `<li>${element}</li>`
   })
 
-  allTimeSleep.innerHTML += `
+  allTimeSleep.innerHTML = `
     <p>All time average hours of sleep: ${sleepRepo.calculateAverage(id, 'hoursSlept').toFixed(2)}</p>
     <p>All time average quality of sleep: ${sleepRepo.calculateAverage(id, 'sleepQuality').toFixed(2)}</p>
   `;
