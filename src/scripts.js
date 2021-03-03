@@ -1,8 +1,5 @@
 import './css/base.scss';
 
-import './images/person walking on path.jpg';
-import './images/The Rock.jpg';
-
 import {
   sleepDataAPI,
   userDataAPI,
