@@ -431,7 +431,7 @@ function postActivityData(userID, date) {
     .then(checkForError)
     .then(json => {
       activityRepo.activityData.push(json);
-      // displayActivityInfo(userRepo, randomUser.id)
+      displayActivityInfo(userRepo, randomUser.id)
     })
     .catch(err => alert(err))
 
