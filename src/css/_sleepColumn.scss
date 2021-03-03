@@ -1,12 +1,7 @@
 .main-column-sleep {
-  background-color: #F6F3FF;
+  @extend .main-column-hydration;
+  background-color: $white;
   grid-column: 3 / 4;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: space-around;
 }
 
 // .card-history-sleep {

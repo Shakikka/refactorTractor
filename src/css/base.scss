@@ -4,6 +4,8 @@
 // body {
 //   background-color: $primary-background;
 // }
+@import 'reset';
+@import 'variables';
 @import 'userDash';
 @import 'activityColumn';
 @import 'hydrationColumn';
