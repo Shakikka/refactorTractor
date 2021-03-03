@@ -368,6 +368,14 @@ function checkForEmptyFields(category) {
   }
 }
 
+const checkForError = response => {
+  if (!response.ok) {
+    throw new Error('An error has been encountered. Please try again.');
+  } else {
+    return response.json();
+  }
+}
+
 function postActivityData(userID, date) {
 
   if (checkForEmptyFields('activity')) {
@@ -385,9 +393,9 @@ function postActivityData(userID, date) {
     'flightsOfStairs': activityFormStairs.value
   }
   postNewData('activity', postData)
-    .then(response => response.json())
+    .then(checkForError)
     .then(json => activityRepo.activityData.push(json))
-    .catch(err => console.log(err.message))
+    .catch(err => alert(err))
 
   resetForm('hide');
 
