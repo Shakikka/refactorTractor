@@ -84,11 +84,17 @@ class Activity {
       return allFriendData.concat(friendData);
     }, []);
   }
+
+  totalFriendsStepCount(user, date, userRepo) {
+    let friendsActivity = this.getFriendsActivity(user, userRepo);
+
+  }
+
   getFriendsAverageStepsForWeek(user, date, userRepo) {
     let friendsActivity = this.getFriendsActivity(user, userRepo);
     let timeline = userRepo.chooseWeekDataForAllUsers(friendsActivity, date);
     return userRepo.combineRankedUserIDsAndAveragedData(friendsActivity, date, 'numSteps', timeline)
-  }
+  // }
   showChallengeListAndWinner(user, date, userRepo) {
     let rankedList = this.getFriendsAverageStepsForWeek(user, date, userRepo);
 

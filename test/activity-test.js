@@ -136,7 +136,7 @@ describe.only('Friend Activity', function() {
        a[6], a[11], a[3], a[8], a[13], a[4], a[9], a[14]]);
   });
 
-  it('should get a users ranked friendslist activity for a chosen week', function() {
+  it('should show total steps for friends for the week', function() {
     expect(activity.getFriendsAverageStepsForWeek(user4, "2019/06/15", userRepo)).to.eql([{
         '2': 9552
       },
