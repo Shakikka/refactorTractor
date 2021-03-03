@@ -116,7 +116,6 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
   randomUser = pickUser(userRepo);
 
 
-
   displayHydrationInfo(userRepo, randomUser.id);
   displaySleepInfo(userRepo, randomUser.id);
   displayActivityInfo(userRepo, randomUser.id)
@@ -207,7 +206,7 @@ function pickUser(listRepo) {
 
 
 
-function addInfoToSidebar(user, userStorage) {
+function addInfoToSidebar(user) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
   userAddress.innerText = user.address;
@@ -424,13 +423,16 @@ function postActivityData(userID, date) {
   const postData = {
     'userID': userID,
     'date': date,
-    'numSteps': activityFormSteps.value,
-    'minutesActive': activityFormMinutes.value,
-    'flightsOfStairs': activityFormStairs.value
+    'numSteps': parseInt(activityFormSteps.value),
+    'minutesActive': parseInt(activityFormMinutes.value),
+    'flightsOfStairs': parseInt(activityFormStairs.value)
   }
   postNewData('activity', postData)
     .then(checkForError)
-    .then(json => activityRepo.activityData.push(json))
+    .then(json => {
+      activityRepo.activityData.push(json);
+      // displayActivityInfo(userRepo, randomUser.id)
+    })
     .catch(err => alert(err))
 
   resetForm('hide');
@@ -450,7 +452,7 @@ function postHydrationData(userID, date) {
   const postData = {
     'userID': userID,
     'date': date,
-    'numOunces': hydrationFormOunces.value
+    'numOunces': parseInt(hydrationFormOunces.value)
   }
 
   postNewData('hydration', postData)
@@ -475,8 +477,8 @@ function postSleepData(userID, date) {
   const postData = {
     'userID': userID,
     'date': date,
-    'hoursSlept': sleepFormHours.value,
-    'sleepQuality': sleepFormQuality.value
+    'hoursSlept': parseInt(sleepFormHours.value),
+    'sleepQuality': parseInt(sleepFormQuality.value)
   }
 
   postNewData('sleep', postData)
