@@ -1,8 +1,10 @@
 .user-dash {
-  background-color: $light-purple;
+  background-color: $white;
   grid-column: 1 / 2;
   grid-row: 2 / 4;
   border: $border;
+  border-radius: $radius;
+  box-shadow: $shadow;
   display: flex;
   flex-direction: column;
   align-items: center;

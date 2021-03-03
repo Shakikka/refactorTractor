@@ -1,6 +1,5 @@
 .activity-column {
   @extend .user-dash;
-  background-color: $light-purple;
   grid-column: 2 / 3;
   grid-row: 2 / 4;
 }

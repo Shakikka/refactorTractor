@@ -9,15 +9,17 @@
   grid-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: .2fr 1fr 1fr;
+  background-color: $green;
 }
 
 .header {
-  background-color: $light-orange;
+  background-color: $dark-orange;
   grid-column: 1 / 4;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: $white;
 }
 
 .sidebar-header-line {
