@@ -162,18 +162,41 @@ describe.only('Friend Activity', function() {
 
   // END OF FRIEND TESTS BEWARE BELOW
 
-  it.skip('should get a users ranked friendslist activity for a chosen week with names', function() {
-    expect(activity.showChallengeListAndWinner(user4, "2019/06/15", userRepo)).to.eql([
-      'Allie McCarthy: 9552', 'Alex Roth: 7475.5'
+  //START EXTENSION
+
+  it('should find ranked list of friends', function() {
+    expect(activityRepo.findRank(user4, "2019/06/15", userRepo)).to.eql([
+      { id: 5, name: 'Erick Schaden', totalSteps: 11374, rank: 1 },
+      { id: 1, name: 'Luisa Hane', totalSteps: 3577, rank: 2 },
+      { id: 3, name: 'Herminia Witting', totalSteps: 1, rank: 3 }
     ])
   });
-  it.skip('should know the ID of the winning friend', function() {
-    expect(activity.getWinnerId(user4, "2019/06/15", userRepo)).to.eql(2)
-  })
-  it.skip('should show a 3-day increasing streak for a users step count', function() {
-    expect(activity.getStreak(userRepo, 1, 'numSteps')).to.eql(['2019/06/17', '2019/06/18'])
+
+  it('should find 3-day increase in user steps', function() {
+    expect(activityRepo.getStreak(userRepo, user3, 'numSteps')).to.eql([
+      {
+        userID: 3,
+        date: '2019/06/17',
+        numSteps: 3,
+        minutesActive: 100,
+        flightsOfStairs: 5
+      },
+      {
+        userID: 3,
+        date: '2019/06/16',
+        numSteps: 2,
+        minutesActive: 50,
+        flightsOfStairs: 8
+      },
+      {
+        userID: 3,
+        date: '2019/06/15',
+        numSteps: 1,
+        minutesActive: 20,
+        flightsOfStairs: 33
+      }
+    ]);
   });
-  it.skip('should show a 3-day increasing streak for a users minutes of activity', function() {
-    expect(activity.getStreak(userRepo, 1, 'minutesActive')).to.eql(['2019/06/18'])
-  });
+
+
 });
