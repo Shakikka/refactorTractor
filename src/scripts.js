@@ -59,7 +59,7 @@ const userStairsThisWeek = document.getElementById('userStairsThisWeek');
 const userMinutesThisWeek = document.getElementById('userMinutesThisWeek');
 const bestUserSteps = document.getElementById('bestUserSteps');
 const streakList = document.getElementById('streakList');
-const streakListMinutes = document.getElementById('streakListMinutes')
+const streakMessage = document.getElementById('streakMessage')
 const avStepGoalCard = document.getElementById('avStepGoalCard');
 const enterProgressDropdown = document.querySelector('#enter-progress-dropdown');
 const activityForm = document.querySelector('#activityForm');
@@ -110,16 +110,22 @@ function loadThisFirst() {
 
 function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
   userRepo = new UserRepo(userInfo);
+  activityRepo = new Activity(activityInfo);
+  hydrationRepo = new Hydration(hydrationInfo);
+  sleepRepo = new Sleep(sleepInfo);
   randomUser = pickUser(userRepo);
 
+
+  displayHydrationInfo(userRepo, randomUser.id);
+  displaySleepInfo(userRepo, randomUser.id);
+  displayActivityInfo(userRepo, randomUser.id);
   addInfoToSidebar(randomUser, userRepo);
-  displayHydrationInfo(userRepo, randomUser.id, hydrationInfo);
-  displaySleepInfo(userRepo, randomUser.id, sleepInfo);
-  displayActivityInfo(userRepo, randomUser.id, activityInfo)
+
 }
 
-function displayActivityInfo(userInfo, id, activityInfo) {
-  activityRepo = new Activity(activityInfo);
+
+function displayActivityInfo(userInfo, id) {
+  // activityRepo = new Activity(activityInfo);
   let today = userInfo.getToday(id, activityRepo.activityData);
   populateStepChallenge(randomUser, userRepo)
 
@@ -131,20 +137,42 @@ function displayActivityInfo(userInfo, id, activityInfo) {
   userDistanceMiles.innerText = `Today you have walked: ${activityRepo.calculateMilesWalked(randomUser, today)} miles`;
   ////table start
   userStepCountToday.innerText = activityRepo.getUserStat(today, randomUser, 'numSteps');
-  allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
   userMinToday.innerText = activityRepo.getUserStat(today, randomUser, 'minutesActive');
-  allMinutesToday.innerText = activityRepo.getAllUserAverageByDate(today, 'minutesActive');
   userFlightsToday.innerText = activityRepo.getUserStat(today, randomUser, 'flightsOfStairs');
+  allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
+  allMinutesToday.innerText = activityRepo.getAllUserAverageByDate(today, 'minutesActive');
   allFlightsToday.innerText = activityRepo.getAllUserAverageByDate(today, 'flightsOfStairs');
-  //bottom section
+  // bottom section
   weeklyStepCount.innerText = `Total steps this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'numSteps')}`;
   userStairsThisWeek.innerText = `Flights of stairs climbed this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'flightsOfStairs')}`;
   userMinutesThisWeek.innerText = `Minutes active this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'minutesActive')}`;
+  // streak list
+  displayStreakList(userInfo);
+}
+
+function displayStreakList(userInfo) {
+  let latestStreaks = activityRepo.getStreak(userInfo, randomUser);
+
+  console.log('latest streaks', latestStreaks);
+
+  if (latestStreaks.length === 3) {
+    latestStreaks.forEach(item => {
+      streakList.innerHTML += `<ul>${item.date}: ${item.numSteps} steps</ul>`;
+    });
+  } else if (latestStreaks.length === 2) {
+    streakList.classList.add('hidden');
+    streakMessage.classList.remove('hidden');
+    streakMessage.innerText = `You're close to a streak, keep it up!`;
+  } else {
+    streakList.classList.add('hidden');
+    streakMessage.classList.remove('hidden');
+    streakMessage.innerText = `Increase your steps every day to start a streak!`;
+  }
 }
 
 
-function displayHydrationInfo(userInfo, id, hydrationInfo) {
-  hydrationRepo = new Hydration(hydrationInfo);
+function displayHydrationInfo(userInfo, id) {
+  // hydrationRepo = new Hydration(hydrationInfo);
   let today = userInfo.getToday(id, hydrationRepo.hydrationData);
 
   console.log('Result of makeToday function called upon the hydrationData:', today);
@@ -163,8 +191,8 @@ function displayHydrationInfo(userInfo, id, hydrationInfo) {
 
 }
 
-function displaySleepInfo(userInfo, id, sleepInfo) {
-  sleepRepo = new Sleep(sleepInfo);
+function displaySleepInfo(userInfo, id) {
+  // sleepRepo = new Sleep(sleepInfo);
   let today = userInfo.getToday(id, sleepRepo.sleepData);
 
   console.log('Result of makeToday function called upon the sleepData:', today);
@@ -198,7 +226,7 @@ function pickUser(listRepo) {
 
 
 
-function addInfoToSidebar(user, userStorage) {
+function addInfoToSidebar(user) {
   sidebarName.innerText = user.name;
   headerText.innerText = `${user.getFirstName()}'s Activity Tracker`;
   userAddress.innerText = user.address;
@@ -216,6 +244,7 @@ function populateStepChallenge(user, userRepo) {
 
 function populateLosers(losers) {
   loserList.innerHTML = ''
+  console.log('losers', losers)
   losers.forEach(loser => {
     loserList.innerHTML += `
     <li>${loser.name} had ${loser.totalSteps} steps!</li>
@@ -415,13 +444,16 @@ function postActivityData(userID, date) {
   const postData = {
     'userID': userID,
     'date': date,
-    'numSteps': activityFormSteps.value,
-    'minutesActive': activityFormMinutes.value,
-    'flightsOfStairs': activityFormStairs.value
+    'numSteps': parseInt(activityFormSteps.value),
+    'minutesActive': parseInt(activityFormMinutes.value),
+    'flightsOfStairs': parseInt(activityFormStairs.value)
   }
   postNewData('activity', postData)
     .then(checkForError)
-    .then(json => activityRepo.activityData.push(json))
+    .then(json => {
+      activityRepo.activityData.push(json);
+      displayActivityInfo(userRepo, randomUser.id)
+    })
     .catch(err => alert(err))
 
   resetForm('hide');
@@ -441,12 +473,15 @@ function postHydrationData(userID, date) {
   const postData = {
     'userID': userID,
     'date': date,
-    'numOunces': hydrationFormOunces.value
+    'numOunces': parseInt(hydrationFormOunces.value)
   }
 
   postNewData('hydration', postData)
     .then(checkForError)
-    .then(json => hydrationRepo.hydrationData.push(json))
+    .then(json => {
+      hydrationRepo.hydrationData.push(json)
+      displayHydrationInfo(userRepo, randomUser.id);
+    })
     .catch(err => alert(err))
 
   resetForm('hide');
@@ -466,13 +501,16 @@ function postSleepData(userID, date) {
   const postData = {
     'userID': userID,
     'date': date,
-    'hoursSlept': sleepFormHours.value,
-    'sleepQuality': sleepFormQuality.value
+    'hoursSlept': parseInt(sleepFormHours.value),
+    'sleepQuality': parseInt(sleepFormQuality.value)
   }
 
   postNewData('sleep', postData)
     .then(checkForError)
-    .then(json => sleepRepo.sleepData.push(json))
+    .then(json => {
+      sleepRepo.sleepData.push(json)
+      displaySleepInfo(userRepo, randomUser.id);
+    })
     .catch(err => alert(err))
 
   resetForm('hide');

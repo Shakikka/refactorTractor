@@ -128,7 +128,7 @@ class Activity {
   };
 
   getStreak(userRepo, user) {
-    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
+    let sortedArray = (userRepo.makeSortedUserArray(user.id, this.activityData)).slice(0, 3);
 
     let streaks = sortedArray.reduce((list, currentActivity, i) => {
       if (sortedArray.indexOf(currentActivity) !== sortedArray.length - 1) {
