@@ -82,27 +82,35 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
 
 function displayActivityInfo(userInfo, id) {
   let today = userInfo.getToday(id, activityRepo.activityData);
-  populateStepChallenge(randomUser, userRepo)
+  populateStepChallenge(randomUser, userRepo);
+  displayUserStats(today);
+  displayTable(today);
+  displayWeeklyStats(today, userInfo)
+  displayStreakList(userInfo);
+}
 
+function displayUserStats(today) {
   userStridelength.innerText = `Your stridelength is: ${randomUser.strideLength} meters`;
   stepGoalCard.innerText = `Your daily step goal is: ${randomUser.dailyStepGoal} steps`;
   avStepGoalCard.innerText = `The average daily step goal is: ${userRepo.findAverageStepGoal()} steps`;
   userStepsToday.innerText = `Today you have taken: ${activityRepo.getUserStat(today, randomUser, 'numSteps')} steps`
   userMinutesToday.innerText = `Today you have been active for: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')} minutes`;
   userDistanceMiles.innerText = `Today you have walked: ${activityRepo.calculateMilesWalked(randomUser, today)} miles`;
-  ////table start
+}
+
+function displayTable(today) {
   userStepCountToday.innerText = activityRepo.getUserStat(today, randomUser, 'numSteps');
   userMinToday.innerText = activityRepo.getUserStat(today, randomUser, 'minutesActive');
   userFlightsToday.innerText = activityRepo.getUserStat(today, randomUser, 'flightsOfStairs');
   allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
   allMinutesToday.innerText = activityRepo.getAllUserAverageByDate(today, 'minutesActive');
   allFlightsToday.innerText = activityRepo.getAllUserAverageByDate(today, 'flightsOfStairs');
-  // bottom section
+}
+
+function displayWeeklyStats(today, userInfo) {
   weeklyStepCount.innerText = `Total steps this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'numSteps')}`;
   userStairsThisWeek.innerText = `Flights of stairs climbed this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'flightsOfStairs')}`;
   userMinutesThisWeek.innerText = `Minutes active this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'minutesActive')}`;
-  // streak list
-  displayStreakList(userInfo);
 }
 
 function displayStreakList(userInfo) {
