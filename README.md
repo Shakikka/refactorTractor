@@ -107,7 +107,7 @@ IMAGE HERE
 
 ### Medium-sized Screens
 
-![https://media.giphy.com/media/khbZidy9qRf0e6CqGJ/giphy.gif]
+![](https://media.giphy.com/media/khbZidy9qRf0e6CqGJ/giphy.gif)
 
 
 
