@@ -109,45 +109,48 @@ class Activity {
   }
 
   friendsWeeklyRanking(user, date, userRepo) {
-    let friends = this.friendsStepsWithNames(user, date, userRepo)
-    let winnerFirst = friends.sort((a, b) => b.totalSteps - a.totalSteps)
-    console.log('winners', winnerFirst);
+    let friends = this.friendsStepsWithNames(user, date, userRepo);
+    let winnerFirst = friends.sort((a, b) => b.totalSteps - a.totalSteps);
     return winnerFirst
   }
 
   // FOR FUTURE EXTENSIONS
 
-  showChallengeListAndWinner(user, date, userRepo) {
-    let rankedList = this.getFriendsAverageStepsForWeek(user, date, userRepo);
+  findRank(user, date, userRepo) {
+    let winnerFirst = this.friendsWeeklyRanking(user, date, userRepo);
 
-    return rankedList.map(function(listItem) {
-      let userID = Object.keys(listItem)[0];
-      let userName = userRepo.getDataFromID(parseInt(userID)).name;
-      return `${userName}: ${listItem[userID]}`
-    })
-  }
-  showcaseWinner(user, date, userRepo) {
-    let namedList = this.showChallengeListAndWinner(user, date, userRepo);
-    let winner = this.showChallengeListAndWinner(user, date, userRepo).shift();
-    return winner;
-  }
-  getStreak(userRepo, id, relevantData) {
-    let data = this.activityData;
-    let sortedUserArray = (userRepo.makeSortedUserArray(id, data)).reverse();
-    let streaks = sortedUserArray.filter(function(element, index) {
-      if (index >= 2) {
-        return (sortedUserArray[index - 2][relevantData] < sortedUserArray[index - 1][relevantData] && sortedUserArray[index - 1][relevantData] < sortedUserArray[index][relevantData])
+    let rankedList = winnerFirst.reduce((list, friend, i) => {
+      friend['rank'] = i + 1;
+      list.push(friend)
+      return list
+    }, []);
+    return rankedList;
+  };
+
+  getStreak(userRepo, user) {
+    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
+
+    let streaks = sortedArray.reduce((list, currentActivity, i) => {
+      if (sortedArray.indexOf(currentActivity) !== sortedArray.length - 1) {
+        if (currentActivity.numSteps > sortedArray[i + 1].numSteps) {
+          list.push(currentActivity);
+          list.push(sortedArray[i + 1])
+        }
       }
-    });
-    return streaks.map(function(streak) {
-      return streak.date;
-    })
+      return list
+    }, []);
+
+    let filteredStreaks = streaks.reduce((list, currentActivity) => {
+      if (!list.includes(currentActivity)) {
+        list.push(currentActivity)
+      }
+      return list
+    }, []);
+
+  return filteredStreaks;
+
   }
-  getWinnerId(user, date, userRepo) {
-    let rankedList = this.getFriendsAverageStepsForWeek(user, date, userRepo);
-    let keysList = rankedList.map(listItem => Object.keys(listItem));
-    return parseInt(keysList[0].join(''))
-  }
+
 }
 
 
