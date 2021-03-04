@@ -4,7 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 
     <title>Activity Tracker</title>
   </head>
@@ -26,7 +27,7 @@
         <section tabindex="0" class="post-form">
           <div>
             <label for="activity-type">Enter your progress for today:</label>
-            <select name="activity-type" id="enter-progress-dropdown" aria-label="enter-progress-here">
+            <select name="activity-type" class="activity-type" id="enter-progress-dropdown" aria-label="enter-progress-here">
               <option value="" selected></option>
               <option value="activity">Activity</option>
               <option value="hydration">Hydration</option>
@@ -51,9 +52,9 @@
         <div class="sidebar-header-line"></div>
 
         <section tabindex="0" class="user-friends">
-          <h2 id="sidebarName">FRIENDLY STEP CHALLENGE!</h2>
+          <h2 id="sidebarName" class="sidebar-title">FRIENDLY STEP CHALLENGE!</h2>
           <img src="./images/person walking on path.jpg" alt="A person's legs walking down a path" class="sidebar-header-challengeImage"></img>
-          <p id="bigWinner" tabindex="0"></p>
+          <p id="bigWinner" class="big-winner" tabindex="0"></p>
             <ul tabindex="0" class="card-vertical-list" id="loserList" aria-label="Friend List">
               <!-- friend list goes here -->
               <!-- NEED TO ADD STEPS FOR WEEK TO EVERY FRIEND LISTED ABOVE
@@ -140,7 +141,6 @@
 
           <!-- do we need the below div? -->
           <div class="card-history-activity">
-            <p class="thisWeek">Winner's steps this week</p>
             <ul class="card-vertical-list" id="bestUserSteps">
               <!-- Activity week list goes here -->
             </ul>

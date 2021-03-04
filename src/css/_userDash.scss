@@ -1,5 +1,6 @@
 .user-dash {
-  background-color: $white;
+  background-color: $medium-purple;
+  color: black;
   grid-column: 1 / 2;
   grid-row: 2 / 4;
   border: $border;
@@ -12,6 +13,17 @@
   justify-content: space-around;
 }
 
+li,
+.sidebar-title,
+.user-info > h2, p {
+  padding-bottom: 10px;
+}
+
+.big-winner,
+.user-info > #userAddress {
+  padding-top: 10px;
+}
+
 .sidebar-header-userImage {
   border-radius: 50%;
   border-color: black;
@@ -22,7 +34,12 @@
 
 .sidebar-header-challengeImage {
   @extend .sidebar-header-userImage;
-  width: 33%;
+  width: 27%;
+}
+
+input,
+.activity-type {
+  border-radius: 5px;
 }
 
 .post-form {
@@ -38,7 +55,7 @@
     width: 30%;
     border-radius: 5px;
     color: white;
-    background-color: black;
+    background-color: $plum;
     margin: 0 auto;
   }
 }
