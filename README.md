@@ -27,7 +27,6 @@ Our task was to redesign the layout, including the responsiveness of the app on 
 
 * [Trello Project Board](https://trello.com/b/oP41W1po/refactor-tractor)
 * [Miro Board - Class Structure Outline](https://miro.com/app/board/o9J_lSqxVCE=/)
-* [Wireframe]()
 
 
 ## Set Up (server and application must be running simultaneously)
