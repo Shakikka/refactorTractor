@@ -51,16 +51,4 @@ describe('Hydration', function () {
     expect(hydration.calculateFirstWeekOunces(userRepo, 2)[1]).to.eql('2018/10/23: 34');
   });
 
-  //below method to be deleted if not used
-
-  // it('should find sleep quality by day for that days week', function () {
-  //   const user1 = new User(fakeUserData[0]);
-  //   const user2 = new User(fakeUserData[1]);
-
-  //   const users = [user1, user2];
-  //   const userRepo = new UserRepo(users);
-  //   console.log(hydration.calculateRandomWeekOunces('2016/08/22', 1, userRepo))
-  //   expect(hydration.calculateRandomWeekOunces('2019/09/18', 4, userRepo)[0]).to.eql('2019/09/18: 40');
-  // })
-
 });

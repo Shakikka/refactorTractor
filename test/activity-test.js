@@ -5,7 +5,6 @@ import {
 import Activity from '../src/Activity';
 import UserRepo from '../src/User-repo';
 import {
-  fakeUserData,
   fakeUserData2,
   fakeActivityData,
   fakeActivityData2,
@@ -13,7 +12,6 @@ import {
 } from '../src/data/fakeData';
 
 describe('Activity', function () {
-
 
   let userOne, userTwo, userThree, userRepo, activityRepo;
 
@@ -24,7 +22,6 @@ describe('Activity', function () {
     userThree = userRepo.users[2];
     activityRepo = new Activity(fakeActivityData);
   });
-
 
   it('should be a function', function () {
     expect(Activity).to.be.a('function');
@@ -80,7 +77,6 @@ describe('Activity', function () {
     expect(activityRepo.getAllUserAverageByDate("2019/06/15", stat)).to.eql(131.33);
   });
 
-
   //The methods below are not currently displayed on UI but should be considered for
   //future iterations
 
@@ -105,29 +101,18 @@ describe('Activity', function () {
 
 });
 
-
-
-
-
 //START FRIENDS STEP CHALLENGE HERE
 
 describe('Friend Activity', function () {
   let activityRepo;
-  let user1;
-  let user2;
   let user3;
   let user4;
-  let user5;
-  let users;
   let userRepo;
 
   beforeEach(function () {
     userRepo = new UserRepo(fakeUserData2);
-    user1 = userRepo.users[0];
-    user2 = userRepo.users[1];
     user3 = userRepo.users[2];
     user4 = userRepo.users[3];
-    user5 = userRepo.users[4];
     activityRepo = new Activity(fakeActivityData2);
   });
 
@@ -208,10 +193,6 @@ describe('Friend Activity', function () {
     expect(activityRepo.friendsWeeklyRanking(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal)
   });
 
-  // END OF FRIEND TESTS BEWARE BELOW
-
-  //START EXTENSION
-
   it('should find ranked list of friends', function () {
     expect(activityRepo.findRank(user4, "2019/06/15", userRepo)).to.eql([{
         id: 5,
@@ -264,6 +245,5 @@ describe('Friend Activity', function () {
       }
     ]);
   });
-
 
 });
