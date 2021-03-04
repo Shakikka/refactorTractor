@@ -30,28 +30,40 @@ Our task was to redesign the layout, including the responsiveness of the app on 
 * [Wireframe]()
 
 
-## Set Up
+## Set Up (server and application must be running simultaneously)
 
 ### FitLit API Server
 
-COPY TO DESCRIBE HOW TO RUN THE FITLIT API
+Clone down this repo: [Trello Project Board](https://github.com/turingschool-examples/fitlit-api)
 
-### Server
+cd into directory and run:
+
+```
+npm install
+```
+
+To start the server, run:
+
+```
+npm start
+```
+
+### FitLit Application
 
 Clone down this repository to your local machine, then install the library dependencies by running:
 
-```bash
+```
 npm install
 ```
 
 
-To start the server that hosts the app, run:
+To start application, run:
 
-```bash
+```
 npm start
 ```
 
-If you see `Compiled successfully` in your terminal, the server is running and the app can be veiwed at `http://localhost:8080/` in your browser. Make sure this server, and the FitLit API server, are both running to ensure you see the right information displayed on the app.
+If you see `Compiled successfully` in your terminal, the application is running and the app can be veiwed at `http://localhost:8080/` in your browser. Make sure this application, and the FitLit API server, are both running to ensure you see the right information displayed on the app.
 
 
 
