@@ -168,7 +168,8 @@ describe.only('Friend Activity', function() {
     expect(activityRepo.findRank(user4, "2019/06/15", userRepo)).to.eql([
       { id: 5, name: 'Erick Schaden', totalSteps: 11374, rank: 1 },
       { id: 1, name: 'Luisa Hane', totalSteps: 3577, rank: 2 },
-      { id: 3, name: 'Herminia Witting', totalSteps: 1, rank: 3 }
+      { id: 4, name: 'Mae Connelly', totalSteps: 3486, rank: 3 },
+      { id: 3, name: 'Herminia Witting', totalSteps: 1, rank: 4 }
     ])
   });
 

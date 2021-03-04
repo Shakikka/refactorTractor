@@ -59,7 +59,7 @@ const userStairsThisWeek = document.getElementById('userStairsThisWeek');
 const userMinutesThisWeek = document.getElementById('userMinutesThisWeek');
 const bestUserSteps = document.getElementById('bestUserSteps');
 const streakList = document.getElementById('streakList');
-const streakListMinutes = document.getElementById('streakListMinutes')
+const streakMessage = document.getElementById('streakMessage')
 const avStepGoalCard = document.getElementById('avStepGoalCard');
 const enterProgressDropdown = document.querySelector('#enter-progress-dropdown');
 const activityForm = document.querySelector('#activityForm');
@@ -118,7 +118,7 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
 
   displayHydrationInfo(userRepo, randomUser.id);
   displaySleepInfo(userRepo, randomUser.id);
-  displayActivityInfo(userRepo, randomUser.id)
+  displayActivityInfo(userRepo, randomUser.id);
   addInfoToSidebar(randomUser, userRepo);
 
 }
@@ -135,17 +135,39 @@ function displayActivityInfo(userInfo, id) {
   userStepsToday.innerText = `Step Count on most recent day: ${activityRepo.getUserStat(today, randomUser, 'numSteps')}`
   userMinutesToday.innerText = `Active Minutes on most recent day: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')}`;
   userDistanceMiles.innerText = `Miles walked on recent day: ${activityRepo.calculateMilesWalked(randomUser, today)}`;
-  ////table start
+  // table start
   userStepCountToday.innerText = activityRepo.getUserStat(today, randomUser, 'numSteps');
   userMinToday.innerText = activityRepo.getUserStat(today, randomUser, 'minutesActive');
   userFlightsToday.innerText = activityRepo.getUserStat(today, randomUser, 'flightsOfStairs');
   allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
   allMinutesToday.innerText = activityRepo.getAllUserAverageByDate(today, 'minutesActive');
   allFlightsToday.innerText = activityRepo.getAllUserAverageByDate(today, 'flightsOfStairs');
-  //bottom section
+  // bottom section
   weeklyStepCount.innerText = `Total steps this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'numSteps')}`;
   userStairsThisWeek.innerText = `Flights of stairs climbed this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'flightsOfStairs')}`;
   userMinutesThisWeek.innerText = `Minutes active this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'minutesActive')}`;
+  // streak list
+  displayStreakList(userInfo);
+}
+
+function displayStreakList(userInfo) {
+  let latestStreaks = activityRepo.getStreak(userInfo, randomUser);
+
+  console.log('latest streaks', latestStreaks);
+
+  if (latestStreaks.length === 3) {
+    latestStreaks.forEach(item => {
+      streakList.innerHTML += `<ul>${item.date}: ${item.numSteps} steps</ul>`;
+    });
+  } else if (latestStreaks.length === 2) {
+    streakList.classList.add('hidden');
+    streakMessage.classList.remove('hidden');
+    streakMessage.innerText = `You're close to a streak, keep it up!`;
+  } else {
+    streakList.classList.add('hidden');
+    streakMessage.classList.remove('hidden');
+    streakMessage.innerText = `Increase your steps every day to start a streak!`;
+  }
 }
 
 
