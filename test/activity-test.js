@@ -34,20 +34,20 @@ describe('Activity', function () {
     expect(activityRepo).to.be.an.instanceof(Activity);
   });
 
-  it('should calculate miles user has walked on a given date', function() {
+  it('should calculate miles user has walked on a given date', function () {
     expect(activityRepo.calculateMilesWalked(userOne, "2019/06/15")).to.eql(2.91);
   });
 
-  it('should return average active minutes in a given week', function() {
+  it('should return average active minutes in a given week', function () {
     expect(activityRepo.findMinutesActiveAverage(userThree, "2019/06/15", userRepo)).to.eql(116);
   });
 
-  it('should determine whether user met their step goal on a given day', function() {
+  it('should determine whether user met their step goal on a given day', function () {
     expect(activityRepo.accomplishStepGoal(userThree, "2019/06/15")).to.eql(true);
     expect(activityRepo.accomplishStepGoal(userTwo, "2019/06/15")).to.eql(false);
   });
 
-  it('should find user/s stats by date', function() {
+  it('should find user/s stats by date', function () {
     let stat = 'flightsOfStairs';
     expect(activityRepo.getUserStat("2019/06/15", userOne, stat)).to.eql(16);
 
@@ -58,7 +58,7 @@ describe('Activity', function () {
     expect(activityRepo.getUserStat("2019/06/15", userOne, stat)).to.eql(140);
   });
 
-  it('should find user/s stat totals by week', function() {
+  it('should find user/s stat totals by week', function () {
     let stat = 'flightsOfStairs';
     expect(activityRepo.getUserTotalsForWeek(userThree, "2019/06/15", userRepo, stat)).to.eql(398);
 
@@ -69,7 +69,7 @@ describe('Activity', function () {
     expect(activityRepo.getUserTotalsForWeek(userThree, "2019/06/15", userRepo, stat)).to.eql(812);
   });
 
-  it('should find average activity stats for all users on a given day', function() {
+  it('should find average activity stats for all users on a given day', function () {
     let stat = 'flightsOfStairs';
     expect(activityRepo.getAllUserAverageByDate("2019/06/15", stat)).to.eql(19.67);
 
@@ -84,7 +84,7 @@ describe('Activity', function () {
   //The methods below are not currently displayed on UI but should be considered for
   //future iterations
 
-  it('should return all days that a given user exceeded their step goal', function() {
+  it('should return all days that a given user exceeded their step goal', function () {
     expect(activityRepo.getDaysGoalExceeded(userThree, userRepo)).to.eql([
       '2019/06/15',
       '2019/06/14',
@@ -96,7 +96,7 @@ describe('Activity', function () {
     ]);
   });
 
-  it('should return user/s record for flights of stairs climbed in a day', function() {
+  it('should return user/s record for flights of stairs climbed in a day', function () {
     expect(activityRepo.getStairRecord(userOne)).to.eql(16);
     expect(activityRepo.getStairRecord(userThree)).to.eql(200);
   });
@@ -111,7 +111,7 @@ describe('Activity', function () {
 
 //START FRIENDS STEP CHALLENGE HERE
 
-describe.only('Friend Activity', function() {
+describe('Friend Activity', function () {
   let activityRepo;
   let user1;
   let user2;
@@ -121,7 +121,7 @@ describe.only('Friend Activity', function() {
   let users;
   let userRepo;
 
-  beforeEach(function() {
+  beforeEach(function () {
     userRepo = new UserRepo(fakeUserData2);
     user1 = userRepo.users[0];
     user2 = userRepo.users[1];
@@ -131,32 +131,80 @@ describe.only('Friend Activity', function() {
     activityRepo = new Activity(fakeActivityData2);
   });
 
-  it('should get a users friend lists activity', function() {
+  it('should get a users friend lists activity', function () {
     const a = fakeActivityData2
     expect(activityRepo.getFriendsActivity(user3, userRepo)).to.deep.equal([a[1],
-       a[6], a[11], a[3], a[8], a[13], a[4], a[9], a[14], a[2], a[7], a[12]]);
+      a[6], a[11], a[3], a[8], a[13], a[4], a[9], a[14], a[2], a[7], a[12]
+    ]);
   });
 
-  it('should show total steps for friends for the week', function() {
+  it('should show total steps for friends for the week', function () {
     activityRepo = new Activity(fakeActivityData3);
-    let friendsTotal = [{id: 5, totalSteps: 53729}, {id: 1, totalSteps: 65341},
-      {id: 3, totalSteps: 54567}, {id: 4, totalSteps: 61072}]
+    let friendsTotal = [{
+        id: 5,
+        totalSteps: 53729
+      }, {
+        id: 1,
+        totalSteps: 65341
+      },
+      {
+        id: 3,
+        totalSteps: 54567
+      }, {
+        id: 4,
+        totalSteps: 61072
+      }
+    ]
     expect(activityRepo.totalFriendsStepCount(user4, "2019/06/22", userRepo)).to.deep.equal(friendsTotal);
   });
 
-  it('should be able to get names for friends', function() {
+  it('should be able to get names for friends', function () {
     activityRepo = new Activity(fakeActivityData3);
-    let friendsTotal = [{id: 5, name: 'Erick Schaden', totalSteps: 53729},
-    {id: 1, name: 'Luisa Hane', totalSteps: 65341}, {id: 3, name: 'Herminia Witting', totalSteps: 54567},
-     {id: 4, name: 'Mae Connelly', totalSteps: 61072}]
+    let friendsTotal = [{
+        id: 5,
+        name: 'Erick Schaden',
+        totalSteps: 53729
+      },
+      {
+        id: 1,
+        name: 'Luisa Hane',
+        totalSteps: 65341
+      }, {
+        id: 3,
+        name: 'Herminia Witting',
+        totalSteps: 54567
+      },
+      {
+        id: 4,
+        name: 'Mae Connelly',
+        totalSteps: 61072
+      }
+    ]
     expect(activityRepo.friendsStepsWithNames(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal);
   });
 
-  it('should organize friends from winner to loser', function() {
+  it('should organize friends from winner to loser', function () {
     activityRepo = new Activity(fakeActivityData3);
-    let friendsTotal = [{id: 1, name: 'Luisa Hane', totalSteps: 65341},
-    {id: 4, name: 'Mae Connelly', totalSteps: 61072}, {id: 3, name: 'Herminia Witting', totalSteps: 54567},
-    {id: 5, name: 'Erick Schaden', totalSteps: 53729}]
+    let friendsTotal = [{
+        id: 1,
+        name: 'Luisa Hane',
+        totalSteps: 65341
+      },
+      {
+        id: 4,
+        name: 'Mae Connelly',
+        totalSteps: 61072
+      }, {
+        id: 3,
+        name: 'Herminia Witting',
+        totalSteps: 54567
+      },
+      {
+        id: 5,
+        name: 'Erick Schaden',
+        totalSteps: 53729
+      }
+    ]
     expect(activityRepo.friendsWeeklyRanking(user4, '2019/06/22', userRepo)).to.deep.equal(friendsTotal)
   });
 
@@ -164,18 +212,36 @@ describe.only('Friend Activity', function() {
 
   //START EXTENSION
 
-  it('should find ranked list of friends', function() {
-    expect(activityRepo.findRank(user4, "2019/06/15", userRepo)).to.eql([
-      { id: 5, name: 'Erick Schaden', totalSteps: 11374, rank: 1 },
-      { id: 1, name: 'Luisa Hane', totalSteps: 3577, rank: 2 },
-      { id: 4, name: 'Mae Connelly', totalSteps: 3486, rank: 3 },
-      { id: 3, name: 'Herminia Witting', totalSteps: 1, rank: 4 }
+  it('should find ranked list of friends', function () {
+    expect(activityRepo.findRank(user4, "2019/06/15", userRepo)).to.eql([{
+        id: 5,
+        name: 'Erick Schaden',
+        totalSteps: 11374,
+        rank: 1
+      },
+      {
+        id: 1,
+        name: 'Luisa Hane',
+        totalSteps: 3577,
+        rank: 2
+      },
+      {
+        id: 4,
+        name: 'Mae Connelly',
+        totalSteps: 3486,
+        rank: 3
+      },
+      {
+        id: 3,
+        name: 'Herminia Witting',
+        totalSteps: 1,
+        rank: 4
+      }
     ])
   });
 
-  it('should find 3-day increase in user steps', function() {
-    expect(activityRepo.getStreak(userRepo, user3, 'numSteps')).to.eql([
-      {
+  it('should find 3-day increase in user steps', function () {
+    expect(activityRepo.getStreak(userRepo, user3, 'numSteps')).to.eql([{
         userID: 3,
         date: '2019/06/17',
         numSteps: 3,
