@@ -19,7 +19,9 @@ A [Front-End Project](https://frontend.turing.io/projects/module-2/refactor-trac
 
 This is a Turing School of Software and Design - Module 2 group project.
 
-What's Cookin'? began as a bare-bones starter kit. Over the course of this project, we built out the HTML structure, CSS Grid styling & responsive design, and Javascript functionality from scratch. The project now has three class files, `Recipe.js`, `RecipeRepository.js` & `User.js`, that were each built via Test Driven Development. The app itself hosts a number of recipe objects, displayed to the user and made interactive. Users can navigate through the app, search for recipes to either favorite or add to their lists to cook for the week, take a look at the ingredients in their pantry, or simply browse for recipe information.
+The purpose of this project was to get brown-field project experience: working on a project that has already been built out and refactoring/updating the project to make for a better user and dev experience with the app. The project we were given was FitLit, an app that tracks a user's activity, like steps, flights of stairs climbed, and miles walked in a week, as well as their hydration and sleep habits. The app also tracks a user's friends' activity, and offers a friendly competition that displays on the UI. 
+
+Our task was to redesign the layout, including the responsiveness of the app on various screen sizes, to make for a better UI, as well as refactor the code behind the scenes for better dev readability and empathy. At the same time, we removed all the hard-coded data, exchanged it for data fetched with an API, and implemented POST request functionality that subsequently updates the DOM. As we refactored the code, we followed TDD best practices to test each class's methods before hooking them up to the DOM. We also refactored the CSS to incorporate SASS files, mixins, and variables to DRY up this code and implemented a reset file so that our styling carries across multiple browsers.
 
 ## Planning Resources
 
