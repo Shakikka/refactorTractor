@@ -34,7 +34,7 @@ Our task was to redesign the layout, including the responsiveness of the app on 
 
 ### FitLit API Server
 
-Clone down this repo: [Trello Project Board](https://github.com/turingschool-examples/fitlit-api)
+Clone down this repo: [FitLit API](https://github.com/turingschool-examples/fitlit-api)
 
 cd into directory and run:
 
