@@ -1,9 +1,7 @@
 * {
   margin: 0;
-}
-
-body {
-  color: $plum;
+  font-family: Roboto;
+  font-weight: 400;
 }
 
 h2 {
@@ -24,7 +22,7 @@ h2 {
   grid-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: .2fr 1fr 1fr;
-  background-color: $green;
+  background-color: $white;
 }
 
 .header {

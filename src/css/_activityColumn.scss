@@ -2,15 +2,12 @@
   @extend .user-dash;
   grid-column: 2 / 3;
   grid-row: 2 / 4;
-  background-color: $white;
-  color: $plum;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  background-color: $white;
 
   tr {
 
