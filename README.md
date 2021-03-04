@@ -67,8 +67,6 @@ If you see `Compiled successfully` in your terminal, the application is running 
 
 
 
-### Open the here: [RefactorTractor: FitLit]() IF WE DEPLOY TO GITHUB PAGES THE LINK WILL GO HERE
-
 
 ## Learning Goals
 
@@ -132,41 +130,27 @@ IMAGE OR GIF HERE
 ---
 ## Challenges
 
-*
-*
-*
-*
+* Inexperience working with brown-field projects
+* Deciding where to start on the project
+* Leveraging multiple new technologies that we learned during the project
+* Refactoring complex methods
 
 ---
 ## Wins
 
 
 * Great organization - we got through everything!
-* 
-*
-*
+* Getting a better understand of the fetch API
+* Leveraging complex methods needed for extensions
+* Practicing array iterator methods
 
 ---
 ## Future Iterations
 
 * Methods were left in each class that we thought had a sound practical purpose, but were not represented on the DOM. These would be great to display in further iterations.
 * Implementing icons or buttons to hide or display information when a user clicks on them.
-* 
-*
 
 
 
 
 
-
-
-
-
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
