@@ -52,29 +52,6 @@ class Activity {
     return Number(average.toFixed(2));
   };
 
-  //The methods below are not currently displayed on UI but should be considered for
-  //future iterations
-
-  getDaysGoalExceeded(user, userRepo) {
-    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
-    return sortedArray.filter(data => user.id === data.userID && data.numSteps >= user.dailyStepGoal).map(data => data.date);
-  };
-
-  getStairRecord(user) {
-    let userActivities = this.activityData.filter(data => user.id === data.userID);
-    let sortedStairCount = userActivities.sort((a, b) => b.flightsOfStairs - a.flightsOfStairs);
-    return sortedStairCount[0].flightsOfStairs;
-    };
-
-//END future iteration suggestions
-
-
-
-
-
-
-  // Friends
-
   getFriendsActivity(user, userRepo) {
     let data = this.activityData;
     let userAndFriends = [...user.friends, user.id]
@@ -95,16 +72,26 @@ class Activity {
       let totalSteps = friendStepWeek.reduce((totalFriendSteps, day) => {
         return totalFriendSteps += day.numSteps
       }, 0)
-      return ({id: friend, totalSteps})
+      return ({
+        id: friend,
+        totalSteps
+      })
     })
     return friendSteps
   }
 
   friendsStepsWithNames(user, date, userRepo) {
     let friendsStepsWithID = this.totalFriendsStepCount(user, date, userRepo)
-    return friendsStepsWithID.map(({id, totalSteps}) => {
+    return friendsStepsWithID.map(({
+      id,
+      totalSteps
+    }) => {
       let user = userRepo.findUserData(id)
-      return ({id, name: user.name , totalSteps})
+      return ({
+        id,
+        name: user.name,
+        totalSteps
+      })
     })
   }
 
@@ -113,8 +100,6 @@ class Activity {
     let winnerFirst = friends.sort((a, b) => b.totalSteps - a.totalSteps);
     return winnerFirst
   }
-
-  // FOR FUTURE EXTENSIONS
 
   findRank(user, date, userRepo) {
     let winnerFirst = this.friendsWeeklyRanking(user, date, userRepo);
@@ -147,12 +132,23 @@ class Activity {
       return list
     }, []);
 
-  return filteredStreaks;
-
+    return filteredStreaks;
   }
 
+  //The methods below are not currently displayed on UI but should be considered for
+  //future iterations
+
+  getDaysGoalExceeded(user, userRepo) {
+    let sortedArray = userRepo.makeSortedUserArray(user.id, this.activityData);
+    return sortedArray.filter(data => user.id === data.userID && data.numSteps >= user.dailyStepGoal).map(data => data.date);
+  };
+
+  getStairRecord(user) {
+    let userActivities = this.activityData.filter(data => user.id === data.userID);
+    let sortedStairCount = userActivities.sort((a, b) => b.flightsOfStairs - a.flightsOfStairs);
+    return sortedStairCount[0].flightsOfStairs;
+  };
+
 }
-
-
 
 export default Activity;
