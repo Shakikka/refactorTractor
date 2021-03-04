@@ -26,11 +26,6 @@ class UserRepo {
     return totalStepGoal / this.users.length;
   }
 
-
-//END OF ITERATION 1
-// START ITERATION 3
-
-
   makeSortedUserArray(id, dataSet) {
     let selectedID = this.getDataFromUserID(id, dataSet)
     let sortByDate = selectedID.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -53,59 +48,9 @@ class UserRepo {
     return foundWeek
   }
 
-
-
   chooseDayDataForAllUsers(dataSet, date) {
     return dataSet.filter(dataItem => dataItem.date === date)
   }
 }
-
-  // HARD STOP
-
-  // chooseWeekDataForAllUsers(dataSet, date) {
-    //   return dataSet.filter(dataItem => {
-      //     return (new Date(date)).setDate((new Date(date)).getDate() - 7) <= new Date(dataItem.date) && new Date(dataItem.date) <= new Date(date)
-      //   })
-      // }
-
-//   isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod) {
-//     return listFromMethod.reduce(function(objectSoFar, dataItem) {
-//       if (!objectSoFar[dataItem.userID]) {
-//         objectSoFar[dataItem.userID] = [dataItem[relevantData]]
-//       } else {
-//         objectSoFar[dataItem.userID].push(dataItem[relevantData])
-//       }
-//       return objectSoFar;
-//     }, {});
-//   }
-//
-//   rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod) {
-//     let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod)
-//     return Object.keys(sortedObjectKeys).sort(function(b, a) {
-//       return (sortedObjectKeys[a].reduce(function(sumSoFar, sleepQualityValue) {
-//         sumSoFar += sleepQualityValue
-//         return sumSoFar;
-//       }, 0) / sortedObjectKeys[a].length) - (sortedObjectKeys[b].reduce(function(sumSoFar, sleepQualityValue) {
-//         sumSoFar += sleepQualityValue
-//         return sumSoFar;
-//       }, 0) / sortedObjectKeys[b].length)
-//     });
-//   }
-//
-//   combineRankedUserIDsAndAveragedData(dataSet, date, relevantData, listFromMethod) {
-//     let sortedObjectKeys = this.isolateUsernameAndRelevantData(dataSet, date, relevantData, listFromMethod)
-//     let rankedUsersAndAverages = this.rankUserIDsbyRelevantDataValue(dataSet, date, relevantData, listFromMethod)
-//     return rankedUsersAndAverages.map(function(rankedUser) {
-//       rankedUser = {
-//         [rankedUser]: sortedObjectKeys[rankedUser].reduce(
-//           function(sumSoFar, sleepQualityValue) {
-//             sumSoFar += sleepQualityValue
-//             return sumSoFar;
-//           }, 0) / sortedObjectKeys[rankedUser].length
-//       };
-//       return rankedUser;
-//     });
-//   }
-// }
 
 export default UserRepo;
