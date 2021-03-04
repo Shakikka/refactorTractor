@@ -237,7 +237,7 @@ function addInfoToSidebar(user) {
 function populateStepChallenge(user, userRepo) {
   const today = userRepo.getToday(user.id, activityRepo.activityData)
   let stepRank = activityRepo.friendsWeeklyRanking(user, today, userRepo)
-  bigWinner.innerText = `${stepRank[0].name} is the WINNER with ${stepRank[0].totalSteps}steps!`
+  bigWinner.innerText = `${stepRank[0].name} is the WINNER with ${stepRank[0].totalSteps} steps!`
   const loserRank = stepRank.shift()
   populateLosers(stepRank);
 }
