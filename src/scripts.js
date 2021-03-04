@@ -123,12 +123,12 @@ function displayActivityInfo(userInfo, id, activityInfo) {
   let today = userInfo.getToday(id, activityRepo.activityData);
   populateStepChallenge(randomUser, userRepo)
 
-  userStridelength.innerText = `Your stridelength is ${randomUser.strideLength} meters.`; //do we need to display this?
-  stepGoalCard.innerText = `Your daily step goal is ${randomUser.dailyStepGoal} steps.`;
-  avStepGoalCard.innerText = `The average daily step goal is ${userRepo.findAverageStepGoal()} steps.`;
-  userStepsToday.innerText = `Step Count on most recent day: ${activityRepo.getUserStat(today, randomUser, 'numSteps')}`
-  userMinutesToday.innerText = `Active Minutes on most recent day: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')}`;
-  userDistanceMiles.innerText = `Miles walked on recent day: ${activityRepo.calculateMilesWalked(randomUser, today)}`;
+  userStridelength.innerText = `Your stridelength is: ${randomUser.strideLength} meters`; //do we need to display this?
+  stepGoalCard.innerText = `Your daily step goal is: ${randomUser.dailyStepGoal} steps`;
+  avStepGoalCard.innerText = `The average daily step goal is: ${userRepo.findAverageStepGoal()} steps`;
+  userStepsToday.innerText = `Today you have taken: ${activityRepo.getUserStat(today, randomUser, 'numSteps')} steps`
+  userMinutesToday.innerText = `Today you have been active for: ${activityRepo.getUserStat(today, randomUser, 'minutesActive')} minutes`;
+  userDistanceMiles.innerText = `Today you have walked: ${activityRepo.calculateMilesWalked(randomUser, today)} miles`;
   ////table start
   userStepCountToday.innerText = activityRepo.getUserStat(today, randomUser, 'numSteps');
   allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
@@ -170,7 +170,7 @@ function displaySleepInfo(userInfo, id, sleepInfo) {
   console.log('Result of makeToday function called upon the sleepData:', today);
 
   sleepToday.innerText = `You slept ${sleepRepo.findInfoForDate(id, today, 'hoursSlept')} hours today.`
-  sleepQualityToday.innerText = `Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')}`;
+  sleepQualityToday.innerText = `Quality of sleep: ${sleepRepo.findInfoForDate(id, today, 'sleepQuality')} / 5`;
 
   let weeksHours = sleepRepo.calculateWeekSleep(today, id, userInfo, sleepRepo.sleepData);
   console.log(weeksHours);
