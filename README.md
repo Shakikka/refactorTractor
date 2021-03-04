@@ -105,7 +105,6 @@ IMAGE HERE
 
 ## Mobile Views
 
-### Medium-sized Screens
 
 ![](https://media.giphy.com/media/khbZidy9qRf0e6CqGJ/giphy.gif)
 
