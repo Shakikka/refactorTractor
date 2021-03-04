@@ -90,8 +90,7 @@ If you see `Compiled successfully` in your terminal, the server is running and t
 ## Landing Page
 
 
-<img width="600" alt="landing-desktop" src="landing.png">
-<img width="350" alt="landing-mobile" src="landing_mobile.png">
+IMAGE HERE
 
 
 
@@ -99,14 +98,13 @@ If you see `Compiled successfully` in your terminal, the server is running and t
 
 ### Medium-sized Screens
 
-<img width="800" alt="recipe detail view" src="Screen Shot 2021-02-17 at 7.56.07 PM.png">
+IMAGE OR GIF HERE
 
 
 ### Small Screens
 
 
-<img width="800" alt="recipe detail view" src="Screen Shot 2021-02-17 at 7.56.07 PM.png">
-
+IMAGE OR GIF HERE
 
 
 
