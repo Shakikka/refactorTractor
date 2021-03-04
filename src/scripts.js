@@ -120,10 +120,8 @@ function displayInfo(userInfo, hydrationInfo, sleepInfo, activityInfo) {
   displaySleepInfo(userRepo, randomUser.id);
   displayActivityInfo(userRepo, randomUser.id)
   addInfoToSidebar(randomUser, userRepo);
+
 }
-
-// function 
-
 
 
 function displayActivityInfo(userInfo, id) {
@@ -139,10 +137,10 @@ function displayActivityInfo(userInfo, id) {
   userDistanceMiles.innerText = `Miles walked on recent day: ${activityRepo.calculateMilesWalked(randomUser, today)}`;
   ////table start
   userStepCountToday.innerText = activityRepo.getUserStat(today, randomUser, 'numSteps');
-  allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
   userMinToday.innerText = activityRepo.getUserStat(today, randomUser, 'minutesActive');
-  allMinutesToday.innerText = activityRepo.getAllUserAverageByDate(today, 'minutesActive');
   userFlightsToday.innerText = activityRepo.getUserStat(today, randomUser, 'flightsOfStairs');
+  allStepCountToday.innerText = activityRepo.getAllUserAverageByDate(today, 'numSteps');
+  allMinutesToday.innerText = activityRepo.getAllUserAverageByDate(today, 'minutesActive');
   allFlightsToday.innerText = activityRepo.getAllUserAverageByDate(today, 'flightsOfStairs');
   //bottom section
   weeklyStepCount.innerText = `Total steps this week: ${activityRepo.getUserTotalsForWeek(randomUser, today, userInfo, 'numSteps')}`;
@@ -224,6 +222,7 @@ function populateStepChallenge(user, userRepo) {
 
 function populateLosers(losers) {
   loserList.innerHTML = ''
+  console.log('losers', losers)
   losers.forEach(loser => {
     loserList.innerHTML += `
     <li>${loser.name} had ${loser.totalSteps} steps!</li>
