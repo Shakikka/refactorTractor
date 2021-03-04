@@ -99,7 +99,7 @@ If you see `Compiled successfully` in your terminal, the application is running 
 ## Landing Page
 
 
-![](https://files.slack.com/files-pri/T029P2S9M-F01QA4ZEPTN/screen_shot_2021-03-03_at_7.42.23_pm.png)
+<img width="350" alt="landing-mobile" src="https://files.slack.com/files-pri/T029P2S9M-F01QA4ZEPTN/screen_shot_2021-03-03_at_7.42.23_pm.png">
 
 
 ## Mobile Views
